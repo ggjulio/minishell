@@ -1,0 +1,11 @@
+*~
+*.o
+minishell
+*.a
+a.out
+a.out.dSYM
+*dSYM
+\#*\#
+.vscode/
+.DS_STORE
+.\#*
