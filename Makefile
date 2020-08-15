@@ -1,29 +1,37 @@
+# https://misc.flogisoft.com/bash/tip_colors_and_formatting
+_BOLD      =\e[1m
+_DIM       =\e[2m
+_UNDERLINE =\e[4m
+_BLINK     =\e[5m
+_REVERSE   =\e[7m
+_HIDDEN    =\e[8m
 
-# This is a minimal set of ANSI/VT100 color codes
-_END=$'\x1b[0m
-_BOLD=$'\x1b[1m
-_UNDER=$'\x1b[4m
-_REV=$'\x1b[7m
+# RESET list
+_R          =\e[0m
+_RBOLD      =\e[21m
+_RDIM       =\e[22m
+_RUNDERLINE =\e[24m
+_RBLINK     =\e[25m
+_RREVERSE   =\e[27m
+_RHIDDEN    =\e[28m
 
 # Colors
-_GREY=$'\x1b[30m
-_RED=$'\x1b[31m
-_GREEN=$'\x1b[32m
-_YELLOW=$'\x1b[33m
-_BLUE=$'\x1b[34m
-_PURPLE=$'\x1b[35m
-_CYAN=$'\x1b[36m
-_WHITE=$'\x1b[37m
+_RED      =\e[91m
+_GREEN    =\e[92m
+_YELLOW   =\e[93m
+_BLUE     =\e[94m
+_MAGENTA  =\e[35m
+_CYAN     =\e[96m
+_WHITE    =\e[97m
 
 # Inverted, i.e. colored backgrounds
-_IGREY=$'\x1b[40m
-_IRED=$'\x1b[41m
-_IGREEN=$'\x1b[42m
-_IYELLOW=$'\x1b[43m
-_IBLUE=$'\x1b[44m
-_IPURPLE=$'\x1b[45m
-_ICYAN=$'\x1b[46m
-_IWHITE=$'\x1b[47m
+_IRED     =\e[101m
+_IGREEN   =\e[102m
+_IYELLOW  =\e[103m
+_IBLUE    =\e[104m
+_IMAGENTA =\e[45m
+_ICYAN    =\e[106m
+_IWHITE   =\e[107m
 
 #******************************************************************************#
 #                                                                              #
@@ -37,9 +45,11 @@ _IWHITE=$'\x1b[47m
 #                                                                              #
 #******************************************************************************#
 
+UNAME := $(shell uname)
+
 NAME = minishell
 
-LIB = ft
+# LIB = ft
 
 SRC_DIR = $(shell find ./srcs -type d)
 INC_DIR = includes
@@ -54,7 +64,7 @@ vpath %.c $(SRC_DIR)
 LFLAGS = $(foreach lib, $(LIB_DIR),-L$(lib))  $(foreach lib, $(LIB),-l$(lib))
 
 CC = clang
-CFLAGS  = -Wall -Wextra -Werror -g # -fsanitize=address  -fsanitize=undefined -fstack-protector  
+CFLAGS  = -Wall -Wextra -Werror #-g -fsanitize=address  -fsanitize=undefined -fstack-protector  
 IFLAGS  = -I./lib/libft -I./includes
 
 all: $(NAME)
@@ -64,38 +74,58 @@ $(OBJ_DIR)/%.o: %.c
 	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ)
-	@echo "$(_GREEN)Compiling ...$(_END)"
 	@$(CC) $(CFLAGS) $(IFLAGS) $(LFLAGS) -o $@ $^
-	@echo "$(_GREEN)Compiled !$(_END)"
+	@printf "$(_GREEN)Compiled : $(_MAGENTA)$(NAME)$(_R)\n"
+	@printf "\nDo $(_CYAN)$(_BOLD)make show$(_R) to debug the Makefile\n"
+	@printf "Do $(_RED)$(_BOLD)make debug$(_R) to run tests with lldb\n"
+	@printf "Do $(_YELLOW)$(_BOLD)make valgrind$(_R) to run valgrind $(_MAGENTA)(May have falses positives under OSX)$(_R)\n"
+	@printf "Do $(_GREEN)$(_BLINK)$(_BOLD)make run$(_R)   to run $(minishell)\n\n"
+
+run: $(NAME)
+	@./minishell
+
+valgrind: $(NAME)
+	@valgrind --leak-check=full --show-leak-kinds=all --show-reachable=yes --trace-children=yes --track-origins=yes --log-file=output_valgrind ./$(NAME)
+	@printf "$(_BOLD)$(_RED)################################################################$(_R)\n"
+	@printf "$(_BOLD)$(_RED)##########################  $(_GREEN)Valgrind$(_RED)  ##########################$(_R)\n"
+	@printf "$(_BOLD)$(_RED)################################################################$(_R)\n\n"
+	@cat output_valgrind
+
+debug:	CFLAGS += -g
+debug: $(NAME)
+	@lldb $(NAME)
 
 clean:
-	@rm -rf $(OBJ_DIR)
-	@echo "$(_GREEN).o removed !$(_END)"
+	@rm -rf $(OBJ_DIR) output_valgrind
+	@printf "$(_RED)Removed :$(_MAGENTA) $(OBJ_DIR)/$(_MAGENTA)\n"
 
 fclean: clean
-	@rm -f $(NAME)
-	@echo "$(_GREEN)$(NAME) program removed !$(_END)"
+	@rm -fr $(NAME) $(DEBUG_EXEC) $(NAME).dSYM/
+	@printf "$(_RED)Removed : $(_MAGENTA)$(NAME), $(NAME).dSYM/$(_R)\n"
 
 bonus: $(NAME)
 
 show:
-	@echo "$(_CYAN)SRC_DIR    :$(_RED)  $(SRC_DIR)$(_END)"
-	@echo "$(_CYAN)SRC    :$(_RED)  $(SRC)$(_END)"
-	@echo "$(_CYAN)OBJ    :$(_RED)  $(OBJ)$(_END)"
-	@echo "$(_CYAN)IFLAGS :$(_RED)  $(IFLAGS)$(_END)"
-	@echo "$(_CYAN)LFLAGS :$(_RED)  $(LFLAGS)$(_END)"
-	@echo "$(_CYAN)CFLAGS :$(_RED)  $(CFLAGS)$(_END)"
+	@printf "$(_MAGENTA)UNAME  :$(_GREEN)  $(UNAME)$(_END)\n"
+	@printf "$(_MAGENTA)ARCH   :$(_GREEN)  $(shell uname -p)$(_END)\n\n"
+	@printf "$(_CYAN)NAME   :$(_RED)  $(NAME)$(_END)\n\n"
+	@printf "$(_CYAN)CC     :$(_RED)  $(CC)$(_END)\n"
+	@printf "$(_CYAN)CFLAGS :$(_RED)  $(CFLAGS)$(_END)\n"
+	@printf "$(_CYAN)IFLAGS :$(_RED)  $(IFLAGS)$(_END)\n"
+	@printf "$(_CYAN)LFLAGS :$(_RED)  $(LFLAGS)$(_END)\n\n"
+	@printf "$(_CYAN)SRC    :$(_RED)  $(SRC)$(_END)\n"
+	@printf "$(_CYAN)OBJ    :$(_RED)  $(OBJ)$(_END)\n"
 
 re: fclean all
 
 
 install: 
-	@echo "$(_GREEN)Install libft.a ...$(_END)"
+	@printf "$(_GREEN)Install libft.a ...$(_R)"
 	@make -s -C lib/libft/
-	@echo "$(_RED)done ...$(_END)"
+	@printf "$(_RED)done ...$(_R)"
 
 fclean-install:
-	@echo "$(_GREEN)fclean-install libft.a ...$(_END)"
+	@printf "$(_GREEN)fclean-install libft.a ...$(_R)"
 	@make fclean -s -C lib/libft/
 
 

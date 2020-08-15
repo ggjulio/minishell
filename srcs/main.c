@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 13:32:17 by juligonz          #+#    #+#             */
-/*   Updated: 2020/05/20 13:33:40 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/15 17:32:01 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,9 @@ int main(int ac, char **av)
 	(void)ac;
 	(void)av;
 
+	int i = 0;
+
+	i = 3;
+	printf("OKKKKkKKK\n");
 	return (0);
 }
