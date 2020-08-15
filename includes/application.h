@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   application.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/20 14:19:45 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/15 17:56:48 by juligonz         ###   ########.fr       */
+/*   Created: 2020/08/15 17:54:31 by juligonz          #+#    #+#             */
+/*   Updated: 2020/08/15 18:00:25 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef APPLICATION_H
+# define APPLICATION_H
+
+typedef struct	s_application
+{
+	//empty
+}				t_application;
+
+/*
+** application.c
+*/
+t_application	create_application(void);
+t_application	*malloc_application(void);
+void			destroy_application(t_application to_destroy);
+void			free_application(t_application *to_free);
 
 
-# include <unistd.h>
-# include <stdio.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# include <sys/wait.h>
-# include <sys/time.h>
-# include <sys/resource.h>
-# include <sys/signal.h>
-# include <dirent.h>
-# include <string.h>
-# include <errno.h>
-
-# include "application.h"
 
 #endif
