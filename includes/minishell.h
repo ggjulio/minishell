@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 14:19:45 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/16 15:12:01 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/16 17:01:41 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@
 /*
 **	Builtins
 */
-# include "application.h"
+# include "echo.h"
 
 #endif
