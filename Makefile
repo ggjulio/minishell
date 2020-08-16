@@ -79,6 +79,7 @@ $(NAME): $(OBJ)
 	@printf "\nDo $(_CYAN)$(_BOLD)make show$(_R) to debug the Makefile\n"
 	@printf "Do $(_RED)$(_BOLD)make debug$(_R) to run tests with lldb\n"
 	@printf "Do $(_YELLOW)$(_BOLD)make valgrind$(_R) to run valgrind $(_MAGENTA)(May have falses positives under OSX)$(_R)\n"
+	@printf "Do $(_GREEN)$(_BOLD)make norminette$(_R) to run norminette on .c and .h files$(_R)\n"
 	@printf "Do $(_GREEN)$(_BLINK)$(_BOLD)make run$(_R)   to run $(minishell)\n\n"
 
 run: $(NAME)
