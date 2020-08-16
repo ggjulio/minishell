@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 17:52:21 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/15 18:02:51 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/16 14:53:03 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_application	*malloc_application(void)
 	if ((result = malloc(sizeof(t_application))) == NULL)
 		return (NULL);
 	*result = create_application();
-	return(result);
+	return (result);
 }
 
 void			destroy_application(t_application to_destroy)

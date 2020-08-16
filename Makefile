@@ -51,15 +51,20 @@ NAME = minishell
 
 # LIB = ft
 
-SRC_DIR = $(shell find ./srcs -type d)
+SRC_DIR = ./srcs
+SRCS_DIR = $(shell find $(SRC_DIR) -type d)
 INC_DIR = includes
 OBJ_DIR = obj
 LIB_DIR = $(shell find ./lib -type d -maxdepth 1)
 
+# Minishells
 SRC = main.c
 
+#Builtins
+SRC+= echo.c
+
 OBJ = $(addprefix  $(OBJ_DIR)/,$(SRC:%.c=%.o))
-vpath %.c $(SRC_DIR)
+vpath %.c $(SRCS_DIR)
 
 LFLAGS = $(foreach lib, $(LIB_DIR),-L$(lib))  $(foreach lib, $(LIB),-l$(lib))
 
@@ -95,6 +100,9 @@ valgrind: $(NAME)
 debug:	CFLAGS += -g
 debug: $(NAME)
 	@lldb $(NAME)
+
+norminette:
+	norminette $(INC_DIR) $(SRC_DIR)
 
 clean:
 	@rm -rf $(OBJ_DIR) output_valgrind

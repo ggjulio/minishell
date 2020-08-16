@@ -6,20 +6,16 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 13:32:17 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/15 17:32:01 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/16 14:52:34 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	(void)ac;
 	(void)av;
-
-	int i = 0;
-
-	i = 3;
-	printf("OKKKKkKKK\n");
+	printf("OKKKKkKKKeeeeeee\n");
 	return (0);
 }
