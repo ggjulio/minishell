@@ -55,7 +55,7 @@ INC_DIR = includes
 OBJ_DIR = obj
 
 SRCS_DIR = $(shell find $(SRC_DIR) -type d)
-LIB_DIR = $(shell find ./lib -type d -maxdepth 1)
+LIB_DIR = $(shell find ./lib -maxdepth 1 -type d)
 
 # Minishells
 SRC = main.c application.c
@@ -79,7 +79,7 @@ $(OBJ_DIR)/%.o: %.c
 	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) $(IFLAGS) $(LFLAGS) -o $@ $^
+	@$(CC) $(CFLAGS) $(IFLAGS)  -o $@ $^ $(LFLAGS)
 	@printf "$(_GREEN)Compiled : $(_MAGENTA)$(NAME)$(_R)\n"
 	@printf "\nDo $(_CYAN)$(_BOLD)make show$(_R) to debug the Makefile\n"
 	@printf "Do $(_RED)$(_BOLD)make debug$(_R) to run tests with lldb\n"
