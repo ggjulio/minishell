@@ -1,4 +1,4 @@
-#******************************************************************************#
+# **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
@@ -6,9 +6,9 @@
 #    By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/22 14:58:05 by juligonz          #+#    #+#              #
-#    Updated: 2020/01/31 15:45:57 by juligonz         ###   ########.fr        #
+#    Updated: 2020/08/16 15:34:28 by juligonz         ###   ########.fr        #
 #                                                                              #
-#******************************************************************************#
+# **************************************************************************** #
 
 NAME = libftprintf.a
 
@@ -58,15 +58,15 @@ all: $(NAME) $(NAME_BONUS)
 
 $(NAME): $(OBJ)
 	@ar rcs $(NAME) $(OBJ)
-	$(info Compiled $(NAME))
+	#$@printf "Compiled $(NAME)"
 
 clean:
 	@rm -f $(OBJ)
-	$(info .o removed !)
+	#@printf ".o removed !"
 
 fclean: clean
 	@rm -f $(NAME)
-	$(info lib removed !)
+	#@printf "lib removed !"
 
 bonus: $(NAME)
 

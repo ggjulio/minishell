@@ -1,4 +1,4 @@
-#******************************************************************************#
+# **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
@@ -6,9 +6,9 @@
 #    By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/15 12:07:06 by juligonz          #+#    #+#              #
-#    Updated: 2020/02/14 11:53:23 by juligonz         ###   ########.fr        #
+#    Updated: 2020/08/16 15:33:42 by juligonz         ###   ########.fr        #
 #                                                                              #
-#******************************************************************************#
+# **************************************************************************** #
 
 NAME = libft.a
 
@@ -117,7 +117,7 @@ libs:
 $(NAME): $(OBJ) $(OBJ_ADD) $(OBJ_BONUS)
 	@make libs
 	@ar rcs $(NAME) $(OBJ) $(OBJ_ADD) $(OBJ_BONUS)
-	$(info Compiled $(NAME))
+	#@printf "Compiled $(NAME)"
 
 debug: $(NAME) main.c
 	@make
@@ -126,13 +126,13 @@ debug: $(NAME) main.c
 clean:
 	@rm -f $(OBJ) $(OBJ_BONUS) $(OBJ_ADD) 
 	@make clean -s -C ft_printf/
-	$(info .o removed !)
+	#@printf ".o removed !"
 
 fclean: clean
 	@rm -f debug	
 	@rm -f $(NAME)
-	$(info debug removed !)
-	$(info lib removed !)
+	#@printf "debug removed !"
+	#@printf "lib removed !"
 
 bonus: $(NAME)
 

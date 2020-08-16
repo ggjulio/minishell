@@ -49,16 +49,16 @@ UNAME := $(shell uname)
 
 NAME = minishell
 
-# LIB = ft
-
+LIB = ft
 SRC_DIR = ./srcs
-SRCS_DIR = $(shell find $(SRC_DIR) -type d)
 INC_DIR = includes
 OBJ_DIR = obj
+
+SRCS_DIR = $(shell find $(SRC_DIR) -type d)
 LIB_DIR = $(shell find ./lib -type d -maxdepth 1)
 
 # Minishells
-SRC = main.c
+SRC = main.c application.c
 
 #Builtins
 SRC+= echo.c
@@ -70,7 +70,7 @@ LFLAGS = $(foreach lib, $(LIB_DIR),-L$(lib))  $(foreach lib, $(LIB),-l$(lib))
 
 CC = clang
 CFLAGS  = -Wall -Wextra -Werror #-g -fsanitize=address  -fsanitize=undefined -fstack-protector  
-IFLAGS  = -I./lib/libft -I./includes
+IFLAGS  = -I./lib/libft/ -I./$(INC_DIR)
 
 all: $(NAME)
 
@@ -90,6 +90,10 @@ $(NAME): $(OBJ)
 run: $(NAME)
 	@./minishell
 
+debug:	CFLAGS += -g
+debug: $(NAME)
+	@lldb $(NAME)
+
 valgrind: $(NAME)
 	@valgrind --leak-check=full --show-leak-kinds=all --show-reachable=yes --trace-children=yes --track-origins=yes --log-file=output_valgrind ./$(NAME)
 	@printf "$(_BOLD)$(_RED)################################################################$(_R)\n"
@@ -97,20 +101,8 @@ valgrind: $(NAME)
 	@printf "$(_BOLD)$(_RED)################################################################$(_R)\n\n"
 	@cat output_valgrind
 
-debug:	CFLAGS += -g
-debug: $(NAME)
-	@lldb $(NAME)
-
 norminette:
 	norminette $(INC_DIR) $(SRC_DIR)
-
-clean:
-	@rm -rf $(OBJ_DIR) output_valgrind
-	@printf "$(_RED)Removed :$(_MAGENTA) $(OBJ_DIR)/$(_MAGENTA)\n"
-
-fclean: clean
-	@rm -fr $(NAME) $(DEBUG_EXEC) $(NAME).dSYM/
-	@printf "$(_RED)Removed : $(_MAGENTA)$(NAME), $(NAME).dSYM/$(_R)\n"
 
 bonus: $(NAME)
 
@@ -122,11 +114,19 @@ show:
 	@printf "$(_CYAN)CFLAGS :$(_RED)  $(CFLAGS)$(_END)\n"
 	@printf "$(_CYAN)IFLAGS :$(_RED)  $(IFLAGS)$(_END)\n"
 	@printf "$(_CYAN)LFLAGS :$(_RED)  $(LFLAGS)$(_END)\n\n"
+	@printf "$(_CYAN)LIB_DIR:$(_RED)  $(LIB_DIR)$(_END)\n\n"
 	@printf "$(_CYAN)SRC    :$(_RED)  $(SRC)$(_END)\n"
 	@printf "$(_CYAN)OBJ    :$(_RED)  $(OBJ)$(_END)\n"
 
-re: fclean all
+clean:
+	@rm -rf $(OBJ_DIR) output_valgrind
+	@printf "$(_RED)Removed :$(_MAGENTA) $(OBJ_DIR)/$(_MAGENTA)\n"
 
+fclean: clean
+	@rm -fr $(NAME) $(DEBUG_EXEC) $(NAME).dSYM/
+	@printf "$(_RED)Removed : $(_MAGENTA)./$(NAME), $(NAME).dSYM/$(_R)\n"
+
+re: fclean all
 
 install: 
 	@printf "$(_GREEN)Install libft.a ...$(_R)"
@@ -134,15 +134,15 @@ install:
 	@printf "$(_RED)done ...$(_R)"
 
 fclean-install:
-	@printf "$(_GREEN)fclean-install libft.a ...$(_R)"
+	@printf "$(_YELLOW)fclean-install libft.a :$(_R)\n"
+	@printf "$(_RED)   Removed :$(_MAGENTA) lib/libft/libft.a\n"
 	@make fclean -s -C lib/libft/
 
 
 re-install: fclean-install install
 
 
-.PHONY: clean fclean re all bonus install re-install fclean-install
-
+.PHONY: all run debug valgrind norminette bonus show clean fclean re install re-install fclean-install
 
 #******************************************************************************#
 #                                  REMINDER                                    #  
