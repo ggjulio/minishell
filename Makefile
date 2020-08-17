@@ -57,6 +57,9 @@ OBJ_DIR = obj
 SRCS_DIR = $(shell find $(SRC_DIR) -type d)
 LIB_DIR = $(shell find ./lib -maxdepth 1 -type d)
 
+INC = application.h echo.h minishell.h
+vpath %.h $(INC_DIR)
+
 # Minishell
 SRC = main.c application.c
 
@@ -69,8 +72,7 @@ vpath %.c $(SRCS_DIR)
 LFLAGS = $(foreach lib, $(LIB_DIR),-L$(lib))  $(foreach lib, $(LIB),-l$(lib))
 
 CC = clang
-CFLAGS  = -Wall -Wextra -Werror #-g -fsanitize=address  -fsanitize=undefined -fstack-protector  
-# IFLAGS  = -I./lib/libft/ -I./$(INC_DIR)
+CFLAGS  = -Wall -Wextra -Werror -g #-fsanitize=address  -fsanitize=undefined -fstack-protector  
 IFLAGS  = $(foreach inc, $(INC_DIR),-I$(inc))
 
 all: $(NAME)
@@ -79,8 +81,8 @@ $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(OBJ_DIR)
 	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
-$(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) $(IFLAGS)  -o $@ $^ $(LFLAGS)
+$(NAME): $(INC) $(OBJ) 
+	@$(CC) $(CFLAGS) $(IFLAGS)  -o $@ $(OBJ) $(LFLAGS)
 	@printf "$(_GREEN)Compiled : $(_MAGENTA)$(NAME)$(_R)\n"
 	@printf "\nDo $(_CYAN)$(_BOLD)make show$(_R) to debug the Makefile\n"
 	@printf "Do $(_RED)$(_BOLD)make debug$(_R) to run tests with lldb\n"
@@ -118,6 +120,7 @@ show:
 	@printf "$(_CYAN)SRC_DIR:$(_RED)  $(SRC_DIR)$(_END)\n"
 	@printf "$(_CYAN)INC_DIR:$(_RED)  $(INC_DIR)$(_END)\n"
 	@printf "$(_CYAN)LIB_DIR:$(_RED)  $(LIB_DIR)$(_END)\n\n"
+	@printf "$(_CYAN)INC    :$(_RED)  $(INC)$(_END)\n"
 	@printf "$(_CYAN)SRC    :$(_RED)  $(SRC)$(_END)\n"
 	@printf "$(_CYAN)OBJ    :$(_RED)  $(OBJ)$(_END)\n"
 
