@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/01 01:58:46 by jugonzal          #+#    #+#             */
-/*   Updated: 2020/08/17 14:06:00 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/17 17:08:02 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdarg.h>
 
 # include "get_next_line.h"
-// # include "ft_printf/includes/printf_proto.h"
+# include "printf_proto.h"
 
 typedef struct	s_list
 {
