@@ -6,7 +6,7 @@
 /*   By: juligonz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 19:15:12 by juligonz          #+#    #+#             */
-/*   Updated: 2020/03/25 10:41:34 by juligonz         ###   ########.fr       */
+/*   Updated: 2019/12/13 17:57:10 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void		conv_s(va_list args, t_manager *p)
 	s = (char *)cast_s(p, args);
 	if (!s)
 		s = "(null)";
-	len = (p->f.l ? ft_wcslen_no_locale((wchar_t *)s) : (int)ft_strlen(s));
+	len = (p->f.l ? ft_wcslen_no_locale((wchar_t *)s) : ft_strlen(s));
 	if (len == -1)
 	{
 		p->is_error = 1;

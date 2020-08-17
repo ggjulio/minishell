@@ -51,13 +51,13 @@ NAME = minishell
 
 LIB = ft
 SRC_DIR = ./srcs
-INC_DIR = includes
+INC_DIR = $(shell find . -type d -name "includes")
 OBJ_DIR = obj
 
 SRCS_DIR = $(shell find $(SRC_DIR) -type d)
 LIB_DIR = $(shell find ./lib -maxdepth 1 -type d)
 
-# Minishells
+# Minishell
 SRC = main.c application.c
 
 #Builtins
@@ -70,7 +70,8 @@ LFLAGS = $(foreach lib, $(LIB_DIR),-L$(lib))  $(foreach lib, $(LIB),-l$(lib))
 
 CC = clang
 CFLAGS  = -Wall -Wextra -Werror #-g -fsanitize=address  -fsanitize=undefined -fstack-protector  
-IFLAGS  = -I./lib/libft/ -I./$(INC_DIR)
+# IFLAGS  = -I./lib/libft/ -I./$(INC_DIR)
+IFLAGS  = $(foreach inc, $(INC_DIR),-I$(inc))
 
 all: $(NAME)
 
@@ -114,6 +115,8 @@ show:
 	@printf "$(_CYAN)CFLAGS :$(_RED)  $(CFLAGS)$(_END)\n"
 	@printf "$(_CYAN)IFLAGS :$(_RED)  $(IFLAGS)$(_END)\n"
 	@printf "$(_CYAN)LFLAGS :$(_RED)  $(LFLAGS)$(_END)\n\n"
+	@printf "$(_CYAN)SRC_DIR:$(_RED)  $(SRC_DIR)$(_END)\n"
+	@printf "$(_CYAN)INC_DIR:$(_RED)  $(INC_DIR)$(_END)\n"
 	@printf "$(_CYAN)LIB_DIR:$(_RED)  $(LIB_DIR)$(_END)\n\n"
 	@printf "$(_CYAN)SRC    :$(_RED)  $(SRC)$(_END)\n"
 	@printf "$(_CYAN)OBJ    :$(_RED)  $(OBJ)$(_END)\n"
@@ -129,14 +132,14 @@ fclean: clean
 re: fclean all
 
 install: 
-	@printf "$(_GREEN)Install libft.a ...$(_R)"
-	@make -s -C lib/libft/
-	@printf "$(_RED)done ...$(_R)"
+	@printf "$(_GREEN)Install libft.a ...$(_R)\n"
+	@make -s -C lib/libft/  > /dev/null
+	@printf "$(_RED)done ...$(_R)\n"
 
 fclean-install:
 	@printf "$(_YELLOW)fclean-install libft.a :$(_R)\n"
 	@printf "$(_RED)   Removed :$(_MAGENTA) lib/libft/libft.a\n"
-	@make fclean -s -C lib/libft/
+	@make fclean -s -C lib/libft/ > /dev/null
 
 
 re-install: fclean-install install

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jugonzal <gonzalez.julio89@hotmail.fr>     +#+  +:+       +#+        */
+/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/01 01:58:46 by jugonzal          #+#    #+#             */
-/*   Updated: 2020/02/14 12:52:40 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/17 14:06:00 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include <stdlib.h>
 # include <stdarg.h>
 
-# include "gnl/get_next_line.h"
-# include "ft_printf/includes/printf_proto.h"
+# include "get_next_line.h"
+// # include "ft_printf/includes/printf_proto.h"
 
 typedef struct	s_list
 {

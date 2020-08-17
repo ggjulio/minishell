@@ -6,7 +6,7 @@
 /*   By: juligonz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 19:14:57 by juligonz          #+#    #+#             */
-/*   Updated: 2020/03/25 10:41:06 by juligonz         ###   ########.fr       */
+/*   Updated: 2019/12/13 19:12:07 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		conv_c(va_list args, t_manager *p)
 	int		wc;
 	char	c;
 
-	wc = cast_c(p, args);
+	wc = (int)cast_s(p, args);
 	if (p->f.l && wc > 255)
 	{
 		p->is_error = 1;
