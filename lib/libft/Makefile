@@ -51,20 +51,20 @@ SRC_DIR = $(shell find ./srcs -type d)
 OBJ_DIR = obj
 INC_DIR = includes
 
-SRC = ft_memset.c	ft_bzero.c	ft_memcpy.c	ft_memccpy.c
+SRC = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c
 SRC+= ft_memmove.c ft_memchr.c ft_memcmp.c
-SRC+=  ft_strlen.c	ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c
-SRC+=	ft_isprint.c ft_toupper.c ft_tolower.c	ft_strchr.c
-SRC+=	ft_strrchr.c ft_strncmp.c ft_strlcpy.c ft_strlcat.c
-SRC+=	ft_strnstr.c ft_atoi.c ft_calloc.c ft_strdup.c
+SRC+= ft_strlen.c ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c
+SRC+= ft_isprint.c ft_toupper.c ft_tolower.c ft_strchr.c
+SRC+= ft_strrchr.c ft_strncmp.c ft_strlcpy.c ft_strlcat.c
+SRC+= ft_strnstr.c ft_atoi.c ft_calloc.c ft_strdup.c
 
-SRC+=	ft_substr.c	ft_strjoin.c ft_strtrim.c ft_split.c
+SRC+= ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c
 SRC+= ft_itoa.c ft_strmapi.c ft_putchar_fd.c ft_putstr_fd.c
 SRC+= ft_putendl_fd.c ft_putnbr_fd.c
 
 SRC+= ft_lstnew.c ft_lstadd_front.c ft_lstsize.c
-SRC+=	ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c
-SRC+=	ft_lstclear.c ft_lstiter.c ft_lstmap.c
+SRC+= ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c
+SRC+= ft_lstclear.c ft_lstiter.c ft_lstmap.c
 
 SRC+= ft_abs.c ft_iscntrl.c	ft_isupper.c ft_isgraph.c
 SRC+= ft_isblank.c ft_islower.c	ft_isspace.c ft_isxdigit.c
@@ -79,13 +79,24 @@ SRC+= ft_strnequ.c ft_strstr.c ft_strndup.c ft_print_memory.c
 SRC+= get_next_line.c ft_valid_extention.c ft_in_charset.c
 SRC+= ft_isnumber.c ft_lstpop_front.c
 
+
+### ft_printf
+SRC+= ft_printf.c ft_dprintf.c ft_sprintf.c ft_asprintf.c
+SRC+= ft_strdup_cat.c cast_len_modifier.c
+SRC+= read_flags.c parse.c write_buffer.c
+SRC+= double_utils.c double_utils_2.c double_validation.c
+SRC+= put_dec.c put_hex.c put_oct.c put_ptr.c put_double.c put_e.c put_g.c
+SRC+= conv_c.c conv_s.c conv_p.c conv_d.c conv_i.c conv_u.c
+SRC+= conv_x_lowcase.c conv_x_upcase.c conv_n.c conv_f.c 
+SRC+= conv_g.c conv_e.c conv_o.c conv_mod.c
+
 OBJ     = $(addprefix  $(OBJ_DIR)/,$(SRC:%.c=%.o))
 vpath %.c $(SRC_DIR)
 
 
 CC      = clang
 CFLAGS  = -Wall -Wextra -Werror #-g
-IFLAGS  =  -I./includes
+IFLAGS  = -I./includes
 
 all: $(NAME)
 
@@ -93,9 +104,6 @@ $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(OBJ_DIR)
 	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
-# libs:
-# 	@make -s -C ft_printf/
-# 	@mv ft_printf/libftprintf.a ./$(NAME)
 
 $(NAME): $(OBJ)
 	@ar rcs $(NAME) $^
