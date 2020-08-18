@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 17:35:53 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/18 18:25:20 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/18 18:49:22 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 typedef struct	s_environment
 {
-	t_list lst_env_var;
+	t_list *lst_env_var;
 }				t_environment;
 
 typedef struct	s_env_var
