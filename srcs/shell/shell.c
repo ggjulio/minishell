@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 17:52:21 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/18 13:22:40 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/18 14:55:41 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ t_shell	*malloc_shell(char *name, char **envp)
 	return (result);
 }
 
-void			destroy_shell(t_shell to_destroy)
+void	destroy_shell(t_shell to_destroy)
 {
 	free(to_destroy.name);
 }
 
-void			free_shell(t_shell *to_free)
+void	free_shell(t_shell *to_free)
 {
 	destroy_shell(*to_free);
 	free(to_free);

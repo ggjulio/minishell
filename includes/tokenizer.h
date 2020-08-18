@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell.h                                            :+:      :+:    :+:   */
+/*   tokenizer.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/15 17:54:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/18 14:53:29 by juligonz         ###   ########.fr       */
+/*   Created: 2020/08/18 14:06:38 by juligonz          #+#    #+#             */
+/*   Updated: 2020/08/18 14:12:30 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHELL_H
-# define SHELL_H
+#include "minishell.h"
 
-typedef struct	s_shell
+#ifndef TOKENIZER_H
+# define TOKENIZER_H
+	
+
+enum e_token_type
 {
-	char *name;
-	char **env_var;
-}				t_shell;
+	None	
+};
 
-/*
-** shell.c
-*/
-t_shell			create_shell(char *name, char **envp);
-t_shell			*malloc_shell(char *name, char **envp);
-void			destroy_shell(t_shell to_destroy);
 
-/*
-** shell_util.c
-*/
-void			run_shell(void);
+typedef struct	s_token
+{
+			
+}				t_token;
+
 
 #endif
