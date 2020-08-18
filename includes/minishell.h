@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 14:19:45 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/18 14:07:56 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/18 18:02:40 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 /*
 **	Minishell
 */
+# include "environment.h"
 # include "shell.h"
 # include "tokenizer.h"
 

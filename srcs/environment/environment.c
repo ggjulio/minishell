@@ -1,45 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell.c                                            :+:      :+:    :+:   */
+/*   environment.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/15 17:52:21 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/18 18:07:48 by juligonz         ###   ########.fr       */
+/*   Created: 2020/08/18 17:34:02 by juligonz          #+#    #+#             */
+/*   Updated: 2020/08/18 18:25:50 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_shell	create_shell(char *name, char **envp)
+t_environment	create_environment(char **envp)
 {
-	t_shell result;
+	t_environment result;
 
-	ft_bzero(&result, sizeof(t_shell));
-	result.name = ft_strdup(name + 2);
-	result.env = create_environment(envp);
+		
 	return (result);
 }
 
-t_shell	*malloc_shell(char *name, char **envp)
+t_environment	*malloc_environment(char **envp)
 {
-	t_shell *result;
+	t_environment *result;
 
-	if ((result = malloc(sizeof(t_shell))) == NULL)
+	if ((result = malloc(sizeof(t_environment))) == NULL)
 		return (NULL);
-	*result = create_shell(name, envp);
+	*result = create_environment(envp);
 	return (result);
 }
 
-void	destroy_shell(t_shell to_destroy)
+void	destroy_environment(t_environment to_destroy)
 {
-	destroy_environment(to_destroy.env);
-	free(to_destroy.name);
+	(void)to_destroy;
 }
 
-void	free_shell(t_shell *to_free)
+void	free_environment(t_environment *to_free)
 {
-	destroy_shell(*to_free);
+	destroy_environment(*to_free);
 	free(to_free);
 }
+

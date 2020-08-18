@@ -1,37 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell.h                                            :+:      :+:    :+:   */
+/*   environment.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/15 17:54:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/18 18:05:08 by juligonz         ###   ########.fr       */
+/*   Created: 2020/08/18 17:35:53 by juligonz          #+#    #+#             */
+/*   Updated: 2020/08/18 18:25:20 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHELL_H
-# define SHELL_H
+#ifndef EVIRONMENT_H
+# define EVIRONMENT_H
 
 #include "minishell.h"
 
-typedef struct	s_shell
+typedef struct	s_environment
 {
-	char *name;
-	t_environment env;
-}				t_shell;
+	t_list lst_env_var;
+}				t_environment;
+
+typedef struct	s_env_var
+{
+	char	*name;
+	char	*value;
+}				t_env_var;
 
 /*
-** shell.c
+**	environment.c
 */
-t_shell			create_shell(char *name, char **envp);
-t_shell			*malloc_shell(char *name, char **envp);
-void			destroy_shell(t_shell to_destroy);
-void			free_shell(t_shell *to_free);
+t_environment	create_environment(char **envp);
+void			destroy_environment(t_environment to_destroy);
+void			destroy_environment(t_environment to_destroy);
+void			free_environment(t_environment *to_free);
 
 /*
-** shell_util.c
+** environment_free.c
 */
-void			run_shell(void);
+
 
 #endif
