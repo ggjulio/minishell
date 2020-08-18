@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 14:19:45 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/18 13:27:22 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/18 13:37:31 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,7 @@
 **	Builtins
 */
 # include "echo.h"
+
+extern t_shell g_sh;
 
 #endif

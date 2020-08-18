@@ -25,6 +25,9 @@ typedef struct	s_shell
 t_shell			create_shell(char *name, char **envp);
 t_shell			*malloc_shell(char *name, char **envp);
 void			destroy_shell(t_shell to_destroy);
-void			free_shell(t_shell *to_free);
+/*
+** shell_util.c
+*/
+void			run_shell();
 
 #endif

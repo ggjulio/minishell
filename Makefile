@@ -61,7 +61,8 @@ INC = minishell.h echo.h shell.h
 vpath %.h $(INC_DIR)
 
 # Minishell
-SRC = main.c shell.c
+SRC = main.c 
+SRC+= shell.c shell_util.c
 
 #Builtins
 SRC+= echo.c
