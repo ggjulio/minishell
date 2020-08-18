@@ -57,11 +57,11 @@ OBJ_DIR = obj
 SRCS_DIR = $(shell find $(SRC_DIR) -type d)
 LIB_DIR = $(shell find ./lib -maxdepth 1 -type d)
 
-INC = application.h echo.h minishell.h
+INC = minishell.h echo.h shell.h
 vpath %.h $(INC_DIR)
 
 # Minishell
-SRC = main.c application.c
+SRC = main.c shell.c
 
 #Builtins
 SRC+= echo.c

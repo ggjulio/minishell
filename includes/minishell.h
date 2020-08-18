@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 14:19:45 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/16 17:01:41 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/18 13:27:22 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 /*
 **	Minishell
 */
-# include "application.h"
+# include "shell.h"
 
 /*
 **	Builtins
