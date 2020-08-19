@@ -1,14 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   environment_free.c                                 :+:      :+:    :+:   */
+/*   shell_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/18 18:22:55 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/18 18:23:19 by juligonz         ###   ########.fr       */
+/*   Created: 2020/08/19 14:06:19 by juligonz          #+#    #+#             */
+/*   Updated: 2020/08/19 14:07:23 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	exit_shell(int status)
+{
+	destroy_shell(g_sh);
+	exit(status);
+}

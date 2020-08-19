@@ -9,3 +9,4 @@ https://codereview.stackexchange.com/questions/125820/tokenizing-a-shell-command
 http://www.cs.man.ac.uk/~pjj/farrell/compmain.html
 http://www.cs.man.ac.uk/~pjj/farrell/comp3.html
 https://people.inf.ethz.ch/wirth/CompilerConstruction/CompilerConstruction1.pdf
+https://brennan.io/2015/01/16/write-a-shell-in-c/

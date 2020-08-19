@@ -9,3 +9,4 @@ a.out.dSYM
 .vscode/
 .DS_STORE
 .\#*
+output_valgrind
