@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:12 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/19 23:23:56 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/20 00:04:01 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,16 @@ enum e_token_type	get_token_type(char c)
 		return (Token_separator);
 	if (ft_in_charset(c, TOKEN_SPACE))
 		return (Token_space);
+	if (ft_in_charset(c, TOKEN_END))
+		return (Token_end);
 	return (Token_literal);
 }
 
 void				print_tokens(t_list *lst)
 {
 	t_token		*token;
-	static char str[5][15] = {"None", "literal", "operator",
-								"separator", "space"};
+	static char str[6][15] = {"None", "literal", "operator",
+					"separator", "space", "end"};
 
 	while (lst)
 	{
