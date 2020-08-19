@@ -45,7 +45,7 @@ void		free_env_var(t_env_var *to_free)
 	free(to_free);
 }
 
-void		lst_del_env_elem(void *variable)
+void		lst_del_env_elem(void *to_free)
 {
-	free(variable);
+	free_env_var(to_free);
 }
