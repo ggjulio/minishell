@@ -6,14 +6,14 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 17:54:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/19 14:14:35 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/19 15:49:56 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHELL_H
 # define SHELL_H
 
-#include "minishell.h"
+# include "minishell.h"
 
 typedef struct	s_shell
 {
