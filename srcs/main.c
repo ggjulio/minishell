@@ -22,6 +22,6 @@ int	main(int ac, char **av, char **envp)
 	// run_shell();
 	destroy_shell(g_sh);
 	g_sh.env.lst_env_var = NULL;
-	system("leaks minishell");
+	//	system("leaks minishell");
 	return (0);
 }

@@ -51,7 +51,7 @@ t_environment	*malloc_environment(char **envp)
 
 void	destroy_environment(t_environment to_destroy)
 {
-	// ft_lstclear(&to_destroy.lst_env_var, lst_del_env_elem);
+	ft_lstclear(&to_destroy.lst_env_var, lst_del_env_elem);
 	(void)to_destroy;
 }
 
