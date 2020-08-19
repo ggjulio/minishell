@@ -95,7 +95,7 @@ vpath %.c $(SRC_DIR)
 
 
 CC      = clang
-CFLAGS  = -Wall -Wextra -Werror #-g
+CFLAGS  = -Wall -Wextra -Werror -g
 IFLAGS  = -I./includes
 
 all: $(NAME)

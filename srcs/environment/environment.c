@@ -6,28 +6,36 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 17:34:02 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/18 18:50:20 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/18 23:07:49 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void init_lst_env_var(t_list **lst, char **envp)
+void	print_env(void)
 {
-	char **tmp;
-
-    for(tmp = envp; *tmp != 0; tmp++)
-    {
-        char *thisEnv = *tmp;
-        ft_printf("%s\n", thisEnv);
-    }
+	t_list *begin;
+	
+	begin = g_sh.env.lst_env_var;
+	while (begin)
+	{
+        ft_printf("%s\n", begin->content);
+		begin = begin->next;
+	}
 }
 
 t_environment	create_environment(char **envp)
 {
 	t_environment result;
 
-	init_lst_env_var(&result.lst_env_var, envp);
+	result.lst_env_var = NULL;
+	while (*envp != 0)
+	{
+		ft_lstadd_back(&(result.lst_env_var),
+			ft_lstnew(*envp));
+		envp++;
+    }
+	print_env();
 	return (result);
 }
 
