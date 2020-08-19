@@ -65,6 +65,7 @@ SRC+= ft_putendl_fd.c ft_putnbr_fd.c
 SRC+= ft_lstnew.c ft_lstadd_front.c ft_lstsize.c
 SRC+= ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c
 SRC+= ft_lstclear.c ft_lstiter.c ft_lstmap.c
+SRC+= ft_lstsort.c
 
 SRC+= ft_abs.c ft_iscntrl.c	ft_isupper.c ft_isgraph.c
 SRC+= ft_isblank.c ft_islower.c	ft_isspace.c ft_isxdigit.c

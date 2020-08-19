@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/01 01:58:46 by jugonzal          #+#    #+#             */
-/*   Updated: 2020/08/17 17:08:02 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/19 16:43:55 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void			ft_lstiter(t_list *lst, void (*f)(void *));
 t_list			*ft_lstmap(t_list *lst, void *(*f)(void*));
 
 t_list			*ft_lstpop_front(t_list **lst);
+void			ft_lstsort(t_list **begin_list, int (*cmp)());
 
 void			ft_putchar(char c);
 void			ft_putstr(char const *s);

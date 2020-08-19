@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   env_var_util.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/20 13:32:17 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/19 16:22:31 by juligonz         ###   ########.fr       */
+/*   Created: 2020/08/19 17:19:26 by juligonz          #+#    #+#             */
+/*   Updated: 2020/08/19 17:20:07 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_shell	g_sh;
-
-int	main(int ac, char **av, char **envp)
+void	lst_del_env_elem(void *to_free)
 {
-	(void)ac;
-	(void)av;
-	g_sh = create_shell(av[0], envp);
-	run_shell();
-	destroy_shell(g_sh);
-	return (0);
+	free_env_var(to_free);
+}
+
+int		cmp_sort(t_env_var *s1, t_env_var *s2)
+{
+	return (ft_strcmp(s1->name, s2->name));
 }

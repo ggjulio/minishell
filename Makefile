@@ -63,7 +63,7 @@ vpath %.h $(INC_DIR)
 # Minishell
 SRC = main.c 
 SRC+= shell.c shell_util.c
-SRC+= environment.c environment_util.c env_var.c
+SRC+= environment.c environment_util.c env_var.c env_var_util.c
 
 #Builtins
 SRC+= echo.c

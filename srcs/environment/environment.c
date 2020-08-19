@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 17:34:02 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/19 15:51:03 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/19 17:24:43 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ t_environment	create_environment(char **envp)
 			ft_lstnew(malloc_env_var(*envp)));
 		envp++;
 	}
-	print_env(result);
 	return (result);
 }
 

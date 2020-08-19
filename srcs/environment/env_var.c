@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 15:16:22 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/19 15:46:02 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/19 17:20:24 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,4 @@ void		free_env_var(t_env_var *to_free)
 {
 	destroy_env_var(*to_free);
 	free(to_free);
-}
-
-void		lst_del_env_elem(void *to_free)
-{
-	free_env_var(to_free);
 }
