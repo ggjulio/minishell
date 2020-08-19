@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:38 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/19 18:53:35 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/19 23:18:35 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,15 @@
 
 # define TOKEN_OPERATOR "&|<>"
 # define TOKEN_SEPARATOR "'\""
+# define TOKEN_SPACE " \f\n\r\t\v"
 
 enum	e_token_type
 {
+	None,
 	Token_literal,
 	Token_operator,
 	Token_separator,
+	Token_space
 };
 
 typedef struct	s_token
