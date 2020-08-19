@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   environment_util.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/20 13:32:17 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/19 14:57:25 by juligonz         ###   ########.fr       */
+/*   Created: 2020/08/19 15:10:55 by juligonz          #+#    #+#             */
+/*   Updated: 2020/08/19 15:12:05 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_shell	g_sh;
-
-int	main(int ac, char **av, char **envp)
+void	print_env(t_environment to_print)
 {
-	(void)ac;
-	(void)av;
-	g_sh = create_shell(av[0], envp);
-	run_shell();
-	destroy_shell(g_sh);
-	return (0);
+	t_list *begin;
+	
+	begin = to_print.lst_var;
+	while (begin)
+	{
+        ft_printf("%s\n", begin->content);
+		begin = begin->next;
+	}
+}
+
+void	lst_del_env_elem(void *variable)
+{
+	free(variable);
 }
