@@ -1,20 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_lst_print.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/09 19:47:02 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/20 16:06:26 by juligonz         ###   ########.fr       */
+/*   Created: 2020/08/20 15:02:03 by juligonz          #+#    #+#             */
+/*   Updated: 2020/08/20 15:08:19 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+void	ft_lst_print(t_list *lst, void (*print_content)(void*))
 {
-	if (del != NULL)
-		del(lst->content);
-	free(lst);
+	int i;
+
+	i = 1;
+	if (lst == NULL)
+		ft_printf("	Empty list !\n");
+	while (lst)
+	{
+		ft_printf("   %d : %p\n", i, lst);
+		ft_printf("       data : \n");
+		if (lst)
+			print_content(lst->content);
+		else
+			ft_printf("            NULL\n");
+		ft_printf("       next : \"%p\"\n\n", lst ? lst->next : 0);
+		i++;
+		lst = lst->next;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 18:13:38 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/19 21:30:50 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/20 15:30:35 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,9 @@ void		free_token(t_token *to_free)
 {
 	destroy_token(*to_free);
 	free(to_free);
+}
+
+void	lst_del_token(void *to_free)
+{
+	free_token(to_free);
 }

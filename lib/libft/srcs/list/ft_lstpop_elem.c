@@ -1,20 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_lstpop_elem.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/09 19:47:02 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/20 16:06:26 by juligonz         ###   ########.fr       */
+/*   Created: 2020/08/20 15:02:50 by juligonz          #+#    #+#             */
+/*   Updated: 2020/08/20 15:08:28 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+t_list		*ft_lstpop_elem(t_list **begin_list, t_list *elem)
 {
-	if (del != NULL)
-		del(lst->content);
-	free(lst);
+	t_list	*previous;
+	t_list	*actual;
+
+	previous = NULL;
+	actual = *begin_list;
+	while (actual)
+	{
+		if (actual != elem)
+			previous = actual;
+		else
+		{
+			if (previous == NULL)
+				*begin_list = actual->next;
+			else
+				previous->next = actual->next;
+			return (actual);
+		}
+		actual = actual->next;
+	}
+	return (NULL);
 }

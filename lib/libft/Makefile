@@ -57,6 +57,7 @@ SRC+= ft_strlen.c ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c
 SRC+= ft_isprint.c ft_toupper.c ft_tolower.c ft_strchr.c
 SRC+= ft_strrchr.c ft_strncmp.c ft_strlcpy.c ft_strlcat.c
 SRC+= ft_strnstr.c ft_atoi.c ft_calloc.c ft_strdup.c
+SRC+= ft_strdupcat.c
 
 SRC+= ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c
 SRC+= ft_itoa.c ft_strmapi.c ft_putchar_fd.c ft_putstr_fd.c
@@ -65,7 +66,8 @@ SRC+= ft_putendl_fd.c ft_putnbr_fd.c
 SRC+= ft_lstnew.c ft_lstadd_front.c ft_lstsize.c
 SRC+= ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c
 SRC+= ft_lstclear.c ft_lstiter.c ft_lstmap.c
-SRC+= ft_lstsort.c
+SRC+= ft_lstpop_front.c ft_lstsort.c ft_lst_remove_if.c
+SRC+= ft_lstpop_elem.c ft_lst_print.c
 
 SRC+= ft_abs.c ft_iscntrl.c	ft_isupper.c ft_isgraph.c
 SRC+= ft_isblank.c ft_islower.c	ft_isspace.c ft_isxdigit.c
@@ -78,7 +80,7 @@ SRC+= ft_striter.c ft_striteri.c ft_strmap.c ft_strequ.c
 SRC+= ft_strnequ.c ft_strstr.c ft_strndup.c ft_print_memory.c
 
 SRC+= get_next_line.c ft_valid_extention.c ft_in_charset.c
-SRC+= ft_isnumber.c ft_lstpop_front.c
+SRC+= ft_isnumber.c 
 
 
 ### ft_printf

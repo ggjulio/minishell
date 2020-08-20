@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/01 01:58:46 by jugonzal          #+#    #+#             */
-/*   Updated: 2020/08/19 16:43:55 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/20 16:36:38 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int				ft_atoi(const char *s);
 
 void			*ft_calloc(size_t count, size_t size);
 char			*ft_strdup(const char *s);
+char			*ft_strdupcat(char *s1, char *s2);
 
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 char			*ft_strjoin(char const *s1, char const *s2);
@@ -75,6 +76,10 @@ t_list			*ft_lstmap(t_list *lst, void *(*f)(void*));
 
 t_list			*ft_lstpop_front(t_list **lst);
 void			ft_lstsort(t_list **begin_list, int (*cmp)());
+void			ft_lst_remove_if(t_list **begin_list, void *content_ref, \
+					int (*cmp)(), void (*free_fct)(void *));
+void			ft_lst_print(t_list *lst, void (*print_content)(void*));
+t_list			*ft_lstpop_elem(t_list **begin_list, t_list *elem);
 
 void			ft_putchar(char c);
 void			ft_putstr(char const *s);

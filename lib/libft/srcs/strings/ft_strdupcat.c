@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_strdupcat.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/09 19:47:02 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/20 16:06:26 by juligonz         ###   ########.fr       */
+/*   Created: 2020/08/20 16:32:01 by juligonz          #+#    #+#             */
+/*   Updated: 2020/08/20 16:32:35 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+char	*ft_strdupcat(char *s1, char *s2)
 {
-	if (del != NULL)
-		del(lst->content);
-	free(lst);
+	char			*result;
+
+	if (!(result = malloc(ft_strlen(s1) + ft_strlen(s2) + 1)))
+		return (NULL);
+	ft_strcpy(result, s1);
+	ft_strcat(result, s2);
+	return (result);
 }

@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:38 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/20 00:19:31 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/20 16:49:36 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define TOKEN_SEPARATOR "'\""
 # define TOKEN_SPACE " \f\n\r\t\v"
 # define TOKEN_END ";"
+# define TOKEN_ESCAPE "\\"
 
 enum	e_token_type
 {
@@ -27,7 +28,8 @@ enum	e_token_type
 	Token_operator,
 	Token_separator,
 	Token_space,
-	Token_end
+	Token_escape,
+	Token_end,
 };
 
 typedef struct	s_token
@@ -48,5 +50,6 @@ t_token			create_token(char *str, enum e_token_type type);
 t_token			*malloc_token(char *str, enum e_token_type type);
 void			destroy_token(t_token to_destroy);
 void			free_token(t_token *to_free);
+void			lst_del_token(void *to_free);
 
 #endif
