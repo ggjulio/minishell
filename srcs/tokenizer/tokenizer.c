@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:12 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/20 16:48:08 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/20 16:55:45 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ enum e_token_type	get_token_type(char c)
 void				print_tokens(t_list *lst)
 {
 	t_token		*token;
-	const char str[7][15] = {"None", "literal", "operator",
-			"separator", "space", "escape", "end"};
+	const char str[8][15] = {"None", "literal", "operator",
+			"separator", "space", "variable", "escape", "end"};
 
 	while (lst)
 	{
@@ -43,8 +43,8 @@ void				print_tokens(t_list *lst)
 
 void print_token(void *token)
 {
-	const char str[7][15] = {"None", "literal", "operator",
-		"separator", "space", "escape", "end"};
+	const char str[8][15] = {"None", "literal", "operator",
+		"separator", "space", "variable", "escape", "end"};
 	
 	ft_printf("             str  : \"%s\"\n", ((t_token *)token)->str);
 	ft_printf("             type : %s\n", str[((t_token *)token)->type]);
@@ -102,11 +102,7 @@ t_list				*tokenize(char *input)
 		ft_lstadd_back(&result, ft_lstnew(
 				malloc_token(one_char, get_token_type(one_char[0]))));
 	}
-	
-	print_tokens(result);
-
 	concatenate_literals(&result);
-	ft_printf("\nAFTER concatenation\n\n");
 	print_tokens(result);
 	
 	return (result);

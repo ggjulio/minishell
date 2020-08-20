@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:38 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/20 16:49:36 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/20 16:54:49 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@
 # define TOKEN_OPERATOR "<>"
 # define TOKEN_SEPARATOR "'\""
 # define TOKEN_SPACE " \f\n\r\t\v"
-# define TOKEN_END ";"
+# define TOKEN_VARIABLE "$"
 # define TOKEN_ESCAPE "\\"
+# define TOKEN_END ";"
 
 enum	e_token_type
 {
@@ -28,6 +29,7 @@ enum	e_token_type
 	Token_operator,
 	Token_separator,
 	Token_space,
+	Token_variable,
 	Token_escape,
 	Token_end,
 };
