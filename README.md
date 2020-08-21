@@ -17,3 +17,5 @@ https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html
 
 https://mtodorovic.developpez.com/linux/programmation-avancee/?page=page_3  
 
+https://stackoverflow.com/questions/8082932/connecting-n-commands-with-pipes-in-a-shell 
+

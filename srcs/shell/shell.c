@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 17:52:21 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/18 18:07:48 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/22 00:53:19 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_shell	create_shell(char *name, char **envp)
 	ft_bzero(&result, sizeof(t_shell));
 	result.name = ft_strdup(name + 2);
 	result.env = create_environment(envp);
+	update_env_array();
 	return (result);
 }
 
