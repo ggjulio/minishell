@@ -6,13 +6,13 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 18:13:38 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/20 15:30:35 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/21 13:35:57 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_token		create_token(char *str, enum e_token_type type)
+t_token		create_token(char *str, t_token_type type)
 {
 	t_token result;
 
@@ -21,7 +21,7 @@ t_token		create_token(char *str, enum e_token_type type)
 	return (result);
 }
 
-t_token		*malloc_token(char *str, enum e_token_type type)
+t_token		*malloc_token(char *str, t_token_type type)
 {
 	t_token *result;
 
@@ -42,7 +42,7 @@ void		free_token(t_token *to_free)
 	free(to_free);
 }
 
-void	lst_del_token(void *to_free)
+void		lst_del_token(void *to_free)
 {
 	free_token(to_free);
 }
