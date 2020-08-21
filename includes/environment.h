@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 17:35:53 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/19 17:24:05 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/21 15:16:55 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ void			free_environment(t_environment *to_free);
 /*
 **	environment_util.c
 */
-void			print_env(t_environment to_print);
+void			print_env(void);
+char			*get_env_var_value(char *name);
+void			set_env_var_value(char *name, char *value);
 
 typedef struct	s_env_var
 {

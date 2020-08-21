@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:25:58 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/21 13:41:06 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/21 14:01:32 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void		print_lst_tokens(t_list *lst)
 	while (lst)
 	{
 		token = lst->content;
-		ft_printf("%10s : %s\n", token->str, str[token->type]);
+		ft_printf("%10s : \"%s\"\n", str[token->type], token->str);
 		lst = lst->next;
 	}
 }

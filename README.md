@@ -14,3 +14,6 @@ https://fr.wikipedia.org/wiki/Analyse_lexicale
 https://en.wikipedia.org/wiki/Parsing  
 https://en.wikipedia.org/wiki/Lexical_analysis   
 https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html
+
+https://mtodorovic.developpez.com/linux/programmation-avancee/?page=page_3  
+
