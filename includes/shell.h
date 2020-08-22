@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 17:54:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/19 15:49:56 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/22 15:35:44 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ typedef struct	s_shell
 /*
 ** shell.c
 */
-t_shell			create_shell(char *name, char **envp);
-t_shell			*malloc_shell(char *name, char **envp);
+t_shell			create_shell(const char *name, t_environment envp);
+t_shell			*malloc_shell(char *name, t_environment envp);
 void			destroy_shell(t_shell to_destroy);
 void			free_shell(t_shell *to_free);
 

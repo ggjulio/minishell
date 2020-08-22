@@ -6,13 +6,13 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 17:52:21 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/22 02:21:46 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/22 15:42:21 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_shell	create_shell(char *name, char **envp)
+t_shell	create_shell(const char *name, t_environment envp)
 {
 	t_shell result;
 
@@ -22,7 +22,7 @@ t_shell	create_shell(char *name, char **envp)
 	return (result);
 }
 
-t_shell	*malloc_shell(char *name, char **envp)
+t_shell	*malloc_shell(char *name, t_environment envp)
 {
 	t_shell *result;
 
