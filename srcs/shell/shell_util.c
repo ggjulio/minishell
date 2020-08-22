@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 13:31:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/22 18:03:14 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/22 19:38:45 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,30 +32,24 @@ int spawn (char* program, char** arg_list, char **envp)
 	return (-1);
 }
 
-// char	**lst_token_to_array(void)
-// {
-// 	char		**result;
-// 	// char 		*ret;
-// 	t_token 	*token;
-// 	t_list 		*iterator;
-// 	int			i;
-//
-// 	iterator = g_sh.env.lst_var;
-// 	if (!(result = malloc((ft_lstsize(iterator) + 1) * sizeof(char *))))
-// 		return (NULL);
-// 	i = 0;
-// 	while (iterator)
-// 	{
-// 		token = iterator->content;
-// 		char *tmp = ft_strdupcat(token->, "=");
-// 		result[i] = ft_strdupcat(tmp, token->value);
-// 		free(tmp);
-// 		iterator = iterator->next;
-// 		i++;
-// 	}
-// 	result[i] = 0;
-// 	return (result);
-// }
+char	**lst_token_to_array(t_list *tokens)
+{
+	char	**result;
+	t_token	*token;
+	int		i;
+
+	if (!(result = malloc((ft_lstsize(tokens) + 1) * sizeof(char *))))
+		return (NULL);
+	i = 0;
+	while (tokens)
+	{
+		token = tokens->content;
+		result[i++] = token->str;
+		tokens = tokens->next;
+	}
+	result[i] = 0;
+	return (result);
+}
 
 char	*get_exec_path(char *exec_name)
 {
@@ -85,26 +79,16 @@ char	*get_exec_path(char *exec_name)
 	return (NULL);
 }
 
-void	execute_commands(t_list *tokens)
+void	execute_commands(char **args)
 {
-	// print_env_list();
-	
-	(void)tokens;
-	
-	char *param[4];
-	param[0] = ft_strdup("echo");
-	param[1] = ft_strdup("-n");
-	param[2] = ft_strdup("Hello");
-	param[3] = 0;
-
-	spawn (get_exec_path("echo"), param, (char **)g_sh.env);
-
+	spawn (get_exec_path(args[0]), args, (char **)g_sh.env);
 }
 
 void	run_shell(void)
 {
 	char	*input;
 	t_list	*tokens;
+	char	**args;
 
 	input = NULL;
 	while (42)
@@ -112,10 +96,15 @@ void	run_shell(void)
 		ft_printf("%s$ ", g_sh.name);
 		get_next_line(STDIN_FILENO, &input);
 		tokens = tokenize(input);
-		print_lst_tokens(tokens);
+		// print_lst_tokens(tokens);
+		args = lst_token_to_array(tokens);
+		// int i = 0;
+		// while (args[i])
+		// 	ft_printf("%s\n", args[i++]);
 		// ft_printf(">> %s\n", get_exec_path(((t_token *)(tokens->content))->str));
-		// execute_commands(tokens);
+		execute_commands(args);
 		ft_lstclear(&tokens, lst_del_token);
+		free(args);
 		free(input);
 	}
 }
