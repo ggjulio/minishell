@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:12 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/22 19:08:47 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/22 19:22:57 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,6 @@ void				concatenate_variables(t_list **tokens)
 	}
 }
 
-int					cmp_token_quotes(t_token *t1, t_token *t2)
-{
-	return (t1->type != t2->type);
-}
-
 void				manage_quotes(t_list **tokens)
 {
 	t_list	*iterator;
@@ -98,6 +93,18 @@ void				manage_quotes(t_list **tokens)
 	}
 }
 
+int					cmp_token_type(t_token *t1, t_token *t2)
+{
+	return (t1->type != t2->type);
+}
+
+void				remove_spaces(t_list **tokens)
+{
+	t_token *token_ref;
+
+	token_ref = malloc_token("", Token_space);
+	ft_lst_remove_if(tokens, token_ref, cmp_token_type, lst_del_token);
+}
 
 t_list				*tokenize(char *input)
 {
@@ -117,5 +124,6 @@ t_list				*tokenize(char *input)
 	manage_quotes(&result);
 	concatenate_literals(&result);
 	concatenate_variables(&result);
+	remove_spaces(&result);
 	return (result);
 }
