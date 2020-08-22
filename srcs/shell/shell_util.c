@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 13:31:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/22 02:13:54 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/22 13:52:58 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // int spawn (char* program, char** arg_list, char **envp)
 // {
 // 	pid_t	child_pid;
-
+//
 // 	child_pid = fork ();
 // 	if (child_pid != 0)
 // 	{
@@ -41,7 +41,7 @@
 // 	t_token 	*token;
 // 	t_list 		*iterator;
 // 	int			i;
-
+//
 // 	iterator = g_sh.env.lst_var;
 // 	if (!(result = malloc((ft_lstsize(iterator) + 1) * sizeof(char *))))
 // 		return (NULL);
@@ -73,13 +73,7 @@ void	execute_commands(t_list *tokens)
 	// char *prog = "echo";
 	// spawn ("/usr/bin/echo", param, g_sh.env);
 
-
-	ft_printf("##################################\n");
-	ft_printf("############# HERE ###############\n");
-	ft_printf("##################################\n");
-	// print_env_array();
-	// while(arr[i])
-		// ft_printf("%s\n", arr[i++]);
+	
 }
 
 void	run_shell(void)
@@ -93,7 +87,7 @@ void	run_shell(void)
 		ft_printf("%s$ ", g_sh.name);
 		get_next_line(STDIN_FILENO, &input);
 		tokens = tokenize(input);
-		// print_env_list();
+		// print_environment();
 		execute_commands(tokens);
 		ft_lstclear(&tokens, lst_del_token);
 		free(input);

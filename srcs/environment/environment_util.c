@@ -6,13 +6,13 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 15:10:55 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/22 02:26:28 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/22 13:46:54 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_env_array(void)
+void	print_environment(void)
 {
 	int i;
 
@@ -26,12 +26,20 @@ void	print_env_array(void)
 		ft_printf("%s\n", g_sh.env[i++]);
 }
 
-// char	*get_env_var_value(char *name)
-// {
+char	*get_environment_variable(char *name)
+{
+	(void)name;
+	return (NULL);
+}
 
-// }
+char	*get_environment_variable_value(char *name)
+{
+	(void)name;
+	return (NULL);
+}
 
-// void	set_env_var_value(char *name, char *value)
-// {
-
-// }
+void	set_environment_variable_value(char *name, char *value)
+{
+	(void)name;
+	(void)value;
+}

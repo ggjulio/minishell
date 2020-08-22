@@ -63,7 +63,7 @@ vpath %.h $(INC_DIR)
 # Minishell
 SRC = main.c 
 SRC+= shell.c shell_util.c
-SRC+= environment.c environment_util.c env_var.c env_var_util.c
+SRC+= environment.c environment_util.c
 SRC+= tokenizer.c tokenizer_util.c
 SRC+= token.c token_util.c
 
@@ -76,7 +76,7 @@ vpath %.c $(SRCS_DIR)
 LFLAGS = $(foreach lib, $(LIB_DIR),-L$(lib))  $(foreach lib, $(LIB),-l$(lib))
 
 CC = clang
-CFLAGS  = -Wall -Wextra -Werror -g #-fsanitize=address  -fsanitize=undefined -fstack-protector  
+CFLAGS  = -Wall -Wextra -Werror -g -fsanitize=address  -fsanitize=undefined -fstack-protector  
 IFLAGS  = $(foreach inc, $(INC_DIR),-I$(inc))
 
 all: $(NAME)

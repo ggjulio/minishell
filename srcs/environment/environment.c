@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 17:34:02 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/22 02:27:06 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/22 13:50:12 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_environment	malloc_environment(char **envp)
 	t_environment	result;
 	size_t			i;
 
-	if (!(result = malloc(environment_len(envp) + 1)))
+	if (!(result = malloc((environment_len(envp) + 1) * sizeof(char *))))
 		return (NULL);
 	i = -1;
 	while (envp[++i])
@@ -37,6 +37,27 @@ void			free_environment(t_environment to_free)
 		to_free[i++] = NULL;
 	}
 	free(to_free);
+}
+
+void			add_environment_variable(char *variable)
+{
+	t_environment	new_env;
+	int				i;
+
+	if (!(new_env = malloc(environment_len(g_sh.env) + 2)))
+		return ;
+	i = 0;
+	while (g_sh.env[++i])
+		new_env[i] = g_sh.env[i];
+	new_env[i++] = ft_strdup(variable);
+	new_env[i] = NULL;
+	free(g_sh.env);
+	g_sh.env = new_env;
+}
+
+void			remove_environment_variable(char *name)
+{
+	(void)name;
 }
 
 size_t			environment_len(char **envp)
