@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 17:52:21 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/22 00:53:19 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/22 02:21:46 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ t_shell	create_shell(char *name, char **envp)
 
 	ft_bzero(&result, sizeof(t_shell));
 	result.name = ft_strdup(name + 2);
-	result.env = create_environment(envp);
-	update_env_array();
+	result.env = malloc_environment(envp);
 	return (result);
 }
 
@@ -35,7 +34,7 @@ t_shell	*malloc_shell(char *name, char **envp)
 
 void	destroy_shell(t_shell to_destroy)
 {
-	destroy_environment(to_destroy.env);
+	free_environment(to_destroy.env);
 	free(to_destroy.name);
 }
 

@@ -6,29 +6,33 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 13:31:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/22 01:11:09 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/22 02:13:54 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 
-int spawn (char* program, char** arg_list, char **envp)
-{
-	pid_t	child_pid;
+// int spawn (char* program, char** arg_list, char **envp)
+// {
+// 	pid_t	child_pid;
 
-	child_pid = fork ();
-	if (child_pid != 0)
-    	return child_pid;
-	else {
-     /* Exécute PROGRAM en le recherchant dans le path. */
-    	execve (program, arg_list, envp);
-     /* On ne sort de la fonction execvp uniquement si une erreur survient. */
-    	ft_printf("une erreur est survenue au sein de execvp\n");
-    	ft_dprintf(STDERR_FILENO, "une erreur est survenue au sein de execvp\n");
-	}
-	return (-1);
-}
+// 	child_pid = fork ();
+// 	if (child_pid != 0)
+// 	{
+// 		wait
+// 		waitpid(child_pid,)
+//     	return child_pid;
+// 	}
+// 	else {
+//      /* Exécute PROGRAM en le recherchant dans le path. */
+//     	execve (program, arg_list, envp);
+//      /* On ne sort de la fonction execvp uniquement si une erreur survient. */
+//     	ft_printf("une erreur est survenue au sein de execvp\n");
+//     	// ft_dprintf(STDERR_FILENO, "une erreur est survenue au sein de execvp\n");
+// 	}
+// 	return (-1);
+// }
 
 // char	**lst_token_to_array(void)
 // {
@@ -57,17 +61,23 @@ int spawn (char* program, char** arg_list, char **envp)
 
 void	execute_commands(t_list *tokens)
 {
-	print_env_list();
+	// print_env_list();
 	
 	(void)tokens;
 	
-	// spawn (, , lst_env_to_array());
+	char *param[3];
+	param[0] = ft_strdup("echocc");
+	param[1] = ft_strdup("Hello");
+	param[2] = 0;
+	
+	// char *prog = "echo";
+	// spawn ("/usr/bin/echo", param, g_sh.env);
 
 
 	ft_printf("##################################\n");
 	ft_printf("############# HERE ###############\n");
 	ft_printf("##################################\n");
-	print_env_array();
+	// print_env_array();
 	// while(arr[i])
 		// ft_printf("%s\n", arr[i++]);
 }
