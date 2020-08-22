@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dprintf.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juligonz <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 12:10:29 by juligonz          #+#    #+#             */
-/*   Updated: 2019/12/03 15:48:33 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/23 00:28:44 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int			ft_vdprintf(int fd, const char *format, va_list ap)
 			i += read_flags(&p, ap, format + i);
 			if (!p.specifier)
 				break ;
-			parse(ap, &p);
+			parse_printf_format(ap, &p);
 			str = (char *)format + i + 1;
 		}
 	write_buffer(&p, str, format + i - str);

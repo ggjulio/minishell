@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:57:19 by juligonz          #+#    #+#             */
-/*   Updated: 2019/12/11 19:53:16 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/23 00:28:54 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int			ft_vprintf(const char *format, va_list ap)
 			i += read_flags(&p, ap, format + i);
 			if (!p.specifier)
 				break ;
-			parse(ap, &p);
+			parse_printf_format(ap, &p);
 			str = (char *)format + i + 1;
 		}
 	write_buffer(&p, str, format + i - str);

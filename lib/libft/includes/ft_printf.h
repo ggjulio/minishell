@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:53:56 by juligonz          #+#    #+#             */
-/*   Updated: 2020/01/31 15:46:31 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/23 00:30:26 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,6 @@ void			write_buffer(t_manager *p, void *s, size_t n);
 void			write_buffer_wcs(t_manager *p, wchar_t *s, size_t n);
 void			flush_buffer(t_manager *p);
 int				read_flags(t_manager *p, va_list args, const char *format);
-void			parse(va_list args, t_manager *p);
+void			parse_printf_format(va_list args, t_manager *p);
 
 #endif
