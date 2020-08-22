@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 14:19:45 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/18 18:02:40 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/22 16:14:32 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <dirent.h>
 # include <string.h>
 # include <errno.h>
+# include <limits.h>
 
 /*
 ** Libraries

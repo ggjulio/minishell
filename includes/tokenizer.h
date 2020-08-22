@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:38 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/21 13:44:42 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/22 18:22:11 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "minishell.h"
 
 # define TOKEN_OPERATOR "<>|"
-# define TOKEN_SEPARATOR "'\""
+# define TOKEN_QUOTE "'\""
 # define TOKEN_SPACE " \f\n\r\t\v"
 # define TOKEN_VARIABLE "$"
 # define TOKEN_ESCAPE "\\"
@@ -27,7 +27,7 @@ typedef enum	e_token_type
 	None,
 	Token_literal,
 	Token_operator,
-	Token_separator,
+	Token_quote,
 	Token_space,
 	Token_variable,
 	Token_escape,
