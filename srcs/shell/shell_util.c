@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 13:31:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/23 13:58:49 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/23 17:34:53 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,27 +52,79 @@ char	**lst_token_to_array(t_list *tokens)
 	return (result);
 }
 
-void	execute_commands(char **args)
+void	execute_commands(t_command **commands)
 {
-	spawn (get_exec_path(args[0]), args, (char **)g_sh.env);
+	// spawn (get_exec_path(args[0]), args, (char **)g_sh.env);
+	(void)commands;
 }
+
+
+
+t_command	*pop_pipeline_from_tokens(t_list **tokens)
+{
+	t_command	*result;
+	t_list		*iterator;
+	t_token		*tok;
+
+	iterator = *tokens;
+	result = NULL;
+	while (iterator)
+	{
+		tok = iterator->content;
+		if (tok->type == Token_end)
+			return (result);
+		if (tok->type == Token_operator && !ft_strcmp(tok->type, "|"))
+		{
+			ft_lstdelone(ft_lstpop_elem(tokens, iterator), lst_del_token);
+			result->pipe = pop_command_from_tokens(tokens);
+		}
+		
+		iterator = iterator->next;
+	}
+	return (result);
+}
+
+
+t_list	*get_commands(char * input)
+{
+	t_list		*result;
+	t_list		*tokens;
+	t_command 	*pipeline;
+
+	tokens = tokenize(input);
+	if ((pipeline = pop_pipeline_from_tokens(&tokens)) != NULL)
+		ft_lstadd_back(&result, ft_lstnew(pipeline));
+	else
+			
+
+	ft_lstclear(&tokens, lst_del_token);
+	
+
+
+
+	// char	**args;
+	// args = lst_token_to_array(tokens);
+	// free(args);
+}
+
+
+
+
+
+
+
+
 
 void	run_shell(void)
 {
 	char	*input;
-	t_list	*tokens;
-	char	**args;
 
 	input = NULL;
 	while (42)
 	{
 		ft_printf("%s%s%s$%s ", "\e[92m", g_sh.name, "\e[91m", "\e[0m");
 		get_next_line(STDIN_FILENO, &input);
-			tokens = tokenize(input);
-			args = lst_token_to_array(tokens);
-		execute_commands(args);
-			ft_lstclear(&tokens, lst_del_token);
-			free(args);
+		execute_commands(get_commands(input));
 		free(input);
 	}
 }
