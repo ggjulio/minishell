@@ -44,9 +44,9 @@ void			add_environment_variable(char *variable)
 	t_environment	new_env;
 	int				i;
 
-	if (!(new_env = malloc(environment_len(g_sh.env) + 2)))
+	if (!(new_env = malloc((environment_len(g_sh.env) + 2) * sizeof(char *))))
 		return ;
-	i = 0;
+	i = -1;
 	while (g_sh.env[++i])
 		new_env[i] = g_sh.env[i];
 	if (*variable == '$')
