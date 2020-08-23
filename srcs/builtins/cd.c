@@ -14,8 +14,12 @@
 
 int     cd(char *arg) {
 
-    ft_printf("%s\n", arg);
-
+    errno = 0;
+    if (chdir(arg) == -1)
+    {
+        error("cd", arg);
+        return (-1);
+    }
     getcwd(g_sh.cwd, sizeof(g_sh.cwd));
     return (0);
 }

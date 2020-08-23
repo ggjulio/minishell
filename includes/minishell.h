@@ -40,6 +40,7 @@
 # include "command.h"
 # include "shell.h"
 # include "tokenizer.h"
+# include "error.h"
 
 /*
 **	Builtins

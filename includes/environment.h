@@ -23,6 +23,7 @@ typedef const char**	t_environment;
 t_environment			malloc_environment(t_environment envp);
 void					free_environment(t_environment to_free);
 void					add_environment_variable(char *variable);
+void			        remove_environment_variable(char *name);
 size_t					environment_len(t_environment envp);
 
 /*

@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/16 14:41:28 by hwinston          #+#    #+#             */
-/*   Updated: 2020/08/16 14:52:02 by hwinston         ###   ########.fr       */
+/*   Created: 2020/08/23 13:40:40 by hwinston          #+#    #+#             */
+/*   Updated: 2020/08/23 14:01:06 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#include "minishell.h"
 
-int     echo(char **args);
-int     cd(char *arg);
-int     pwd();
-int     export(char *arg);
-int     env();
-int     unset(char *name);
+int     env()
+{
+    int i;
 
-#endif
+    i = -1;
+    while (g_sh.env[++i])
+        ft_printf("%s\n", g_sh.env[i]);
+    return (0);
+}

@@ -49,8 +49,6 @@ void			add_environment_variable(char *variable)
 	i = -1;
 	while (g_sh.env[++i])
 		new_env[i] = g_sh.env[i];
-	if (*variable == '$')
-		variable++;
 	new_env[i++] = ft_strdup(variable);
 	new_env[i] = NULL;
 	free(g_sh.env);
@@ -59,7 +57,22 @@ void			add_environment_variable(char *variable)
 
 void			remove_environment_variable(char *name)
 {
-	(void)name;
+	t_environment	new_env;
+	int				i;
+	int				j;
+
+	if (!(new_env = malloc(environment_len(g_sh.env) * sizeof(char *))))
+		return ;
+	i = -1;
+	j = 0;
+	while (g_sh.env[++i])
+	{
+		if (ft_strcmp(g_sh.env[i], name) != 0)
+			new_env[j++] = g_sh.env[i];
+	}
+	new_env[j] = NULL;
+	free(g_sh.env);
+	g_sh.env = new_env;
 }
 
 size_t			environment_len(t_environment envp)
