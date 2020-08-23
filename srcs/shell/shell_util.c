@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 13:31:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/23 23:49:43 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/24 01:28:27 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ void	run_shell(void)
 	input = NULL;
 	while (42)
 	{
-		ft_printf("%s%s%s$%s ", "\e[92m", g_sh.name, "\e[91m", "\e[0m");
+		ft_printf("%s%s:%s ", "\e[92m", g_sh.name, "\e[94m");
+		ft_printf("%s%s$%s ", g_sh.cwd, "\e[91m", "\e[0m");
 		get_next_line(STDIN_FILENO, &input);
 		execute_commands(get_commands(input));
 		free(input);
