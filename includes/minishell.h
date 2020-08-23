@@ -44,7 +44,7 @@
 /*
 **	Builtins
 */
-# include "echo.h"
+# include "builtins.h"
 
 extern t_shell g_sh;
 
