@@ -26,7 +26,7 @@ int     echo(char **args)
     }
     while (args[++i])
     {
-        if ((opt == 0 && i%2 == 1) || (opt == 1 && i%2 == 0))
+        if ((opt == 0 && i > 0) || (opt == 1 && i > 1))
             ft_printf(" ");
         ft_printf("%s", args[i]);
     }
