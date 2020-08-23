@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:37:23 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/23 14:11:43 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/23 15:04:22 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 
 typedef struct	s_command
 {
-	char	*bin_path;
-	char	**args;
+	char		*bin_path;
+	char		**args;
+	t_command	*pipe;
 }				t_command;
 
 /*
