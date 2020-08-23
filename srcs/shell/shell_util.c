@@ -6,14 +6,14 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 13:31:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/23 02:35:36 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/23 13:58:49 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 
-int spawn (char* program, char** arg_list, char **envp)
+int spawn (char* bin_path, char** arg_list, char **envp)
 {
 	pid_t	child_pid;
 	int		status;
@@ -27,7 +27,7 @@ int spawn (char* program, char** arg_list, char **envp)
     	return child_pid;
 	}
 	else {
-    	execve (program, arg_list, envp);
+    	execve (bin_path, arg_list, envp);
     	ft_printf("une erreur est survenue au sein de execvp\n");
 	}
 	return (0);
@@ -50,34 +50,6 @@ char	**lst_token_to_array(t_list *tokens)
 	}
 	result[i] = 0;
 	return (result);
-}
-
-char	*get_exec_path(char *exec_name)
-{
-	size_t			i;
-	char			**paths;
-    DIR				*dir;
-    struct dirent	*dp;
-
-	paths = malloc_environment_path();
-	i = -1;
-	while (paths[++i])
-	{
-		dir = opendir(paths[i]);
-		if (dir == NULL)
-			continue;
-		while ((dp = readdir(dir)) != NULL)
-			if (!ft_strcmp(exec_name, dp->d_name))
-			{
-				char *tmp = ft_strdupcat(paths[i], "/");
-				char *result = ft_strdupcat(tmp, exec_name);
-				free(tmp);
-				return (result);
-			}
-   		closedir(dir);
-	}	
-	free_environment_path(paths);
-	return (NULL);
 }
 
 void	execute_commands(char **args)

@@ -66,6 +66,7 @@ SRC+= shell.c shell_util.c
 SRC+= environment.c environment_util.c environment_path.c
 SRC+= tokenizer.c tokenizer_util.c
 SRC+= token.c token_util.c
+SRC+= command.c command_util.c
 
 #Builtins
 SRC+= echo.c
