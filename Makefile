@@ -57,7 +57,7 @@ OBJ_DIR = obj
 SRCS_DIR = $(shell find $(SRC_DIR) -type d)
 LIB_DIR = $(shell find ./lib -maxdepth 1 -type d)
 
-INC = minishell.h echo.h shell.h environment.h tokenizer.h
+INC = minishell.h shell.h environment.h tokenizer.h builtins.h
 vpath %.h $(INC_DIR)
 
 # Minishell
