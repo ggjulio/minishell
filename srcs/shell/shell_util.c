@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 13:31:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/22 19:38:45 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/23 02:35:36 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,21 @@
 int spawn (char* program, char** arg_list, char **envp)
 {
 	pid_t	child_pid;
+	int		status;
 
 	child_pid = fork ();
+	if (child_pid == -1)
+		return (-1);
 	if (child_pid != 0)
 	{
+		waitpid(child_pid, &status, 0);
     	return child_pid;
 	}
 	else {
-     /* Exécute PROGRAM en le recherchant dans le path. */
     	execve (program, arg_list, envp);
-     /* On ne sort de la fonction execvp uniquement si une erreur survient. */
     	ft_printf("une erreur est survenue au sein de execvp\n");
-    	// ft_dprintf(STDERR_FILENO, "une erreur est survenue au sein de execvp\n");
 	}
-	return (-1);
+	return (0);
 }
 
 char	**lst_token_to_array(t_list *tokens)
@@ -93,18 +94,13 @@ void	run_shell(void)
 	input = NULL;
 	while (42)
 	{
-		ft_printf("%s$ ", g_sh.name);
+		ft_printf("%s%s%s$%s ", "\e[92m", g_sh.name, "\e[91m", "\e[0m");
 		get_next_line(STDIN_FILENO, &input);
-		tokens = tokenize(input);
-		// print_lst_tokens(tokens);
-		args = lst_token_to_array(tokens);
-		// int i = 0;
-		// while (args[i])
-		// 	ft_printf("%s\n", args[i++]);
-		// ft_printf(">> %s\n", get_exec_path(((t_token *)(tokens->content))->str));
+			tokens = tokenize(input);
+			args = lst_token_to_array(tokens);
 		execute_commands(args);
-		ft_lstclear(&tokens, lst_del_token);
-		free(args);
+			ft_lstclear(&tokens, lst_del_token);
+			free(args);
 		free(input);
 	}
 }
