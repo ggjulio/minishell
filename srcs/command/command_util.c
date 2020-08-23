@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:45:43 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/23 14:18:47 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/23 23:33:32 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,20 @@ char	*get_exec_path(char *exec_name)
 	}	
 	free_environment_path(paths);
 	return (NULL);
+}
+
+void		print_command(t_command *to_print)
+{
+	int i;
+
+	i = 0;
+	while (to_print->args[i])
+		ft_printf("%s ", to_print->args[i++]);		
+	if (to_print->pipe != NULL)
+	{
+		ft_printf(" | ");
+		print_command(to_print->pipe);
+		
+	}
+	ft_printf("\n");
 }
