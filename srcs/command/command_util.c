@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:45:43 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/23 23:33:32 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/24 01:09:53 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*get_exec_path(char *exec_name)
     DIR				*dir;
     struct dirent	*dp;
 
+	if (!ft_strncmp("./",exec_name, 2) || !ft_strncmp("/",exec_name, 1))
+		return (ft_strdup(exec_name));
 	paths = malloc_environment_path();
 	i = -1;
 	while (paths[++i])
