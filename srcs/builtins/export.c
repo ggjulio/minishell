@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by hwinston          #+#    #+#             */
-/*   Updated: 2020/08/23 14:01:06 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/08/24 17:42:44 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@ int    export_error(char *arg)
     return (0);
 }
 
-int     export(char *arg)
+int     export(const char **args)
 {
-    if (!ft_isalpha(arg[0]) && arg[0] != '_')
-        export_error(arg);
-    if (ft_strchr(arg, '=') != NULL)
-        add_environment_variable(arg);
+    (void)args;
+    // if (!ft_isalpha(arg[0]) && arg[0] != '_')
+    //     export_error(arg);
+    // if (ft_strchr(arg, '=') != NULL)
+    //     add_environment_variable(arg);
     return (0);
 }
 

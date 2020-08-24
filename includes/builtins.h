@@ -3,22 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 14:41:28 by hwinston          #+#    #+#             */
-/*   Updated: 2020/08/16 14:52:02 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/08/24 17:30:53 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
-int     echo(char **args);
-int     cd(char *arg);
-int     pwd();
-int     export(char *arg);
-int     env();
-int     unset(char *name);
-int     exit_builtin();
+typedef int		(*t_builtin_ptr)(const char **args);
+
+int				echo(const char **args);
+int				cd(const char **args);
+int				pwd(const char **args);
+int				export(const char **args);
+int				env(const char **args);
+int				unset(const char **args);
+int				exit_builtin(const char **args);
+
+/*
+** builtins_util.c
+*/
+t_builtin_ptr	get_builtin_ptr(char *command_name);
 
 #endif

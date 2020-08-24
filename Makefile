@@ -71,6 +71,7 @@ SRC+= error.c
 
 #Builtins
 SRC+= echo.c cd.c env.c export.c pwd.c unset.c exit_builtin.c
+SRC+= builtins_util.c
 
 OBJ = $(addprefix  $(OBJ_DIR)/,$(SRC:%.c=%.o))
 vpath %.c $(SRCS_DIR)

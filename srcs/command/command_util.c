@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:45:43 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/24 16:38:55 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/24 17:28:23 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,31 @@ void		print_command(t_command *to_print)
 		
 	}
 	ft_printf("\n");
+}
+
+int spawn_command(t_command *command)
+{
+	pid_t			child_pid;
+	int				status;
+	t_builtin_ptr	builtin;
+
+	child_pid = fork ();
+	builtin = get_builtin_ptr(command->args[0]);
+	if (child_pid == -1)
+		return (-1);
+	if (child_pid != 0)
+	{
+		waitpid(child_pid, &status, 0);
+    	return child_pid;
+	}
+	else {
+		if (builtin != NULL)
+			(*builtin)((const char **)command->args);
+		else
+		{
+    		execve (command->bin_path, command->args, (char **)g_sh.env);
+			ft_printf("une erreur est survenue au sein de execvp\n");
+		}
+	}
+	return (0);
 }
