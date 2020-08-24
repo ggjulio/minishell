@@ -104,6 +104,7 @@ void				remove_spaces(t_list **tokens)
 
 	token_ref = malloc_token("", Token_space);
 	ft_lst_remove_if(tokens, token_ref, cmp_token_type, lst_del_token);
+	free_token(token_ref);
 }
 
 t_list				*tokenize(char *input)

@@ -85,5 +85,6 @@ void	run_shell(void)
 			free_command(pipelines->content);
 			pipelines = pipelines->next;
 		}
+		pipelines = NULL;
 	}
 }

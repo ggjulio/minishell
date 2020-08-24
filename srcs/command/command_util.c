@@ -27,16 +27,20 @@ char	*get_exec_path(char *exec_name)
 	{
 		dir = opendir(paths[i]);
 		if (dir == NULL)
+		{
+			closedir(dir);
 			continue;
+		}
 		while ((dp = readdir(dir)) != NULL)
 			if (!ft_strcmp(exec_name, dp->d_name))
 			{
 				char *tmp = ft_strdupcat(paths[i], "/");
 				char *result = ft_strdupcat(tmp, exec_name);
 				free(tmp);
+				closedir(dir);
 				return (result);
 			}
-   		closedir(dir);
+		closedir(dir);
 	}	
 	free_environment_path(paths);
 	return (NULL);
