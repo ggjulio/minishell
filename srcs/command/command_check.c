@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   command_check.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,30 +12,49 @@
 
 #include "minishell.h"
 
-int     echo(char **args)
+int     is_builtin(char *command)
 {
-    int opt;
-    int i;
+    const char  *builtins[] = {"echo", "cd", "env", "export", "pwd", "unset", "exit", 0};
+    int         i;
 
     i = -1;
-    opt = 0;
-    if (args[0] && ft_strcmp(args[0], "-n") == 0)
+    while (builtins[++i])
     {
-        opt = 1;
-        i++;
+        if (ft_strcmp(builtins[i], command) == 0)
+            return (1);
     }
-    if (args[0] == NULL && opt == 0)
+    return (0);
+}
+
+
+int check_pipeline(t_command *pipeline)
+{
+    int i;
+
+	i = -1;
+
+    if (is_builtin(pipeline->args[0]))
+        return (1);
+    else if (pipeline->bin_path == NULL)
+        return (1);
+	
+	//if (pipeline->pipe != NULL)
+	//	check_pipeline(pipeline->pipe);
+    return (0);
+}
+
+
+
+int     check_commands(t_list *commands)
+{
+    t_list *tmp;
+
+    tmp = commands;
+    while (tmp)
     {
-        ft_printf("\n");
-        return (0);
+        if (!check_pipeline(tmp->content))
+            ft_printf("bad input\n");
+        tmp = tmp->next;
     }
-    while (args[++i])
-    {
-        if ((opt == 0 && i > 0) || (opt == 1 && i > 1))
-            ft_printf(" ");
-        ft_printf("%s", args[i]);
-    }
-    if (opt == 0)
-        ft_printf("\n");
     return (0);
 }

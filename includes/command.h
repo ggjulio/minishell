@@ -37,6 +37,11 @@ char			*get_exec_path(char *exec_name);
 void			print_command(t_command *to_print);
 
 /*
+** command_util.c
+*/
+int     		check_commands(t_list *commands);
+
+/*
 ** command_pipelines.c
 */
 t_list			*get_pipelines(char * input);

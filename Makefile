@@ -66,7 +66,7 @@ SRC+= shell.c shell_util.c shell_exit.c
 SRC+= environment.c environment_util.c environment_path.c
 SRC+= tokenizer.c tokenizer_util.c
 SRC+= token.c token_util.c
-SRC+= command.c command_util.c command_pipelines.c
+SRC+= command.c command_util.c command_pipelines.c command_check.c
 SRC+= error.c
 
 #Builtins

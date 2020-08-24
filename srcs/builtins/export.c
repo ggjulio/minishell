@@ -14,7 +14,8 @@
 
 int     export(char *arg)
 {
-    add_environment_variable(arg);
+    if (ft_strchr(arg, '=') != NULL)
+        add_environment_variable(arg);
     return (0);
 }
 
