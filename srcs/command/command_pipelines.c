@@ -34,9 +34,9 @@ t_command	*pop_pipeline_from_tokens(t_list *tokens)
 		tokens = tokens->next;
 	}
 	result = malloc_command(args);
-	ft_lstclear(&args, lst_del_string);
 	if (tok->type == Token_operator && !ft_strcmp(tok->str, "|"))
 		result->pipe = pop_pipeline_from_tokens(tokens->next);
+	ft_lstclear(&args, lst_del_string);
 	return (result);
 }
 
@@ -52,6 +52,7 @@ t_list		*get_pipelines(char * input)
 		ft_lstadd_back(&result,
 			ft_lstnew(pop_pipeline_from_tokens(tokens)));
 
+	check_commands(result);
 
 	ft_lstclear(&tokens, lst_del_token);
 

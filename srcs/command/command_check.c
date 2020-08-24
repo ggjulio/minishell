@@ -35,12 +35,11 @@ int check_pipeline(t_command *pipeline)
 
     if (is_builtin(pipeline->args[0]))
         return (1);
-    else if (pipeline->bin_path == NULL)
-        return (1);
-	
-	//if (pipeline->pipe != NULL)
-	//	check_pipeline(pipeline->pipe);
-    return (0);
+    if (pipeline->bin_path == NULL)
+        return (0);
+	if (pipeline->pipe != NULL)
+		check_pipeline(pipeline->pipe);
+    return (1);
 }
 
 

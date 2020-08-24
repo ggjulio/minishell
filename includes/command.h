@@ -37,7 +37,7 @@ char			*get_exec_path(char *exec_name);
 void			print_command(t_command *to_print);
 
 /*
-** command_util.c
+** command_check.c
 */
 int     		check_commands(t_list *commands);
 

@@ -12,8 +12,19 @@
 
 #include "minishell.h"
 
+int    export_error(char *arg)
+{
+    ft_printf("%s: ", g_sh.name);
+    ft_printf("export: ");
+    ft_printf("`%s`: ", arg);
+    ft_printf("not a valid identifier\n");
+    return (0);
+}
+
 int     export(char *arg)
 {
+    if (!ft_isalpha(arg[0]) && arg[0] != '_')
+        export_error(arg);
     if (ft_strchr(arg, '=') != NULL)
         add_environment_variable(arg);
     return (0);
