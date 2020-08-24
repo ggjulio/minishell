@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 13:31:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/24 17:41:43 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/24 18:10:42 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,6 @@ void	execute_commands(t_list	*commands)
 	while	(iterator)
 	{
 		to_exec = iterator->content;
-		// if (ft_strcmp(to_exec->args[0], "echo") == 0)
-		// 	echo(&to_exec->args[1]);
-		// else if (ft_strcmp(to_exec->args[0], "cd") == 0)
-		// 	cd(to_exec->args[1]);
-		// else if (ft_strcmp(to_exec->args[0], "env") == 0)
-		// 	env();
-		// else if (ft_strcmp(to_exec->args[0], "pwd") == 0)
-		// 	pwd();
-		// else if (ft_strcmp(to_exec->args[0], "export") == 0)
-		// 	export(to_exec->args[1]);
-		// else if (ft_strcmp(to_exec->args[0], "unset") == 0)
-		// 	unset(to_exec->args[1]);
-		// else if (ft_strcmp(to_exec->args[0], "exit") == 0)
-		// 	exit_builtin();	
-		// else
 		spawn_command(to_exec);
 		iterator = iterator->next;
 	}
