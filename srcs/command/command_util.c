@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:45:43 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/24 01:28:30 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/24 16:38:55 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,7 @@ char	*get_exec_path(char *exec_name)
 	{
 		dir = opendir(paths[i]);
 		if (dir == NULL)
-		{
-			closedir(dir);
 			continue;
-		}
 		while ((dp = readdir(dir)) != NULL)
 			if (!ft_strcmp(exec_name, dp->d_name))
 			{

@@ -41,7 +41,7 @@ _IWHITE   =\e[107m
 #    By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/20 12:43:01 by juligonz          #+#    #+#              #
-#    Updated: 2020/05/20 12:51:11 by juligonz         ###   ########.fr        #
+#    Updated: 2020/08/24 16:37:55 by juligonz         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -78,7 +78,7 @@ vpath %.c $(SRCS_DIR)
 LFLAGS = $(foreach lib, $(LIB_DIR),-L$(lib))  $(foreach lib, $(LIB),-l$(lib))
 
 CC = clang
-CFLAGS  = -Wall -Wextra -Werror -g #-fsanitize=address  -fsanitize=undefined -fstack-protector  
+CFLAGS  = -Wall -Wextra -Werror -g -fsanitize=address  -fsanitize=undefined -fstack-protector  
 IFLAGS  = $(foreach inc, $(INC_DIR),-I$(inc))
 
 all: $(NAME)
