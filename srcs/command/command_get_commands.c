@@ -71,6 +71,7 @@ t_list		*get_commands(char * input)
 
 
 	ft_lstclear(&tokens, lst_del_token);
+
 	
 	return (result);
 }

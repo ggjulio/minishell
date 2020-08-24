@@ -19,5 +19,6 @@ int     pwd();
 int     export(char *arg);
 int     env();
 int     unset(char *name);
+int     exit_builtin();
 
 #endif

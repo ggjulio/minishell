@@ -56,6 +56,8 @@ void	execute_commands(t_list	*commands)
 			export(to_exec->args[1]);
 		else if (ft_strcmp(to_exec->args[0], "unset") == 0)
 			unset(to_exec->args[1]);
+		else if (ft_strcmp(to_exec->args[0], "exit") == 0)
+			exit_builtin();	
 		else
 			spawn (to_exec->bin_path, to_exec->args, (char **)g_sh.env);
 		iterator = iterator->next;

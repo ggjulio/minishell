@@ -62,7 +62,7 @@ vpath %.h $(INC_DIR)
 
 # Minishell
 SRC = main.c 
-SRC+= shell.c shell_util.c
+SRC+= shell.c shell_util.c shell_exit.c
 SRC+= environment.c environment_util.c environment_path.c
 SRC+= tokenizer.c tokenizer_util.c
 SRC+= token.c token_util.c
@@ -70,7 +70,7 @@ SRC+= command.c command_util.c command_get_commands.c
 SRC+= error.c
 
 #Builtins
-SRC+= echo.c cd.c env.c export.c pwd.c unset.c
+SRC+= echo.c cd.c env.c export.c pwd.c unset.c exit_builtin.c
 
 OBJ = $(addprefix  $(OBJ_DIR)/,$(SRC:%.c=%.o))
 vpath %.c $(SRCS_DIR)

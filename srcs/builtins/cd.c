@@ -14,6 +14,8 @@
 
 int     cd(char *arg) {
 
+    if (arg == NULL)
+        return (0);
     errno = 0;
     if (chdir(arg) == -1)
     {

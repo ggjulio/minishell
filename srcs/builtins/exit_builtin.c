@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,10 +12,9 @@
 
 #include "minishell.h"
 
-void     error(char *cmd, char *arg)
+int     exit_builtin()
 {
-    ft_dprintf(STDERR_FILENO, "%s: ", g_sh.name);
-    ft_dprintf(STDERR_FILENO, "%s: ", cmd);
-    ft_dprintf(STDERR_FILENO, "%s: ", arg);
-    ft_dprintf(STDERR_FILENO, "%s\n", strerror(errno));
+    ft_printf("exit\n");
+    exit_shell(EXIT_SUCCESS);
+    return (0);
 }
