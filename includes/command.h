@@ -37,8 +37,8 @@ char			*get_exec_path(char *exec_name);
 void			print_command(t_command *to_print);
 
 /*
-**
+** command_get_commands.c
 */
-t_list			*get_commands(char * input);
+t_list			*get_pipelines(char * input);
 
 #endif

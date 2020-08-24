@@ -52,8 +52,15 @@ t_command		*malloc_command(t_list *p_args)
 
 void		destroy_command(t_command to_destroy)
 {
+	int i;
+
+	if (to_destroy.pipe != NULL)
+		free_command(to_destroy.pipe);
 	free(to_destroy.bin_path);
-	(void)to_destroy;
+	i = 0;
+	while(to_destroy.args[i])
+		free(to_destroy.args[i++]);
+	free(to_destroy.args);
 }
 
 void		free_command(t_command *to_free)

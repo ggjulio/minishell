@@ -41,7 +41,7 @@ t_command	*pop_pipeline_from_tokens(t_list *tokens)
 }
 
 
-t_list		*get_commands(char * input)
+t_list		*get_pipelines(char * input)
 {
 	t_list		*result;
 	t_list		*tokens;

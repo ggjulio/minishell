@@ -69,6 +69,7 @@ void	execute_commands(t_list	*commands)
 void	run_shell(void)
 {
 	char	*input;
+	t_list	*pipelines;
 
 	input = NULL;
 	while (42)
@@ -76,7 +77,13 @@ void	run_shell(void)
 		ft_printf("%s%s:%s ", "\e[92m", g_sh.name, "\e[94m");
 		ft_printf("%s%s$%s ", g_sh.cwd, "\e[91m", "\e[0m");
 		get_next_line(STDIN_FILENO, &input);
-		execute_commands(get_commands(input));
+		pipelines = get_pipelines(input);
 		free(input);
+		execute_commands(pipelines);
+		while (pipelines)
+		{
+			free_command(pipelines->content);
+			pipelines = pipelines->next;
+		}
 	}
 }
