@@ -54,7 +54,7 @@ t_list		*get_pipelines(char * input)
 			ft_lstnew(pop_pipeline_from_tokens(tokens)));
 
 	// print_command(result->content);
-	// check_commands(result);
+	check_commands(result);
 
 	ft_lstclear(&tokens, lst_del_token);
 

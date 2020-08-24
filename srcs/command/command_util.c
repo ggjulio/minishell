@@ -80,11 +80,8 @@ int spawn_command(t_command *command)
 	else {
 		if (builtin != NULL)
 			(*builtin)((const char **)command->args);
-		else
-		{
+		else if (command->bin_path != NULL)
     		execve (command->bin_path, command->args, (char **)g_sh.env);
-			ft_printf("une erreur est survenue au sein de execvp\n");
-		}
 	}
 	return (0);
 }

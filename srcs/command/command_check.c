@@ -26,6 +26,10 @@ int     is_builtin(char *command)
     return (0);
 }
 
+void puterr(char *cmd)
+{
+    ft_printf("%s: %s: command not found\n", g_sh.name, cmd);
+}
 
 int check_pipeline(t_command *pipeline)
 {
@@ -33,10 +37,8 @@ int check_pipeline(t_command *pipeline)
 
 	i = -1;
 
-    if (is_builtin(pipeline->args[0]))
-        return (1);
-    if (pipeline->bin_path == NULL)
-        return (0);
+    if (!(is_builtin(pipeline->args[0])) && pipeline->bin_path == NULL)
+        puterr(pipeline->args[0]);
 	if (pipeline->pipe != NULL)
 		check_pipeline(pipeline->pipe);
     return (1);
