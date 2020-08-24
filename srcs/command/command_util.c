@@ -35,6 +35,7 @@ char	*get_exec_path(char *exec_name)
 				char *result = ft_strdupcat(tmp, exec_name);
 				free(tmp);
 				closedir(dir);
+				free_environment_path(paths);
 				return (result);
 			}
 		closedir(dir);
