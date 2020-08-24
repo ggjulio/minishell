@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 14:41:28 by hwinston          #+#    #+#             */
-/*   Updated: 2020/08/24 17:30:53 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/24 18:40:55 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ int				exit_builtin(const char **args);
 ** builtins_util.c
 */
 t_builtin_ptr	get_builtin_ptr(char *command_name);
+t_builtin_ptr	get_internal_builtin_ptr(char *command_name);
 
 #endif

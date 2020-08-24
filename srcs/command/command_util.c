@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:45:43 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/24 17:28:23 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/24 18:40:29 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,9 @@ int spawn_command(t_command *command)
 	int				status;
 	t_builtin_ptr	builtin;
 
-	child_pid = fork ();
+	if ((builtin = get_internal_builtin_ptr(command->args[0])) != NULL)
+		return ((*builtin)((const char **)command->args));
+	child_pid = fork();
 	builtin = get_builtin_ptr(command->args[0]);
 	if (child_pid == -1)
 		return (-1);
