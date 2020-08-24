@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:37:23 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/24 13:52:44 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/24 15:04:24 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char			*get_exec_path(char *exec_name);
 void			print_command(t_command *to_print);
 
 /*
-** command_get_commands.c
+** command_pipelines.c
 */
 t_list			*get_pipelines(char * input);
 
