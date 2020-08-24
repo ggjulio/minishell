@@ -17,21 +17,16 @@ int     echo(const char **args)
     int opt;
     int i;
 
-    i = -1;
-    opt = 0;
-    if (args[0] && ft_strcmp(args[0], "-n") == 0)
-    {
-        opt = 1;
-        i++;
-    }
-    if (args[0] == NULL && opt == 0)
+    opt = (args[1] && ft_strcmp(args[1], "-n") == 0) ? 1 : 0;
+    if (args[1] == NULL && opt == 0)
     {
         ft_printf("\n");
         return (0);
     }
+    i = 0 + opt;
     while (args[++i])
     {
-        if ((opt == 0 && i > 0) || (opt == 1 && i > 1))
+        if ((opt == 0 && i > 1) || (opt == 1 && i > 2))
             ft_printf(" ");
         ft_printf("%s", args[i]);
     }

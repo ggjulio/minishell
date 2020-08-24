@@ -19,3 +19,8 @@ void     error(char *cmd, const char *arg)
     ft_dprintf(STDERR_FILENO, "%s: ", arg);
     ft_dprintf(STDERR_FILENO, "%s\n", strerror(errno));
 }
+
+void bad_command(char *cmd)
+{
+    ft_printf("%s: %s: command not found\n", g_sh.name, cmd);
+}

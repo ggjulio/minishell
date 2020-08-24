@@ -13,6 +13,7 @@
 #ifndef ERROR_H
 # define ERROR_H
 
-void     error(char *cmd, const char *arg);
+void    error(char *cmd, const char *arg);
+void    bad_command(char *cmd);
 
 #endif
