@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void     error(char *cmd, char *arg)
+void     error(char *cmd, const char *arg)
 {
     ft_dprintf(STDERR_FILENO, "%s: ", g_sh.name);
     ft_dprintf(STDERR_FILENO, "%s: ", cmd);

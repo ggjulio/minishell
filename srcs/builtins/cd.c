@@ -15,14 +15,14 @@
 int     cd(const char **args)
 {
     (void)args;
-    // if (arg == NULL)
-    //     return (0);
-    // errno = 0;
-    // if (chdir(arg) == -1)
-    // {
-    //     error("cd", arg);
-    //     return (-1);
-    // }
+    if (args[1] == NULL)
+        return (0);
+    errno = 0;
+    if (chdir(args[1]) == -1)
+    {
+        error("cd", args[1]);
+        return (-1);
+    }
     getcwd(g_sh.cwd, sizeof(g_sh.cwd));
     return (0);
 }
