@@ -6,30 +6,47 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/23 23:26:08 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/24 13:53:12 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_command	create_command(char **args)
+static char	**lst_token_to_string_array(t_list *lst_strings)
+{
+	char	**result;
+	int		i;
+
+	if (!(result = malloc((ft_lstsize(lst_strings) + 1) * sizeof(char *))))
+		return (NULL);
+	i = 0;
+	while (lst_strings)
+	{
+		result[i++] = ft_strdup(lst_strings->content);
+		lst_strings = lst_strings->next;
+	}
+	result[i] = 0;
+	return (result);
+}
+
+t_command	create_command(t_list *p_args)
 {
 	t_command	result;
 
 	ft_bzero(&result, sizeof(t_command));
-	result.bin_path = get_exec_path(args[0]);
-	result.args = args;
+	result.args = lst_token_to_string_array(p_args);
+	result.bin_path = get_exec_path(result.args[0]);
 	result.pipe = NULL;
 	return (result);
 }
 
-t_command	*malloc_command(char **args)
+t_command		*malloc_command(t_list *p_args)
 {
 	t_command	*result;
 
 	if ((result = malloc(sizeof(t_command))) == NULL)
 		return (NULL);
-	*result = create_command(args);
+	*result = create_command(p_args);
 	return (result);
 }
 

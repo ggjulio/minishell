@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:37:23 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/23 23:39:26 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/24 13:52:44 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ typedef struct	s_command
 /*
 ** command.c
 */
-t_command		create_command(char **args);
-t_command		*malloc_command(char **args);
+t_command		create_command(t_list *p_args);
+t_command		*malloc_command(t_list *p_args);
 void			destroy_command(t_command to_destroy);
 void			free_command(t_command *to_free);
 
