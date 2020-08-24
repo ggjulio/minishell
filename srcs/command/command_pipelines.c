@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command_get_commands.c                             :+:      :+:    :+:   */
+/*   command_pipelines.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -28,13 +28,13 @@ t_command	*pop_pipeline_from_tokens(t_list *tokens)
 	while (tokens)
 	{
 		tok = tokens->content;
-		if (tok->type == Token_end || (tok->type == Token_operator && !ft_strcmp(tok->str, "|")))
+		if (tok->type == Token_end || tok->type == Token_op_pipe)
 			break;
 		ft_lstadd_back(&args, ft_lstnew(ft_strdup(tok->str)));
 		tokens = tokens->next;
 	}
 	result = malloc_command(args);
-	if (tok->type == Token_operator && !ft_strcmp(tok->str, "|"))
+	if (tok->type == Token_op_pipe)
 		result->pipe = pop_pipeline_from_tokens(tokens->next);
 	ft_lstclear(&args, lst_del_string);
 	return (result);
@@ -49,10 +49,12 @@ t_list		*get_pipelines(char * input)
 	tokens = tokenize(input);
 	result = NULL;
 
+	// print_lst_tokens(tokens);
 		ft_lstadd_back(&result,
 			ft_lstnew(pop_pipeline_from_tokens(tokens)));
 
-	check_commands(result);
+	// print_command(result->content);
+	// check_commands(result);
 
 	ft_lstclear(&tokens, lst_del_token);
 
