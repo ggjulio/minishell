@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:37:23 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/24 17:01:23 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/25 17:27:59 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@ void			free_command(t_command *to_free);
 char			*get_exec_path(char *exec_name);
 void			print_command(t_command *to_print);
 int				spawn_command(t_command *command);
+
+/*
+** command_util.c
+*/
+void			lst_del_command(void *to_free);
 
 /*
 ** command_check.c

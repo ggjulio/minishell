@@ -6,12 +6,11 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 13:31:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/24 18:10:42 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/25 17:28:05 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 void	execute_commands(t_list	*commands)
 {
@@ -25,11 +24,6 @@ void	execute_commands(t_list	*commands)
 		spawn_command(to_exec);
 		iterator = iterator->next;
 	}
-}
-
-void	lst_del_command(void *to_free)
-{
-	free_command(to_free);
 }
 
 void	run_shell(void)
