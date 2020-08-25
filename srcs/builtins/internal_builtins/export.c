@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int    export_error(char *arg)
+int    export_error(const char *arg)
 {
     ft_printf("%s: ", g_sh.name);
     ft_printf("export: ");
@@ -23,11 +23,10 @@ int    export_error(char *arg)
 
 int     export(const char **args)
 {
-    (void)args;
-    // if (!ft_isalpha(arg[0]) && arg[0] != '_')
-    //     export_error(arg);
-    // if (ft_strchr(arg, '=') != NULL)
-    //     add_environment_variable(arg);
+    if (!ft_isalpha(args[1][0]) && args[1][0] != '_')
+        export_error(args[1]);
+    if (ft_strchr(args[1], '=') != NULL)
+        add_environment_variable((char *)args[1]);
     return (0);
 }
 

@@ -14,18 +14,17 @@
 
 int     unset(const char **args)
 {
-    (void)args;
-    // const char  *val;
-    // char        *tmp;
-    // char        *to_unset;
+    const char  *val;
+    char        *tmp;
+    char        *to_unset;
 
-    // if (get_environment_variable(name) == NULL)
-    //     return (0);
-    // val = get_environment_variable_value(name);
-    // tmp = ft_strdupcat(name, "=");
-    // to_unset = ft_strdupcat(tmp, (char *)val);
-    // free(tmp);
-    // remove_environment_variable(to_unset);
-    // free(to_unset);
+    if (get_environment_variable((char *)args[1]) == NULL)
+        return (0);
+    val = get_environment_variable_value((char *)args[1]);
+    tmp = ft_strdupcat((char *)args[1], "=");
+    to_unset = ft_strdupcat(tmp, (char *)val);
+    free(tmp);
+    remove_environment_variable(to_unset);
+    free(to_unset);
     return (0);
 }

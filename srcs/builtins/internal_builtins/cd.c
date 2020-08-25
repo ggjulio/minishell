@@ -14,7 +14,6 @@
 
 int     cd(const char **args)
 {
-    (void)args;
     if (args[1] == NULL)
         return (0);
     errno = 0;

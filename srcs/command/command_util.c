@@ -88,13 +88,23 @@ void		print_command(t_command *to_print)
 
 
 
+int			run_command(t_command *command)
+{
+	t_builtin_ptr	builtin;
+
+	if ((builtin = get_internal_builtin_ptr(command->args[0])) != NULL)
+ 		return ((*builtin)((const char **)command->args));
+	else if ((builtin = get_builtin_ptr(command->args[0])) != NULL)
+		return ((*builtin)((const char **)command->args));
+	else if (command->bin_path != NULL)
+    	execve (command->bin_path, command->args, (char **)g_sh.env);
+	return (0);
+}
 
 
-
-int fork_spawn(int in, int out, t_command *command)
+int			fork_spawn(int in, int out, t_command *command)
 {
 	pid_t			pid;
-	t_builtin_ptr	builtin;
 
 	if ((pid = fork()) == -1)
 		return (-1);
@@ -110,18 +120,13 @@ int fork_spawn(int in, int out, t_command *command)
 		dup2(out, STDOUT_FILENO);
 		close(out);
 	}
-	builtin = get_builtin_ptr(command->args[0]);
-	if (builtin != NULL)
-		(*builtin)((const char **)command->args);
-	else if (command->bin_path != NULL)
-    	execve (command->bin_path, command->args, (char **)g_sh.env);
+	run_command(command);
 	return (pid);
 }
 
-int spawn_command(t_command *command)
+int			spawn_command(t_command *command)
 {
 	int				pipe_fd[2];
-	t_builtin_ptr	builtin;
 	int				in;
 
 	in = 0;
@@ -133,10 +138,5 @@ int spawn_command(t_command *command)
 		in = pipe_fd[0];
 		command = command->pipe;
 	}
-	builtin = get_builtin_ptr(command->args[0]);
-	if (builtin != NULL)
-		(*builtin)((const char **)command->args);
-	else if (command->bin_path != NULL)
-    	execve(command->bin_path, command->args, (char **)g_sh.env);
-	return (0);
+	return (run_command(command));
 }
