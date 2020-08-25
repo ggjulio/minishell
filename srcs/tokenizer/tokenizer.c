@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:12 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/22 19:22:57 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/25 16:05:10 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,19 @@ void				concatenate_variables(t_list **tokens)
 	}
 }
 
+int					cmp_token_type(t_token *t1, t_token *t2)
+{
+	return (t1->type != t2->type);
+}
+
 void				manage_quotes(t_list **tokens)
 {
 	t_list	*iterator;
 	t_token	*actual;
 	int		has_open_quote;
 	char	quote_type;
+	t_token	*token_ref;
+
 
 	iterator = *tokens;
 	if (iterator == NULL)
@@ -76,26 +83,16 @@ void				manage_quotes(t_list **tokens)
 		{
 			has_open_quote = 1;
 			quote_type = actual->str[0];
-			actual->type = Token_space;
-			free(actual->str);
-			actual->str = ft_strdup("was an opening quote !");
 		}
 		else if (actual->type == Token_quote && quote_type == actual->str[0])
-		{
 			has_open_quote = 0;
-			actual->type = Token_space;
-			free(actual->str);
-			actual->str = ft_strdup("was a close quote !");
-		}
 		else if (has_open_quote)
 			actual->type = Token_literal;
 		iterator = iterator->next;
 	}
-}
-
-int					cmp_token_type(t_token *t1, t_token *t2)
-{
-	return (t1->type != t2->type);
+	token_ref = malloc_token("", Token_quote);
+	ft_lst_remove_if(tokens, token_ref, cmp_token_type, lst_del_token);
+	free_token(token_ref);
 }
 
 void				remove_spaces(t_list **tokens)
@@ -122,7 +119,10 @@ t_list				*tokenize(char *input)
 		ft_lstadd_back(&result, ft_lstnew(
 				malloc_token(one_char, get_token_type(one_char[0]))));
 	}
+	print_lst_tokens(result);
 	manage_quotes(&result);
+	ft_printf("###########################################\n");
+	print_lst_tokens(result);
 	concatenate_literals(&result);
 	concatenate_variables(&result);
 	remove_spaces(&result);
