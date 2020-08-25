@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:12 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/25 16:40:01 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/25 18:50:42 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int					cmp_token_type(t_token *t1, t_token *t2)
 	return (t1->type != t2->type);
 }
 
+
+
 void				manage_quotes(t_list **tokens)
 {
 	t_list	*iterator;
@@ -104,6 +106,32 @@ void				remove_spaces(t_list **tokens)
 	free_token(token_ref);
 }
 
+void				do_escape(t_list **tokens)
+{
+	t_list	*iterator;
+	t_token	*actual;
+	t_token	*next;
+	t_list 	*elem_to_del;
+
+	iterator = *tokens;
+	if (iterator == NULL)
+		return ;
+	while (iterator && iterator->next)
+	{
+		actual = iterator->content;
+		next = iterator->next->content;
+		if (actual->type == Token_escape)
+		{
+			next->type = Token_literal;
+			elem_to_del = ft_lstpop_elem(tokens, iterator);
+			iterator = elem_to_del->next;
+			ft_lstdelone(elem_to_del, lst_del_token);
+		}
+		else
+			iterator = iterator->next;
+	}
+}
+
 t_list				*tokenize(char *input)
 {
 	t_list	*result;
@@ -119,10 +147,11 @@ t_list				*tokenize(char *input)
 		ft_lstadd_back(&result, ft_lstnew(
 				malloc_token(one_char, get_token_type(one_char[0]))));
 	}
-	// print_lst_tokens(result);
+		// print_lst_tokens(result);
+	do_escape(&result);
+		// ft_printf("###########################################\n");
+		// print_lst_tokens(result);
 	manage_quotes(&result);
-	// ft_printf("###########################################\n");
-	// print_lst_tokens(result);
 	concatenate_literals(&result);
 	concatenate_variables(&result);
 	remove_spaces(&result);

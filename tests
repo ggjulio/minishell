@@ -1,0 +1,29 @@
+echo "cd"cd"cd"
+echo \"salut\"
+echo \"\\salut\\\"
+echo "$LESS"
+echo '$LESS'
+echo "\$LESS"
+echo "$?"
+echo "$?salut"
+echo "\\"
+echo "\\\\"
+echo '\\'
+echo '\\\\'
+echo '\\\\\'
+echo "\\\\\ "
+echo \"
+echo salu\t
+echo salu\\t
+
+
+should not work
+
+echo \
+echo salut\
+echo salu\t\
+echo "
+echo "sds
+echo "\"
+echo "\\\\\"
+
