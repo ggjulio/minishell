@@ -15,9 +15,13 @@ echo "\\\\\ "
 echo \"
 echo salu\t
 echo salu\\t
+echo $?
+echo "$?"
+echo "$?s"
+echo "s$?s"
+echo 's$?s'
 
-
-should not work
+Should not work with parse error:
 
 echo \
 echo salut\

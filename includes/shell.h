@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 17:54:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/25 17:25:45 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/26 01:15:25 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ typedef struct	s_shell
 {
 	char			*name;
 	t_environment	env;
-	char		cwd[PATH_MAX + 1];
+	char			cwd[PATH_MAX + 1];
+	int				status;
 }				t_shell;
 
 /*

@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 17:52:21 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/22 16:20:26 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/26 01:16:56 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_shell	create_shell(const char *name, t_environment envp)
 	ft_bzero(&result, sizeof(t_shell));
 	result.name = ft_strdup(name + 2);
 	result.env = malloc_environment(envp);
+	result.status = 42;
 	getcwd(result.cwd, sizeof(result.cwd));
 	return (result);
 }

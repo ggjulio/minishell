@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_check.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by hwinston          #+#    #+#             */
-/*   Updated: 2020/08/23 14:01:06 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/08/25 21:19:51 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int check_pipeline(t_command *pipeline)
 
     if (!(is_builtin(pipeline->args[0])) && pipeline->bin_path == NULL)
         bad_command(pipeline->args[0]);
-	if (pipeline->pipe != NULL)
+    if (pipeline->pipe != NULL)
 		check_pipeline(pipeline->pipe);
     return (1);
 }
