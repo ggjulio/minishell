@@ -20,6 +20,5 @@ int     env(const char **args)
     i = -1;
     while (g_sh.env[++i])
         ft_printf("%s\n", g_sh.env[i]);
-    exit(EXIT_SUCCESS);
     return (0);
 }

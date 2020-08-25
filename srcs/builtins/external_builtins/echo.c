@@ -32,6 +32,5 @@ int     echo(const char **args)
     }
     if (opt == 0)
         ft_printf("\n");
-    exit(EXIT_SUCCESS);
     return (0);
 }

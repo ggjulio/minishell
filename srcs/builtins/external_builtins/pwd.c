@@ -16,6 +16,5 @@ int     pwd(const char **args)
 {
     (void)args;
     ft_printf("%s\n", g_sh.cwd);
-    exit(EXIT_SUCCESS);
     return (0);
 }
