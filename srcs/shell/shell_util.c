@@ -27,6 +27,11 @@ void	execute_commands(t_list	*commands)
 	}
 }
 
+void	lst_del_command(void *to_free)
+{
+	free_command(to_free);
+}
+
 void	run_shell(void)
 {
 	char	*input;
@@ -41,11 +46,7 @@ void	run_shell(void)
 		pipelines = get_pipelines(input);
 		free(input);
 		execute_commands(pipelines);
-		while (pipelines)
-		{
-			free_command(pipelines->content);
-			pipelines = pipelines->next;
-		}
-		pipelines = NULL;
+		ft_lstclear(&pipelines, lst_del_command);
+
 	}
 }
