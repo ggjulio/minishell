@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:12 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/25 16:05:10 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/25 16:40:01 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,10 +119,10 @@ t_list				*tokenize(char *input)
 		ft_lstadd_back(&result, ft_lstnew(
 				malloc_token(one_char, get_token_type(one_char[0]))));
 	}
-	print_lst_tokens(result);
+	// print_lst_tokens(result);
 	manage_quotes(&result);
-	ft_printf("###########################################\n");
-	print_lst_tokens(result);
+	// ft_printf("###########################################\n");
+	// print_lst_tokens(result);
 	concatenate_literals(&result);
 	concatenate_variables(&result);
 	remove_spaces(&result);
