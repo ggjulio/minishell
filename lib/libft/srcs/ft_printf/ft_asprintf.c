@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 12:29:54 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/26 01:07:03 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/26 01:46:13 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		ft_vasprintf(char **ret, const char *format, va_list ap)
 	str = (char *)format;
 	ft_memset(&p, 0, sizeof(t_manager));
 	p.caller = ASPRINTF;
-	if (!(p.dst = ft_calloc(1,1)))
+	if (!(p.dst = ft_calloc(1, 1)))
 		return (-1);
 	i = -1;
 	while (format[++i])
