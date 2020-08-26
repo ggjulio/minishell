@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 13:31:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/25 17:28:05 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/26 17:59:46 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,12 @@ void	run_shell(void)
 		ft_printf("%s%s:%s ", "\e[92m", g_sh.name, "\e[94m");
 		ft_printf("%s%s$%s ", g_sh.cwd, "\e[91m", "\e[0m");
 		get_next_line(STDIN_FILENO, &input);
-		pipelines = get_pipelines(input);
+		if (input[0] != '\0')
+		{
+			pipelines = get_pipelines(input);
+			execute_pipelines(pipelines);
+			ft_lstclear(&pipelines, lst_del_command);
+		}
 		free(input);
-		execute_pipelines(pipelines);
-		ft_lstclear(&pipelines, lst_del_command);
-
 	}
 }
