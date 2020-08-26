@@ -35,7 +35,7 @@ void			free_shell(t_shell *to_free);
 ** shell_util.c
 */
 void			run_shell(void);
-void			execute_commands(t_list	*commands);
+void			execute_pipelines(t_list	*commands);
 
 /*
 **	shell_exit.c

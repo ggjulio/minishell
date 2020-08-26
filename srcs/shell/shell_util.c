@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	execute_commands(t_list	*commands)
+void	execute_pipelines(t_list	*commands)
 {
 	t_list		*iterator;
 	t_command	*to_exec;
@@ -39,7 +39,7 @@ void	run_shell(void)
 		get_next_line(STDIN_FILENO, &input);
 		pipelines = get_pipelines(input);
 		free(input);
-		execute_commands(pipelines);
+		execute_pipelines(pipelines);
 		ft_lstclear(&pipelines, lst_del_command);
 
 	}

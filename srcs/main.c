@@ -19,7 +19,7 @@ void	execute_string(char *input)
 	t_list	*pipelines;
 
 	pipelines = get_pipelines(input);
-	execute_commands(pipelines);
+	execute_pipelines(pipelines);
 	ft_lstclear(&pipelines, lst_del_command);
 }
 
