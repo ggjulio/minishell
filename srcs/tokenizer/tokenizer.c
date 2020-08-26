@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:12 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/26 01:23:05 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/26 17:57:17 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,9 @@ void				expand_variables(t_list **begin_tokens)
 		{
 			if (!is_between_simple_quote(*begin_tokens, iterator))
 			{
-				if (!ft_strncmp("$?", actual->str,2))
+				if (!ft_strcmp(actual->str, "$"))
+					;
+				else if (!ft_strncmp("$?", actual->str,2))
 				{
 					ft_asprintf(&tmp, "%d%s", g_sh.status, actual->str + 2);
 					free(actual->str);

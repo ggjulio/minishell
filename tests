@@ -23,7 +23,8 @@ echo " \ "
 echo \n
 echo "\n"
 echo "$|"
-
+echo $
+echo $d
 
 echo "\\\\\ "
 
