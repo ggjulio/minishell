@@ -35,7 +35,7 @@ void			free_command(t_command *to_free);
 */
 char			*get_exec_path(char *exec_name);
 void			print_command(t_command *to_print);
-int				spawn_command(t_command *command);
+int				spawn_pipeline(t_command *command);
 
 /*
 ** command_util.c

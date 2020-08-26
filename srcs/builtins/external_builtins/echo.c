@@ -21,6 +21,7 @@ int     echo(const char **args)
     if (args[1] == NULL && opt == 0)
     {
         ft_printf("\n");
+        // exit(EXIT_SUCCESS);
         return (0);
     }
     i = 0 + opt;
@@ -32,5 +33,6 @@ int     echo(const char **args)
     }
     if (opt == 0)
         ft_printf("\n");
+    // exit(EXIT_SUCCESS);
     return (0);
 }

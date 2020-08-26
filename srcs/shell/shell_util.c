@@ -21,7 +21,7 @@ void	execute_commands(t_list	*commands)
 	while	(iterator)
 	{
 		to_exec = iterator->content;
-		spawn_command(to_exec);
+		spawn_pipeline(to_exec);
 		iterator = iterator->next;
 	}
 }
