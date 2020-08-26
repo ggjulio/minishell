@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 15:10:55 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/26 00:27:19 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/26 02:32:32 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,18 @@ const char	*get_environment_variable_value(char *name)
 	return (ft_strchr(variable, '=') + 1);
 }
 
-void	set_environment_variable_value(char *name, char *value)
+void		set_environment_variable_value(char *name, char *value)
 {
-	(void)name;
-	(void)value;
+	int	i;
+	char **g_env;
+
+	i = -1;
+	g_env = (char **)g_sh.env;
+	while (g_sh.env[++i])
+		if (!ft_strncmp(name, g_sh.env[i], ft_strlen(name)))
+		{
+			free(g_env[i]);
+			ft_asprintf(&(g_env[i]), "%s=%s", name, value);
+			return ;	
+		}
 }
