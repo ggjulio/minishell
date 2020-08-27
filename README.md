@@ -23,7 +23,8 @@ http://www.zeitoun.net/articles/communication-par-tuyau/start
 http://www.makelinux.net/alp/    
 
 https://cs61.seas.harvard.edu/site/2018/Shell2/   
-http://www.cs.uleth.ca/~holzmann/C/system/pipeforkexec.html   
+http://www.cs.uleth.ca/~holzmann/C/system/pipeforkexec.html    
+https://stackoverflow.com/questions/47767995/exec-and-pipe-between-child-process-in-c    
 
 - [x] Afficher un prompt en l’attente d’une nouvelle commande
 - [x] Chercher et lancer le bon executable (basé sur une variable d’environnement PATH ou en utilisant un path absolu), comme dans bash
