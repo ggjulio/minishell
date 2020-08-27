@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command_pipelines.c                             :+:      :+:    :+:   */
+/*   command_pipelines.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 23:37:33 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/24 13:53:27 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/27 18:43:04 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static void	lst_del_string(void *to_free)
 {
-	free(to_free);	
+	free(to_free);
 }
 
-t_command	*pop_pipeline_from_tokens(t_list *tokens)
+t_command	*pop_pipeline_from_tokens(t_list *tokens, t_list **iterator)
 {
 	t_list		*args;
 	t_command	*result;
@@ -29,36 +29,45 @@ t_command	*pop_pipeline_from_tokens(t_list *tokens)
 	{
 		tok = tokens->content;
 		if (tok->type == Token_end || tok->type == Token_op_pipe)
-			break;
+			break ;
 		ft_lstadd_back(&args, ft_lstnew(ft_strdup(tok->str)));
 		tokens = tokens->next;
 	}
 	result = malloc_command(args);
 	if (tok->type == Token_op_pipe)
-		result->pipe = pop_pipeline_from_tokens(tokens->next);
+		result->pipe = pop_pipeline_from_tokens(tokens->next, iterator);
+	else
+		*iterator = tokens;
 	ft_lstclear(&args, lst_del_string);
 	return (result);
 }
 
-
-t_list		*get_pipelines(char * input)
+t_list		*get_pipelines(char *input)
 {
 	t_list		*result;
 	t_list		*tokens;
+	t_list		*iterator;
+	t_token		*tok;
 
-	tokens = tokenize(input);
 	result = NULL;
-
-	// print_lst_tokens(tokens);
-		ft_lstadd_back(&result,
-			ft_lstnew(pop_pipeline_from_tokens(tokens)));
-
-	// print_command(result->content);
-	check_commands(result);
-
-	ft_lstclear(&tokens, lst_del_token);
-
+	tokens = tokenize(input);
+	iterator = tokens;
+	while (iterator)
+	{
+		tok = iterator->content;
+		if (tok->type != Token_end)
+			ft_lstadd_back(&result, ft_lstnew(pop_pipeline_from_tokens(iterator, &iterator)));
+		else
+			iterator = iterator->next;
+	}
+	// t_list *res_to_print = result;
+	// while (res_to_print)
+	// {
+	// 	print_command(res_to_print->content);
+	// 	res_to_print = res_to_print->next;
+	// }
 	
+	check_commands(result);
+	ft_lstclear(&tokens, lst_del_token);
 	return (result);
 }
-
