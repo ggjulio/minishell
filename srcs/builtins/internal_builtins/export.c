@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by hwinston          #+#    #+#             */
-/*   Updated: 2020/08/27 17:18:47 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/27 17:24:08 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static void	export_error(const char *arg)
 	ft_printf("export: ");
 	ft_printf("`%s`: ", arg);
 	ft_printf("not a valid identifier\n");
-	return (0);
 }
 
 static void	print_export_no_args()
