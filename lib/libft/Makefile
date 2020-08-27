@@ -63,6 +63,8 @@ SRC+= ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c
 SRC+= ft_itoa.c ft_strmapi.c ft_putchar_fd.c ft_putstr_fd.c
 SRC+= ft_putendl_fd.c ft_putnbr_fd.c
 
+SRC+= ft_array_len.c
+
 SRC+= ft_lstnew.c ft_lstadd_front.c ft_lstsize.c
 SRC+= ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c
 SRC+= ft_lstclear.c ft_lstiter.c ft_lstmap.c
@@ -107,7 +109,6 @@ $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(OBJ_DIR)
 	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
-
 $(NAME): $(OBJ)
 	@ar rcs $(NAME) $^
 	@printf "$(_GREEN)Compiled : $(_MAGENTA)$(NAME)$(_R)\n"
@@ -132,7 +133,6 @@ shit_to_delete:
 fclean: clean
 	@rm -fr $(NAME)
 	@printf "$(_RED)Removed : $(_MAGENTA)$(NAME)$(_R)\n"
-
 
 bonus: $(NAME)
 

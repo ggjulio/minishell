@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/01 01:58:46 by jugonzal          #+#    #+#             */
-/*   Updated: 2020/08/20 16:36:38 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/27 17:08:18 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,10 @@ char			*ft_strdupcat(char *s1, char *s2);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strtrim(char const *s1, char const *set);
+
 char			**ft_split(char const *s, char c);
+size_t			ft_array_len(char **array);
+
 char			*ft_itoa(int n);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void			ft_putchar_fd(char c, int fd);
