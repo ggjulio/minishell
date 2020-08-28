@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by hwinston          #+#    #+#             */
-/*   Updated: 2020/08/27 18:33:09 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/28 01:54:56 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,12 @@
 
 int		exit_builtin(const char **args)
 {
-	(void)args;
+	int		i;
+
+	i = -1;
+	while (args[++i])
+		free((void *)args[i]);
+	free((void **)args);
 	exit_shell(EXIT_SUCCESS);
 	return (0);
 }

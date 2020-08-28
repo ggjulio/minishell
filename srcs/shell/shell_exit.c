@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 14:06:19 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/19 14:07:23 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/28 02:13:05 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	exit_shell(int status)
 {
+	ft_printf("exit\n");
 	destroy_shell(g_sh);
 	exit(status);
 }
