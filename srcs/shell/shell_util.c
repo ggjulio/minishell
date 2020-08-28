@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 13:31:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/28 10:47:17 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/08/28 11:24:02 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,18 @@ void	sig_handler(int sig)
 
 	(void)sig;
 	wait(&status);
-	// if (status == 3)
-	// {
-	// 	ft_dprintf(2, "Quit: 3\n");			// sortie standard ou error ?
-	// 	exit(EXIT_SUCCESS);
-	// }
-
+	if (status == 3)
+	{
+		ft_dprintf(1, "Quit: 3\n");
+		status = 1;
+		exit(WEXITSTATUS(status));
+	}
 	if (status != SIGINT)
 	{
 		ft_printf("\n");
 		prompt_name();
 	}
+
 }
 
 
@@ -65,9 +66,10 @@ void	run_shell(void)
 	g_sh.pid = 1;
 	input = NULL;
 	signal(SIGINT, sig_handler);
-	//signal(SIGQUIT, sig_handler);
+	signal(SIGQUIT, sig_handler);
 	while (g_sh.status)
 	{
+
 		prompt_name();
 		if ((eof = get_next_line(STDIN_FILENO, &input)) == 0)
 			exit_shell(EXIT_SUCCESS);
