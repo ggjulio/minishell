@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:37:23 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/29 17:23:53 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/08/29 19:25:02 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void			free_command(t_command *to_free);
 */
 char			*get_exec_path(char *exec_name);
 void			print_command(t_command *to_print);
-int				spawn_pipeline(t_command *command);
 
 /*
 ** command_util.c
@@ -52,5 +51,10 @@ int     		is_builtin(char *command);
 ** command_pipelines.c
 */
 t_command		*get_pipeline(char *input);
+
+/*
+** command_spawn.c
+*/
+int				spawn_pipeline(t_command *command);
 
 #endif
