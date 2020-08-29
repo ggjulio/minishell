@@ -36,19 +36,19 @@ http://www.idc-online.com/technical_references/pdfs/information_technology/How_L
 
 - [x] Afficher un prompt en l’attente d’une nouvelle commande
 - [x] Chercher et lancer le bon executable (basé sur une variable d’environnement PATH ou en utilisant un path absolu), comme dans bash
-- [ ] Vous devez implémenter les builtins suivants :
-  - [ ] echo et l’option ’-n’
-  - [ ] cd uniquement avec un chemin absolu ou relatif
-  - [ ] pwd sans aucune option
-  - [ ] export sans aucune option
-  - [ ] unset sans aucune option
-  - [ ] env sans aucune option ni argument
-  - [ ] exit sans aucune option 
-- [ ] ; dans la ligne de commande doit séparer les commandes
-- [ ] ’ et " doivent marcher comme dans bash, à l’exception du multiligne.
+- [x] Vous devez implémenter les builtins suivants :
+  - [x] echo et l’option ’-n’
+  - [x] cd uniquement avec un chemin absolu ou relatif
+  - [x] pwd sans aucune option
+  - [x] export sans aucune option
+  - [x] unset sans aucune option
+  - [x] env sans aucune option ni argument
+  - [x] exit sans aucune option 
+- [x] ; dans la ligne de commande doit séparer les commandes
+- [x] ’ et " doivent marcher comme dans bash, à l’exception du multiligne.
 - [ ] Les redirections <, > et “>>” doivent marcher comme dans bash, à l’exception des aggrégations de fd
 
-- [ ] Pipes | doivent marcher comme dans bash.
-- [ ] Les variables d’environnement ($suivi de caractères) doivent marcher comme dansbash.
-- [ ] $? doit marcher comme dans bash
+- [x] Pipes | doivent marcher comme dans bash.
+- [x] Les variables d’environnement ($suivi de caractères) doivent marcher comme dans bash.
+- [x] $? doit marcher comme dans bash
 - [ ] ctrl-C, ctrl-D et ctrl-\ doivent afficher le même résultat que dans bash.
