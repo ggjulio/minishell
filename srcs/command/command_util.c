@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:45:43 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/29 17:32:32 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/08/29 18:20:19 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int			fork_command(t_command *pipeline, int *pfd, int in)
 		redirect_pipe_end(pfd[1], STDOUT_FILENO);
     	close(pfd[0]);		
 		run_command(pipeline);
+		exit(EXIT_FAILURE);
     }
 	waitpid(pid, &status, 0);
 	close(pfd[1]);
