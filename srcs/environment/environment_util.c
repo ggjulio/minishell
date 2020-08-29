@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 15:10:55 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/26 17:23:06 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/29 22:01:44 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ const char	*get_environment_variable(char *name)
 const char	*get_environment_variable_value(char *name)
 {
 	const char *variable;
+
 	variable = get_environment_variable(name);
 	if (!variable)
 		return (NULL);
@@ -52,16 +53,24 @@ const char	*get_environment_variable_value(char *name)
 
 void		set_environment_variable_value(char *name, char *value)
 {
-	int	i;
-	char **g_env;
+	int		i;
+	char	**g_env;
+	char	*to_add;
 
 	i = -1;
 	g_env = (char **)g_sh.env;
-	while (g_sh.env[++i])
-		if (!ft_strncmp(name, g_sh.env[i], ft_strlen(name)))
-		{
-			free(g_env[i]);
-			ft_asprintf(&(g_env[i]), "%s=%s", name, value);
-			return ;	
-		}
+	ft_asprintf(&to_add, "%s=%s", name, value);
+	if (!get_environment_variable(name))
+	{
+		add_environment_variable(to_add);
+		free(to_add);
+	}
+	else
+		while (g_sh.env[++i])
+			if (!ft_strncmp(name, g_sh.env[i], ft_strlen(name)))
+			{
+				free(g_env[i]);
+				g_env[i] = to_add;
+				return ;
+			}
 }

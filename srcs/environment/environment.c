@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 17:34:02 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/29 16:19:49 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/29 22:05:10 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ void			remove_environment_variable(char *name)
 	i = -1;
 	j = 0;
 	while (g_sh.env[++i])
-	{
-		if (ft_strcmp(g_sh.env[i], name) != 0)
+		if (ft_strcmp(g_sh.env[i], name))
 			new_env[j++] = g_sh.env[i];
-	}
+		else
+			free((char *)g_sh.env[i]);
 	new_env[j] = NULL;
 	free(g_sh.env);
 	g_sh.env = new_env;
