@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by hwinston          #+#    #+#             */
-/*   Updated: 2020/08/24 17:33:33 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/29 16:39:42 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ int     env(const char **args)
     i = -1;
     while (g_sh.env[++i])
         ft_printf("%s\n", g_sh.env[i]);
-    // exit(EXIT_SUCCESS);
+    exit(EXIT_SUCCESS);
     return (0);
 }

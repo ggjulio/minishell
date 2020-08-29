@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by hwinston          #+#    #+#             */
-/*   Updated: 2020/08/24 17:33:18 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/29 16:41:58 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int     echo(const char **args)
     if (args[1] == NULL && opt == 0)
     {
         ft_printf("\n");
-        // exit(EXIT_SUCCESS);
+        exit(EXIT_SUCCESS);
         return (0);
     }
     i = 0 + opt;
@@ -33,6 +33,6 @@ int     echo(const char **args)
     }
     if (opt == 0)
         ft_printf("\n");
-    // exit(EXIT_SUCCESS);
+    exit(EXIT_SUCCESS);
     return (0);
 }

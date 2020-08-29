@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_check.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by hwinston          #+#    #+#             */
-/*   Updated: 2020/08/25 21:19:51 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/29 17:24:03 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,22 @@
 
 int     is_builtin(char *command)
 {
-    const char  *builtins[] = {"echo", "cd", "env", "export", "pwd", "unset", "exit", 0};
+    const char *internal[] = {"cd", "exit", "export", "unset", 0};
+    const char  *external[] = {"echo", "env", "pwd", 0};
     int         i;
 
     i = -1;
-    while (builtins[++i])
-    {
-        if (ft_strcmp(builtins[i], command) == 0)
+    while (internal[++i])
+        if (ft_strcmp(internal[i], command) == 0)
             return (1);
-    }
+    i = -1;
+    while (external[++i])
+        if (ft_strcmp(external[i], command) == 0)
+            return (2);
     return (0);
 }
 
-int check_pipeline(t_command *pipeline)
+int     check_pipeline(t_command *pipeline)
 {
     int i;
 
@@ -38,8 +41,6 @@ int check_pipeline(t_command *pipeline)
 		check_pipeline(pipeline->pipe);
     return (1);
 }
-
-
 
 int     check_commands(t_list *commands)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:37:23 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/29 16:32:14 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/29 17:23:53 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void			lst_del_command(void *to_free);
 ** command_check.c
 */
 int				check_commands(t_list *commands);
+int     		is_builtin(char *command);
 
 /*
 ** command_pipelines.c
