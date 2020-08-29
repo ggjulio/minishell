@@ -26,6 +26,14 @@ https://cs61.seas.harvard.edu/site/2018/Shell2/
 http://www.cs.uleth.ca/~holzmann/C/system/pipeforkexec.html    
 https://stackoverflow.com/questions/47767995/exec-and-pipe-between-child-process-in-c    
 
+https://brandonwamboldt.ca/how-bash-redirection-works-under-the-hood-1512/   
+https://brandonwamboldt.ca/how-linux-pipes-work-under-the-hood-1518/    
+https://catonmat.net/bash-one-liners-explained-part-three   
+https://abs.traduc.org/abs-5.1-fr/ch19.html  
+https://pubs.opengroup.org/onlinepubs/009604499/utilities/xcu_chap02.html#tag_02_07   
+
+http://www.idc-online.com/technical_references/pdfs/information_technology/How_Linux_pipes_work_under_the_hood.pdf   
+
 - [x] Afficher un prompt en l’attente d’une nouvelle commande
 - [x] Chercher et lancer le bon executable (basé sur une variable d’environnement PATH ou en utilisant un path absolu), comme dans bash
 - [ ] Vous devez implémenter les builtins suivants :
