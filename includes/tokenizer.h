@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:38 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/29 16:30:22 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/29 20:59:15 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ t_list			*tokenize(char *input);
 **	tokenizer.c
 */
 t_token_type	get_token_type(char c);
+char			**lst_token_to_string_array(t_list *lst_strings);
 
 /*
 **	token.c

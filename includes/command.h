@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:37:23 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/29 19:25:02 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/08/29 21:11:10 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_command		create_command(t_list *p_args);
 t_command		*malloc_command(t_list *p_args);
 void			destroy_command(t_command to_destroy);
 void			free_command(t_command *to_free);
+void			lst_del_command(void *to_free);
 
 /*
 ** command_util.c
@@ -37,15 +38,9 @@ char			*get_exec_path(char *exec_name);
 void			print_command(t_command *to_print);
 
 /*
-** command_util.c
+** command_validation.c
 */
-void			lst_del_command(void *to_free);
-
-/*
-** command_check.c
-*/
-int				check_commands(t_list *commands);
-int     		is_builtin(char *command);
+int				is_valid_pipeline(t_command *pipeline);
 
 /*
 ** command_pipelines.c

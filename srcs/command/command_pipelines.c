@@ -6,18 +6,18 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 23:37:33 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/29 16:47:43 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/29 20:50:00 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	lst_del_string(void *to_free)
+static void			lst_del_string(void *to_free)
 {
 	free(to_free);
 }
 
-t_command	*pop_pipeline_from_tokens(t_list *tokens)
+static t_command	*convert_tokens_to_command(t_list *tokens)
 {
 	t_list		*args;
 	t_command	*result;
@@ -35,22 +35,23 @@ t_command	*pop_pipeline_from_tokens(t_list *tokens)
 	}
 	result = malloc_command(args);
 	if (tok->type == Token_op_pipe)
-		result->pipe = pop_pipeline_from_tokens(tokens->next);
+		result->pipe = convert_tokens_to_command(tokens->next);
 	ft_lstclear(&args, lst_del_string);
 	return (result);
 }
 
-t_command	*get_pipeline(char *input)
+t_command			*get_pipeline(char *input)
 {
 	t_command	*result;
 	t_list		*tokens;
 
 	tokens = tokenize(input);
-	result = pop_pipeline_from_tokens(tokens);
-
-// 	print_command(res_to_print->content);
-	
-	// check_commands(result);
+	result = convert_tokens_to_command(tokens);
 	ft_lstclear(&tokens, lst_del_token);
+	if (!is_valid_pipeline(result))
+	{
+		free_command(result);
+		return (NULL);
+	}
 	return (result);
 }

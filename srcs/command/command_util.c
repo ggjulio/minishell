@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_util.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:45:43 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/29 19:24:14 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/08/29 21:03:57 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ char	*get_exec_path(char *exec_name)
 	char			**paths;
 	DIR				*dir;
 	struct dirent	*dp;
+	char			*result;
 
-	if (!ft_strncmp("./",exec_name, 2) || !ft_strncmp("/",exec_name, 1))
+	if (!ft_strncmp("./", exec_name, 2) || !ft_strncmp("/", exec_name, 1))
 		return (ft_strdup(exec_name));
 	paths = malloc_environment_path();
 	i = -1;
@@ -31,31 +32,28 @@ char	*get_exec_path(char *exec_name)
 		while ((dp = readdir(dir)) != NULL)
 			if (!ft_strcmp(exec_name, dp->d_name))
 			{
-				char *tmp = ft_strdupcat(paths[i], "/");
-				char *result = ft_strdupcat(tmp, exec_name);
-				free(tmp);
+				ft_asprintf(&result, "%s/%s", paths[i], exec_name);
 				closedir(dir);
 				free_environment_path(paths);
 				return (result);
 			}
 		closedir(dir);
-	}	
+	}
 	free_environment_path(paths);
 	return (NULL);
 }
 
-void		print_command(t_command *to_print)
+void	print_command(t_command *to_print)
 {
 	int		i;
 
 	i = 0;
 	while (to_print->args[i])
-		ft_printf("%s ", to_print->args[i++]);		
+		ft_printf("%s ", to_print->args[i++]);
 	if (to_print->pipe != NULL)
 	{
 		ft_printf(" | ");
 		print_command(to_print->pipe);
-		
 	}
 	ft_printf("\n");
 }

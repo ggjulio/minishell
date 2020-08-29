@@ -6,28 +6,11 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/29 16:37:37 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/29 20:56:22 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static char	**lst_token_to_string_array(t_list *lst_strings)
-{
-	char	**result;
-	int		i;
-
-	if (!(result = malloc((ft_lstsize(lst_strings) + 1) * sizeof(char *))))
-		return (NULL);
-	i = 0;
-	while (lst_strings)
-	{
-		result[i++] = ft_strdup(lst_strings->content);
-		lst_strings = lst_strings->next;
-	}
-	result[i] = 0;
-	return (result);
-}
 
 t_command	create_command(t_list *p_args)
 {
@@ -40,7 +23,7 @@ t_command	create_command(t_list *p_args)
 	return (result);
 }
 
-t_command		*malloc_command(t_list *p_args)
+t_command	*malloc_command(t_list *p_args)
 {
 	t_command	*result;
 
@@ -65,4 +48,9 @@ void		free_command(t_command *to_free)
 {
 	destroy_command(*to_free);
 	free(to_free);
+}
+
+void		lst_del_command(void *to_free)
+{
+	free_command(to_free);
 }

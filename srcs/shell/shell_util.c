@@ -6,13 +6,13 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 13:31:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/29 16:45:35 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/29 21:10:14 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	prompt_name()
+void	prompt_name(void)
 {
 	ft_printf("%s%s:%s ", "\e[92m", g_sh.name, "\e[94m");
 	ft_printf("%s%s$%s ", g_sh.cwd, "\e[91m", "\e[0m");
@@ -35,9 +35,7 @@ void	sig_handler(int sig)
 		ft_printf("\n");
 		prompt_name();
 	}
-
 }
-
 
 void	run_shell(void)
 {
@@ -61,9 +59,11 @@ void	run_shell(void)
 		i = -1;
 		while (commands[++i])
 		{
-			to_exec = get_pipeline(commands[i]);
-			spawn_pipeline(to_exec);
-			free_command(to_exec);
+			if ((to_exec = get_pipeline(commands[i])) != NULL)
+			{
+				spawn_pipeline(to_exec);
+				free_command(to_exec);
+			}
 		}
 		ft_free_array(commands);
 		free(input);
