@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:38 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/29 20:59:15 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/29 22:57:00 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,18 @@ typedef struct	s_token
 t_list			*tokenize(char *input);
 
 /*
-**	tokenizer.c
+**	tokenizer_util.c
 */
 t_token_type	get_token_type(char c);
 char			**lst_token_to_string_array(t_list *lst_strings);
+int				is_between_simple_quote(t_list *begin_tokens, t_list *to_find);
+void			remove_spaces(t_list **tokens);
+
+/*
+**	tokenizer_variable.c
+*/
+void			concatenate_variables(t_list **tokens);
+void			expand_variables(t_list **begin_tokens);
 
 /*
 **	token.c
@@ -65,5 +73,6 @@ void			lst_del_token(void *to_free);
 t_token			*merge_tokens(t_token *t1, t_token *t2, t_token_type type);
 void			print_lst_tokens(t_list *lst);
 void			print_token(void *token);
+int				cmp_token_type(t_token *t1, t_token *t2);
 
 #endif

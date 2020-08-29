@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:32:18 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/29 20:55:51 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/29 22:56:35 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,41 @@ char			**lst_token_to_string_array(t_list *lst_strings)
 	}
 	result[i] = 0;
 	return (result);
+}
+
+int				is_between_simple_quote(t_list *begin_tokens, t_list *to_find)
+{
+	t_token	*actual;
+	int		has_open_quote;
+	char	quote_type;
+
+	has_open_quote = 0;
+	while (begin_tokens)
+	{
+		actual = begin_tokens->content;
+		if (actual->type == Token_quote && !has_open_quote)
+		{
+			has_open_quote = 1;
+			quote_type = actual->str[0];
+		}
+		else if (actual->type == Token_quote && quote_type == actual->str[0])
+			has_open_quote = 0;
+		if (begin_tokens == to_find)
+		{
+			if (has_open_quote && quote_type == '\'')
+				return (1);
+			return (0);
+		}
+		begin_tokens = begin_tokens->next;
+	}
+	return (-1);
+}
+
+void			remove_spaces(t_list **tokens)
+{
+	t_token *token_ref;
+
+	token_ref = malloc_token("", Token_space);
+	ft_lst_remove_if(tokens, token_ref, cmp_token_type, lst_del_token);
+	free_token(token_ref);
 }

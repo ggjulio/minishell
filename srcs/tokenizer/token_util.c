@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:25:58 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/24 16:41:18 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/29 22:45:10 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,9 @@ void		print_token(void *token)
 
 	ft_printf("             str  : \"%s\"\n", ((t_token *)token)->str);
 	ft_printf("             type : %s\n", str[((t_token *)token)->type]);
+}
+
+int			cmp_token_type(t_token *t1, t_token *t2)
+{
+	return (t1->type != t2->type);
 }
