@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:32:18 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/24 16:40:48 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/29 16:29:54 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,5 @@ t_token_type	get_token_type(char c)
 		return (Token_variable);
 	if (ft_in_charset(c, TOKEN_ESCAPE))
 		return (Token_escape);
-	if (ft_in_charset(c, TOKEN_END))
-		return (Token_end);
 	return (Token_literal);
 }

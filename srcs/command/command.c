@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/24 13:53:12 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/29 16:37:37 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,7 @@ void		destroy_command(t_command to_destroy)
 		free_command(to_destroy.pipe);
 	free(to_destroy.bin_path);
 	i = 0;
-	while(to_destroy.args[i])
-		free(to_destroy.args[i++]);
-	free(to_destroy.args);
+	ft_free_array(to_destroy.args);
 }
 
 void		free_command(t_command *to_free)

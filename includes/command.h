@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:37:23 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/25 17:27:59 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/29 16:32:14 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ void			lst_del_command(void *to_free);
 /*
 ** command_check.c
 */
-int     		check_commands(t_list *commands);
+int				check_commands(t_list *commands);
 
 /*
 ** command_pipelines.c
 */
-t_list			*get_pipelines(char * input);
+t_command		*get_pipeline(char *input);
 
 #endif

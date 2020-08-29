@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 17:34:02 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/22 15:37:33 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/29 16:19:49 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,7 @@ t_environment	malloc_environment(t_environment envp)
 
 void			free_environment(t_environment to_free)
 {
-	size_t	i;
-
-	i = 0;
-	while (to_free[i])
-	{
-		free((char *)to_free[i]);
-		to_free[i++] = NULL;
-	}
-	free(to_free);
+	ft_free_array((char **)to_free);
 }
 
 void			add_environment_variable(char *variable)
@@ -77,10 +69,5 @@ void			remove_environment_variable(char *name)
 
 size_t			environment_len(t_environment envp)
 {
-	size_t	len;
-
-	len = 0;
-	while (envp[len])
-		len++;
-	return (len);
+	return (ft_array_len((char **)envp));
 }

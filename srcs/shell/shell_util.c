@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   shell_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 13:31:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/29 11:41:15 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/08/29 16:45:35 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	execute_pipelines(t_list	*commands)
-{
-	t_list		*iterator;
-	t_command	*to_exec;
-
-	iterator = commands;
-	while	(iterator)
-	{
-		to_exec = iterator->content;
-		spawn_pipeline(to_exec);
-		iterator = iterator->next;
-	}
-}
 
 void	prompt_name()
 {
@@ -53,14 +39,13 @@ void	sig_handler(int sig)
 }
 
 
-
-
-
 void	run_shell(void)
 {
-	char	*input;
-	t_list	*pipelines;
-	int		eof;
+	char		*input;
+	char		**commands;
+	t_command	*to_exec;
+	int			i;
+	int			eof;
 
 	//g_sh.status = 1;
 	g_sh.pid = 1;
@@ -69,16 +54,18 @@ void	run_shell(void)
 	signal(SIGQUIT, sig_handler);
 	while (g_sh.status)
 	{
-
 		prompt_name();
 		if ((eof = get_next_line(STDIN_FILENO, &input)) == 0)
 			exit_shell(EXIT_SUCCESS);
-		if (input[0] != '\0')
+		commands = ft_split(input, ';');
+		i = -1;
+		while (commands[++i])
 		{
-			pipelines = get_pipelines(input);
-			execute_pipelines(pipelines);
-			ft_lstclear(&pipelines, lst_del_command);
+			to_exec = get_pipeline(commands[i]);
+			spawn_pipeline(to_exec);
+			free_command(to_exec);
 		}
+		ft_free_array(commands);
 		free(input);
 	}
 }

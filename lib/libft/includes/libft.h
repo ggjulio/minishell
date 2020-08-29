@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/01 01:58:46 by jugonzal          #+#    #+#             */
-/*   Updated: 2020/08/27 17:08:18 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/29 16:12:40 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ char			*ft_strtrim(char const *s1, char const *set);
 
 char			**ft_split(char const *s, char c);
 size_t			ft_array_len(char **array);
+void			ft_free_array(char **to_free);
 
 char			*ft_itoa(int n);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));

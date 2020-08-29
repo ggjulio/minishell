@@ -4,6 +4,7 @@ echo \"\\salut\\\"
 echo "$LESS"
 echo '$LESS'
 echo "\$LESS"
+echo "\$LESS"'OK'
 echo "$?"
 echo "$?salut"
 echo "\\"
@@ -25,6 +26,9 @@ echo "\n"
 echo "$|"
 echo $
 echo $d
+
+NOO ; echo $?
+echo 'ok?' ; echo $?
 
 echo "\\\\\ "
 
