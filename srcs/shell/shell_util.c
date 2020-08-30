@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 13:31:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/30 15:58:07 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/30 16:14:32 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,12 @@ void	run_shell(void)
 	char		**commands;
 	t_command	*to_exec;
 	int			i;
-	int			eof;
 
 	input = NULL;
 	while (g_sh.status)
 	{
 		prompt_name();
-		if ((eof = get_next_line(STDIN_FILENO, &input)) == 0)
+		if (get_next_line(STDIN_FILENO, &input) == 0)
 			exit_shell(EXIT_SUCCESS);
 		commands = ft_split(input, ';');
 		i = -1;
