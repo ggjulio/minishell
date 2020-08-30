@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 17:54:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/30 16:04:50 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/30 23:43:26 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void				free_shell(t_shell *to_free);
 */
 void				run_shell(void);
 void				execute_pipelines(t_list *commands);
-void				sig_handler(int sig);
+void				sigint_handler(int sig);
+void				sigquit_handler(int sig);
 
 /*
 **	shell_exit.c

@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 17:52:21 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/30 17:03:01 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/08/30 23:43:55 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ t_shell	create_shell(const char *name, t_environment envp)
 	result.name = ft_strdup(name + 2);
 	result.env = malloc_environment(envp);
 	result.status = 0;
-	signal(SIGINT, sig_handler);
-	signal(SIGQUIT, sig_handler);
+	signal(SIGINT, sigint_handler);
+	signal(SIGQUIT, sigquit_handler);
 	getcwd(result.cwd, sizeof(result.cwd));
 	return (result);
 }

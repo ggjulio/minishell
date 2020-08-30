@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 13:31:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/30 18:48:14 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/08/30 23:47:56 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,32 @@ void	prompt_name(void)
 	ft_printf("%s%s$%s ", g_sh.cwd, "\e[91m", "\e[0m");
 }
 
-void	sig_handler(int sig)
+void	sigint_handler(int sig)
 {
 	(void)sig;
 	wait(&g_sh.status);
-	if (g_sh.status == 3)
+	if (g_sh.status == 2)
 	{
-		ft_dprintf(1, "Quit: 3\n");
-		exit(EXIT_SUCCESS);
+		g_sh.status = 130;
+		ft_printf("\n");
 	}
-	if (g_sh.status != SIGINT)
+	else
 	{
 		g_sh.status = 1;
 		ft_printf("\n");
 		prompt_name();
 	}
+}
+
+void	sigquit_handler(int sig)
+{
+	(void)sig;
+	wait(&g_sh.status);
+	if (g_sh.status == 3)
+	{
+		g_sh.status = 131;
+		ft_dprintf(1, "Quit: 3\n");
+	}	
 }
 
 void	run_shell(void)

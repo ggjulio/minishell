@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by hwinston          #+#    #+#             */
-/*   Updated: 2020/08/28 01:54:56 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/08/30 23:49:09 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int		exit_builtin(const char **args)
 	while (args[++i])
 		free((void *)args[i]);
 	free((void **)args);
+	g_sh.status = 0;
 	exit_shell(EXIT_SUCCESS);
 	return (0);
 }
