@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 14:06:19 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/28 10:52:47 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/08/30 21:48:52 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void	exit_shell(int status)
 {
-	ft_printf("exit\n");
+	ft_printf("exit");
+	if (g_sh.status != 1)
+		ft_printf("\n");
 	destroy_shell(g_sh);
 	exit(status);
 }
