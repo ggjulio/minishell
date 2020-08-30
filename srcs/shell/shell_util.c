@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 13:31:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/29 21:10:14 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/30 15:58:07 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,7 @@ void	run_shell(void)
 	int			i;
 	int			eof;
 
-	//g_sh.status = 1;
-	g_sh.pid = 1;
 	input = NULL;
-	signal(SIGINT, sig_handler);
-	signal(SIGQUIT, sig_handler);
 	while (g_sh.status)
 	{
 		prompt_name();
