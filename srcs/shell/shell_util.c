@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 13:31:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/30 16:14:32 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/30 18:48:14 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,16 @@ void	prompt_name(void)
 
 void	sig_handler(int sig)
 {
-	int status;
-
 	(void)sig;
-	wait(&status);
-	if (status == 3)
+	wait(&g_sh.status);
+	if (g_sh.status == 3)
 	{
 		ft_dprintf(1, "Quit: 3\n");
-		status = 1;
-		exit(WEXITSTATUS(status));
+		exit(EXIT_SUCCESS);
 	}
-	if (status != SIGINT)
+	if (g_sh.status != SIGINT)
 	{
+		g_sh.status = 1;
 		ft_printf("\n");
 		prompt_name();
 	}
@@ -45,7 +43,7 @@ void	run_shell(void)
 	int			i;
 
 	input = NULL;
-	while (g_sh.status)
+	while (42)
 	{
 		prompt_name();
 		if (get_next_line(STDIN_FILENO, &input) == 0)

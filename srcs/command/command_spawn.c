@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:45:43 by hwinston          #+#    #+#             */
-/*   Updated: 2020/08/30 12:08:26 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/08/30 18:59:05 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ int			run_command(t_command *command)
 	else if (ft_strchr(command->args[0], '/') && !is_executable(command))
 		exit(EXIT_FAILURE);
 	else if (!(execve(command->bin_path, command->args, (char **)g_sh.env)))
-			exit(EXIT_FAILURE);
+		exit(EXIT_FAILURE);
+	exit(EXIT_SUCCESS);
 	return (0);
 }
 
 int			fork_command(t_command *pipeline, int *pfd, int in)
 {
 	pid_t			pid;
-	int				status;
 
 	if ((pid = fork()) == -1)
         exit(EXIT_FAILURE);
@@ -47,12 +47,13 @@ int			fork_command(t_command *pipeline, int *pfd, int in)
     {
 		redirect_pipe_end(in, STDIN_FILENO);
     	if (pipeline->pipe)
-		redirect_pipe_end(pfd[1], STDOUT_FILENO);
+			redirect_pipe_end(pfd[1], STDOUT_FILENO);
     	close(pfd[0]);	
 		run_command(pipeline);
-		exit(EXIT_FAILURE);
     }
-	waitpid(pid, &status, 0);
+	waitpid(pid, &g_sh.status, 0);
+	if (g_sh.status == 256)
+		g_sh.status = 126;
 	close(pfd[1]);
 	return (0);
 }

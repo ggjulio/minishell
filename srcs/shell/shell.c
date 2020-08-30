@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 17:52:21 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/30 15:56:58 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/30 17:03:01 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_shell	create_shell(const char *name, t_environment envp)
 	ft_bzero(&result, sizeof(t_shell));
 	result.name = ft_strdup(name + 2);
 	result.env = malloc_environment(envp);
-	result.status = 42;
+	result.status = 0;
 	signal(SIGINT, sig_handler);
 	signal(SIGQUIT, sig_handler);
 	getcwd(result.cwd, sizeof(result.cwd));
