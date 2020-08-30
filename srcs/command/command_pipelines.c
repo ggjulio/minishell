@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 23:37:33 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/29 20:50:00 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/30 20:43:12 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ static t_command	*convert_tokens_to_command(t_list *tokens)
 		tok = tokens->content;
 		if (tok->type == Token_op_pipe)
 			break ;
-		ft_lstadd_back(&args, ft_lstnew(ft_strdup(tok->str)));
+		if (tok->type == Token_literal)
+			ft_lstadd_back(&args, ft_lstnew(ft_strdup(tok->str)));
+		else if (tok->type == Token_op_dgreat)
+			;
 		tokens = tokens->next;
 	}
 	result = malloc_command(args);

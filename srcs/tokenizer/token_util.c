@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:25:58 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/29 22:45:10 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/30 20:58:47 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ t_token		*merge_tokens(t_token *t1, t_token *t2, t_token_type type)
 void		print_lst_tokens(t_list *lst)
 {
 	t_token		*token;
-	const char	str[10][15] = {"None", "literal", "operator", "op_pipe",
-			"separator", "space", "variable", "escape", "end"};
+	const char	str[15][15] = {"None", "literal", "operator", "op_pipe",
+			"op_great", "op_dgreat", "op_less", "quote", "space",
+			"variable", "escape"};
 
 	while (lst)
 	{
@@ -41,8 +42,9 @@ void		print_lst_tokens(t_list *lst)
 
 void		print_token(void *token)
 {
-	const char	str[10][15] = {"None", "literal", "operator", "op_pipe",
-		"separator", "space", "variable", "escape", "end"};
+	const char	str[15][15] = {"None", "literal", "operator", "op_pipe",
+			"op_great", "op_dgreat", "op_less", "quote", "space",
+			"variable", "escape"};
 
 	ft_printf("             str  : \"%s\"\n", ((t_token *)token)->str);
 	ft_printf("             type : %s\n", str[((t_token *)token)->type]);

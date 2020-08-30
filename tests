@@ -42,3 +42,27 @@ echo "\"
 echo "\\\\\"
 
 ./minishell ->>>> command not found ?
+
+
+echo ||
+echo >>
+echo >
+echo >|
+;;
+
+
+
+
+https://github.com/solaldunckel/minishell-tester/blob/master/test.sh
+
+
+A FIX :  
+
+pwd ; echo "ok ; "
+UNSET PATH
+
+
+TEST THIS after following pipes || is managed:
+
+actual->type == Token_op_dgreat || actual->type == Token_op_great
+				|| actual->type == Token_op_less)

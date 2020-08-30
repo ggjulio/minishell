@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:38 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/29 22:57:00 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/30 20:56:50 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,19 @@
 # define TOKEN_VARIABLE "$"
 # define TOKEN_ESCAPE "\\"
 
+# define DGREAT ">>"
+# define GREAT ">"
+# define LESS "<"
+
 typedef enum	e_token_type
 {
 	None,
 	Token_literal,
 	Token_operator,
 	Token_op_pipe,
+	Token_op_great,
+	Token_op_dgreat,
+	Token_op_less,
 	Token_quote,
 	Token_space,
 	Token_variable,
@@ -57,6 +64,12 @@ void			remove_spaces(t_list **tokens);
 */
 void			concatenate_variables(t_list **tokens);
 void			expand_variables(t_list **begin_tokens);
+
+/*
+**	token_util.c
+*/
+void			redirection_detect_operator(t_list **begin_tokens);
+void			redirection_join_arg(t_list **begin_tokens);
 
 /*
 **	token.c
