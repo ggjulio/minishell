@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:37:23 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/29 21:11:10 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/30 12:10:41 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void			lst_del_command(void *to_free);
 */
 char			*get_exec_path(char *exec_name);
 void			print_command(t_command *to_print);
+int             is_executable(t_command *command);
 
 /*
 ** command_validation.c
