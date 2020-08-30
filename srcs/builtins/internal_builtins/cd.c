@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by hwinston          #+#    #+#             */
-/*   Updated: 2020/08/29 21:30:54 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/30 23:24:33 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,16 @@
 
 int		cd(const char **args)
 {
-	if (args[1] == NULL)
-		return (0);
 	errno = 0;
-	if (chdir(args[1]) == -1)
+	if (args[1] == NULL)
+	{
+		if (chdir(get_environment_variable_value("HOME")) == -1)
+		{
+			error("cd", args[1]);
+			return (-1);
+		}
+	}
+	else if (chdir(args[1]) == -1)
 	{
 		error("cd", args[1]);
 		return (-1);
