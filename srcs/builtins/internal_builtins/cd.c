@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by hwinston          #+#    #+#             */
-/*   Updated: 2020/08/30 23:39:38 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/08/30 23:57:07 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int		cd_no_args(const char **args)
 	if (!get_environment_variable("HOME"))
 	{
 		ft_dprintf(2, "%s: %s: HOME not set\n", g_sh.name, args[0]);
+		g_sh.status = 1;
 		return (0);
 	}
 	if (chdir(get_environment_variable_value("HOME")) == -1)
