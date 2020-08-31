@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 13:31:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/30 23:47:56 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/08/31 19:02:07 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,34 +16,6 @@ void	prompt_name(void)
 {
 	ft_printf("%s%s:%s ", "\e[92m", g_sh.name, "\e[94m");
 	ft_printf("%s%s$%s ", g_sh.cwd, "\e[91m", "\e[0m");
-}
-
-void	sigint_handler(int sig)
-{
-	(void)sig;
-	wait(&g_sh.status);
-	if (g_sh.status == 2)
-	{
-		g_sh.status = 130;
-		ft_printf("\n");
-	}
-	else
-	{
-		g_sh.status = 1;
-		ft_printf("\n");
-		prompt_name();
-	}
-}
-
-void	sigquit_handler(int sig)
-{
-	(void)sig;
-	wait(&g_sh.status);
-	if (g_sh.status == 3)
-	{
-		g_sh.status = 131;
-		ft_dprintf(1, "Quit: 3\n");
-	}	
 }
 
 void	run_shell(void)
@@ -58,7 +30,7 @@ void	run_shell(void)
 	{
 		prompt_name();
 		if (get_next_line(STDIN_FILENO, &input) == 0)
-			exit_shell(EXIT_SUCCESS);
+			d_exit_shell();
 		commands = ft_split(input, ';');
 		i = -1;
 		while (commands[++i])

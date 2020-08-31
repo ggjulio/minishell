@@ -1,30 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell_exit.c                                       :+:      :+:    :+:   */
+/*   shell_signal.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/19 14:06:19 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/31 18:54:45 by hwinston         ###   ########.fr       */
+/*   Created: 2020/08/31 18:49:36 by hwinston          #+#    #+#             */
+/*   Updated: 2020/08/31 18:50:39 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exit_shell(int status)
+void	sigint_handler(int sig)
 {
-	ft_printf("exit\n");
-	destroy_shell(g_sh);
-	exit(status);
+	(void)sig;
+	wait(&g_sh.status);
+	if (g_sh.status == 2)
+	{
+		g_sh.status = 130;
+		ft_printf("\n");
+		
+	}
+	else
+	{
+		g_sh.status = 1;
+		ft_printf("\n");
+		prompt_name();
+	}
 }
 
-void	d_exit_shell()
+void	sigquit_handler(int sig)
 {
-	signal(SIGINT, NULL);
-	ft_printf("exit");
-	if (g_sh.status != 1 && g_sh.status != 130)
-		ft_printf("\n");
-	destroy_shell(g_sh);
-	exit(EXIT_SUCCESS);
+	(void)sig;
+	wait(&g_sh.status);
+	if (g_sh.status == 3)
+	{
+		g_sh.status = 131;
+		ft_dprintf(1, "Quit: 3\n");
+	}	
 }
