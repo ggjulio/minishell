@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:25:58 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/30 20:58:47 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/31 18:44:06 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void		print_lst_tokens(t_list *lst)
 	t_token		*token;
 	const char	str[15][15] = {"None", "literal", "operator", "op_pipe",
 			"op_great", "op_dgreat", "op_less", "quote", "space",
-			"variable", "escape"};
+			"variable", "escape", "end"};
 
 	while (lst)
 	{
@@ -44,7 +44,7 @@ void		print_token(void *token)
 {
 	const char	str[15][15] = {"None", "literal", "operator", "op_pipe",
 			"op_great", "op_dgreat", "op_less", "quote", "space",
-			"variable", "escape"};
+			"variable", "escape", "end"};
 
 	ft_printf("             str  : \"%s\"\n", ((t_token *)token)->str);
 	ft_printf("             type : %s\n", str[((t_token *)token)->type]);

@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:38 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/31 15:11:44 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/31 18:43:44 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define TOKEN_SPACE " \f\n\r\t\v"
 # define TOKEN_VARIABLE "$"
 # define TOKEN_ESCAPE "\\"
+# define TOKEN_END ";"
 
 # define DGREAT ">>"
 # define GREAT ">"
@@ -38,6 +39,7 @@ typedef enum	e_token_type
 	Token_space,
 	Token_variable,
 	Token_escape,
+	Token_end,
 }				t_token_type;
 
 typedef struct	s_token
