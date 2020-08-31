@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:12 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/30 22:53:05 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/31 16:01:01 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ void				do_escape(t_list **begin_tokens)
 	}
 }
 
-
 t_list				*tokenize(char *input)
 {
 	t_list	*result;
@@ -120,11 +119,11 @@ t_list				*tokenize(char *input)
 		// ft_printf("###########################################\n");
 		// print_lst_tokens(result);
 		// ft_printf("###########################################\n");
-	// redirection_detect_operator(&result);
+	redirection_detect_operator(&result);
 	// 	// ft_printf("###########################################\n");
 	// 	// print_lst_tokens(result);
 	// 	// ft_printf("###########################################\n");
-	// redirection_join_arg(&result);
+	redirection_join_arg(&result);
 	// 	ft_printf("###########################################\n");
 	// 	print_lst_tokens(result);
 	// 	ft_printf("###########################################\n");

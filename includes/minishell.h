@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 14:19:45 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/23 13:42:02 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/31 15:06:30 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 # include "shell.h"
 # include "tokenizer.h"
 # include "error.h"
+# include "redirection.h"
 
 /*
 **	Builtins

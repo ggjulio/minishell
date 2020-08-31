@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:38 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/30 20:56:50 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/08/31 15:11:44 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 typedef enum	e_token_type
 {
-	None,
+	Token_None,
 	Token_literal,
 	Token_operator,
 	Token_op_pipe,

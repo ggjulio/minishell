@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:37:23 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/30 12:10:41 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/08/31 15:41:46 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,15 @@ typedef struct	s_command
 {
 	char				*bin_path;
 	char				**args;
+	t_list				*redirections;
 	struct s_command	*pipe;
 }				t_command;
 
 /*
 ** command.c
 */
-t_command		create_command(t_list *p_args);
-t_command		*malloc_command(t_list *p_args);
+t_command		create_command(t_list *p_args, t_list *p_redirections);
+t_command		*malloc_command(t_list *p_args, t_list *p_redirections);
 void			destroy_command(t_command to_destroy);
 void			free_command(t_command *to_free);
 void			lst_del_command(void *to_free);
