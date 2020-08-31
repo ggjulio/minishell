@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/01 01:25:11 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/01 01:28:15 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ static int		exit_error(const char **args)
 		ret = ft_atoi(args[1]);
 	else
 	{
-		if (ft_strcmp(args[1], "-") == 0)
-			ret = 255;
+		ret = 255;
 		ft_dprintf(2, "%s: %s: %s: numeric argument required\n",
 		g_sh.name, args[0], args[1]);
 	}
