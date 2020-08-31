@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/01 00:16:32 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/01 00:17:32 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int				exit_builtin(const char **args)
 		free((void *)args[i]);
 	free((void **)args);
 	g_sh.status = 0;
+	destroy_shell(g_sh);
 	exit(ret);
 	return (0);
 }
