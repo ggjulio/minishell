@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/01 01:28:15 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/01 01:31:24 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static int		exit_error(const char **args)
 	int ret;
 
 	ret = 0;
+	if (ft_strcmp(args[1], "--") == 0 && !args[2])
+		return (ret);
 	if (is_number(args[1]) && args[2])
 	{	
 		ft_dprintf(2, "%s: %s: too many arguments\n", g_sh.name, args[0]);
