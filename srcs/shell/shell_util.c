@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 13:31:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/31 19:02:07 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/01 15:59:43 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	run_shell(void)
 		prompt_name();
 		if (get_next_line(STDIN_FILENO, &input) == 0)
 			d_exit_shell();
-		commands = ft_split(input, ';');
+		commands = split_input(input, ';');
 		i = -1;
 		while (commands[++i])
 		{
