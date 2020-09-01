@@ -51,14 +51,13 @@ echo >|
 ;;
 
 echo ";a;\" ; echo \";b;" ; pwd
-
+echo ";a;\' ; echo \';b;" ; pwd
 
 https://github.com/solaldunckel/minishell-tester/blob/master/test.sh
 
 
 A FIX :  
 
-pwd ; echo "ok ; "
 UNSET PATH
 
 

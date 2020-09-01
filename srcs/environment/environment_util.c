@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 15:10:55 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/29 22:01:44 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/01 20:14:18 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ const char	*get_environment_variable(char *name)
 		name++;
 	i = -1;
 	while (g_sh.env[++i])
-		if (!ft_strncmp(name, g_sh.env[i], ft_strlen(name)))
+		if (!ft_strncmp(name, g_sh.env[i], ft_strlen(name))
+	&& ft_strlen(name) == (size_t)(ft_strchr(g_sh.env[i], '=') - g_sh.env[i]))
 			return (g_sh.env[i]);
 	return (NULL);
 }
