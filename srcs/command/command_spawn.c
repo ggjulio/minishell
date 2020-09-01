@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:45:43 by hwinston          #+#    #+#             */
-/*   Updated: 2020/08/30 18:59:05 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/01 13:04:09 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int			fork_command(t_command *pipeline, int *pfd, int in)
 {
 	pid_t			pid;
 
+	pipe(pfd);
 	if ((pid = fork()) == -1)
         exit(EXIT_FAILURE);
     else if (pid == 0)
@@ -72,9 +73,13 @@ int			spawn_pipeline(t_command *pipeline)
 			(*builtin)((const char **)pipeline->args);
 		else
 		{
-			pipe(pfd);
-			fork_command(pipeline, pfd, in);
-			in = pfd[0];
+			if (pipeline->redirections)
+				redirection_hub(pipeline, pipeline->redirections->content);
+			else
+			{
+				fork_command(pipeline, pfd, in);
+				in = pfd[0];
+			}
 		}
 		pipeline = pipeline->pipe;
     }

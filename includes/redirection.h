@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/31 15:00:10 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/31 16:10:28 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/01 13:04:14 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,10 @@ void			lst_del_redirection(void *to_free);
 t_redirection_type	get_redirection_type_from_token_type(t_token_type p_type);
 void			print_redirection(t_redirection *to_print);
 void			print_lst_redirection(t_list *lst_to_print);
+
+/*
+** redirection_handle.c
+*/
+int         	redirection_hub(t_command *command, t_redirection *r);
 
 #endif

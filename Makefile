@@ -70,7 +70,7 @@ SRC+= token.c token_util.c
 
 SRC+= command.c command_util.c command_pipelines.c command_validation.c
 SRC+= command_spawn.c
-SRC+= redirection.c redirection_util.c
+SRC+= redirection.c redirection_util.c redirection_handle.c
 SRC+= error.c
 
 #Builtins
