@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 17:34:02 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/29 22:05:10 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/01 23:49:28 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,18 @@ void			remove_environment_variable(char *name)
 	int				i;
 	int				j;
 
+	if (get_environment_variable(name) == NULL)
+		return ;
 	if (!(new_env = malloc(environment_len(g_sh.env) * sizeof(char *))))
 		return ;
 	i = -1;
 	j = 0;
 	while (g_sh.env[++i])
-		if (ft_strcmp(g_sh.env[i], name))
-			new_env[j++] = g_sh.env[i];
-		else
+		if (!ft_strncmp(name, g_sh.env[i], ft_strlen(name))
+	&& ft_strlen(name) == (size_t)(ft_strchr(g_sh.env[i], '=') - g_sh.env[i]))
 			free((char *)g_sh.env[i]);
+		else
+			new_env[j++] = g_sh.env[i];
 	new_env[j] = NULL;
 	free(g_sh.env);
 	g_sh.env = new_env;
