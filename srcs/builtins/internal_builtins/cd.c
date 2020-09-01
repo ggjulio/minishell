@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by hwinston          #+#    #+#             */
-/*   Updated: 2020/08/30 23:57:07 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/01 22:29:25 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ int		cd_no_args(const char **args)
 	}
 	if (chdir(get_environment_variable_value("HOME")) == -1)
 	{
-		error("cd", args[1]);
+		if (get_environment_variable("HOME")
+			&& get_environment_variable_value("HOME")[0] == '\0')
+			return (0);
+		error("cd", get_environment_variable_value("HOME"));
 		return (0);
 	}
 	return (1);
