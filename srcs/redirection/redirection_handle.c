@@ -6,13 +6,13 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/01 01:38:36 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/01 13:37:04 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/01 13:39:08 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int         open_file(t_redirection *r)
+static int      open_file(t_redirection *r)
 {
     int fd;
 
@@ -28,7 +28,7 @@ int         open_file(t_redirection *r)
     return (fd);
 }
 
-int         redirection_hub(t_command *command, t_redirection *r)
+int             redirection_hub(t_command *command, t_redirection *r)
 {
     int fd;
     int pid;
