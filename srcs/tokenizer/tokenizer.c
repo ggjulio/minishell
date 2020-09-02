@@ -6,11 +6,58 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:12 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/02 19:46:03 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/02 20:51:09 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static t_list		*assign_token_type_to_each_char(char *input)
+{
+	t_list	*result;
+	char	one_char[2];
+	int		i;
+
+	i = -1;
+	result = NULL;
+	ft_bzero(&one_char, 2);
+	while (input[++i])
+	{
+		one_char[0] = input[i];
+		ft_lstadd_back(&result, ft_lstnew(
+				malloc_token(one_char, get_token_type(one_char[0]))));
+	}
+	return (result);
+}
+
+void				do_escape(t_list **begin_tokens)
+{
+	t_list	*iterator;
+	t_token	*actual;
+	t_token	*next;
+	t_list	*elem_to_del;
+
+	iterator = *begin_tokens;
+	while (iterator && iterator->next)
+	{
+		actual = iterator->content;
+		next = iterator->next->content;
+		if (actual->type == Token_escape)
+		{
+			if (!is_between_simple_quote(*begin_tokens, iterator))
+			{
+				next->type = Token_literal;
+				elem_to_del = ft_lstpop_elem(begin_tokens, iterator);
+				iterator = elem_to_del->next;
+				ft_lstdelone(elem_to_del, lst_del_token);
+			}
+			else
+				actual->type = Token_literal;
+		}
+		else
+			iterator = iterator->next;
+	}
+}
 
 void				concatenate_literals(t_list **tokens)
 {
@@ -62,57 +109,10 @@ void				manage_quotes(t_list **tokens)
 		iterator = iterator->next;
 	}
 	if (has_open_quote)
-		print_syntax_error(quote_type);
+		syntax_error(quote_type);
 	token_ref = malloc_token("", Token_quote);
 	ft_lst_remove_if(tokens, token_ref, cmp_token_type, lst_del_token);
 	free_token(token_ref);
-}
-
-void				do_escape(t_list **begin_tokens)
-{
-	t_list	*iterator;
-	t_token	*actual;
-	t_token	*next;
-	t_list	*elem_to_del;
-
-	iterator = *begin_tokens;
-	while (iterator && iterator->next)
-	{
-		actual = iterator->content;
-		next = iterator->next->content;
-		if (actual->type == Token_escape)
-		{
-			if (!is_between_simple_quote(*begin_tokens, iterator))
-			{
-				next->type = Token_literal;
-				elem_to_del = ft_lstpop_elem(begin_tokens, iterator);
-				iterator = elem_to_del->next;
-				ft_lstdelone(elem_to_del, lst_del_token);
-			}
-			else
-				actual->type = Token_literal;
-		}
-		else
-			iterator = iterator->next;
-	}
-}
-
-static t_list		*assign_token_type_to_each_char(char *input)
-{
-	t_list	*result;
-	char	one_char[2];
-	int		i;
-
-	i = -1;
-	result = NULL;
-	ft_bzero(&one_char, 2);
-	while (input[++i])
-	{
-		one_char[0] = input[i];
-		ft_lstadd_back(&result, ft_lstnew(
-				malloc_token(one_char, get_token_type(one_char[0]))));
-	}
-	return (result);
 }
 
 t_list				*tokenize(char *input)
@@ -128,7 +128,8 @@ t_list				*tokenize(char *input)
 	remove_spaces(&result);
 	redirection_detect_operator(&result);
 	redirection_join_arg(&result);
-	if (has_syntax_error(0))
+	validation_tokens(result);
+	if (has_syntax_error(-1))
 	{
 		ft_lstclear(&result, lst_del_token);
 		return (NULL);
