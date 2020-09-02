@@ -12,18 +12,13 @@
 
 #include "minishell.h"
 
-char	*get_exec_path(char *exec_name)
+static	char	*get_absolute_path(char **paths, char *exec_name)
 {
-	size_t			i;
-	char			**paths;
+	char			*result;
 	DIR				*dir;
 	struct dirent	*dp;
-	char			*result;
+	int				i;
 
-	if (!ft_strncmp("./", exec_name, 2) || !ft_strncmp("/", exec_name, 1))
-		return (ft_strdup(exec_name));
-	if ((paths = malloc_environment_path()) == NULL)
-		return (NULL);
 	i = -1;
 	while (paths[++i])
 	{
@@ -35,16 +30,28 @@ char	*get_exec_path(char *exec_name)
 			{
 				ft_asprintf(&result, "%s/%s", paths[i], exec_name);
 				closedir(dir);
-				free_environment_path(paths);
 				return (result);
 			}
 		closedir(dir);
 	}
-	free_environment_path(paths);
 	return (NULL);
 }
 
-void	print_command(t_command *to_print)
+char			*get_exec_path(char *exec_name)
+{
+	char			**paths;
+	char			*result;
+
+	if (!ft_strncmp("./", exec_name, 2) || !ft_strncmp("/", exec_name, 1))
+		return (ft_strdup(exec_name));
+	if ((paths = malloc_environment_path()) == NULL)
+		return (NULL);
+	result = get_absolute_path(paths, exec_name);
+	free_environment_path(paths);
+	return (result);
+}
+
+void			print_command(t_command *to_print)
 {
 	int		i;
 
@@ -59,7 +66,7 @@ void	print_command(t_command *to_print)
 	ft_printf("\n");
 }
 
-int		is_executable(t_command *command)
+int				is_executable(t_command *command)
 {
 	struct stat		*stats;
 
@@ -68,6 +75,7 @@ int		is_executable(t_command *command)
 	if (stat(command->args[0], stats) == -1)
 	{
 		error(command->args[0], "");
+		free(stats);
 		return (0);
 	}
 	if (S_ISREG(stats->st_mode) == 0)
