@@ -12,6 +12,8 @@ echo "\\\\"
 echo '\\'
 echo '\\\\'
 echo '\\\\\'
+echo '\\\\\\'
+echo '\\\\\\\'
 echo \"
 echo salu\t
 echo salu\\t
@@ -52,6 +54,8 @@ echo >|
 
 echo ";a;\" ; echo \";b;" ; pwd
 echo ";a;\' ; echo \';b;" ; pwd
+echo '\\\\\\\'
+echo '\\\\\'
 
 https://github.com/solaldunckel/minishell-tester/blob/master/test.sh
 
@@ -59,6 +63,8 @@ https://github.com/solaldunckel/minishell-tester/blob/master/test.sh
 A FIX :  
 
 UNSET PATH
+echo "$NOP"
+echo " \ "
 
 
 TEST THIS after following pipes || is managed:
