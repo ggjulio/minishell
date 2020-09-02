@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by hwinston          #+#    #+#             */
-/*   Updated: 2020/08/29 16:40:32 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/02 02:26:17 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	export_error(const char *arg)
 	ft_printf("not a valid identifier\n");
 }
 
-static void	print_export_no_args()
+static void	print_export_no_args(void)
 {
 	int		i;
 	char	*equal_pos;
@@ -41,7 +41,6 @@ int			export(const char **args)
 {
 	int			i;
 	char		*equal_pos;
-	const char	*env_var;
 
 	i = 0;
 	if (ft_array_len((char **)args) > 1)
@@ -52,11 +51,7 @@ int			export(const char **args)
 			else if ((equal_pos = ft_strchr(args[i], '=')) != NULL)
 			{
 				*equal_pos = '\0';
-				env_var = get_environment_variable((char *)args[i]);
-				if (env_var == NULL && (*equal_pos = '='))
-					add_environment_variable((char *)args[i]);
-				else
-					set_environment_variable_value((char *)args[i], equal_pos + 1);
+				set_environment_variable_value((char *)args[i], equal_pos + 1);
 				*equal_pos = '=';
 			}
 	}
