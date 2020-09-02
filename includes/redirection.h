@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/31 15:00:10 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/01 13:04:14 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/01 16:27:02 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ void			print_lst_redirection(t_list *lst_to_print);
 /*
 ** redirection_handle.c
 */
-int         	redirection_hub(t_command *command, t_redirection *r);
+int         	redirection_hub(t_command *command, t_list *redirections);
 
 #endif

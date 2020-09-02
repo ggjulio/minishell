@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:45:43 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/01 13:04:09 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/01 16:25:11 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int			spawn_pipeline(t_command *pipeline)
 		else
 		{
 			if (pipeline->redirections)
-				redirection_hub(pipeline, pipeline->redirections->content);
+				redirection_hub(pipeline, pipeline->redirections);
 			else
 			{
 				fork_command(pipeline, pfd, in);

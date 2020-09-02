@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/01 01:38:36 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/01 13:39:08 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/01 17:19:00 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int      open_file(t_redirection *r)
     return (fd);
 }
 
-int             redirection_hub(t_command *command, t_redirection *r)
+int             redirection_handle(t_command *command, t_redirection *r)
 {
     int fd;
     int pid;
@@ -52,5 +52,19 @@ int             redirection_hub(t_command *command, t_redirection *r)
         exit(EXIT_FAILURE);
     }
     close(fd);
+    return (0);
+}
+
+
+int        redirection_hub(t_command *command, t_list *redirections)
+{
+    t_list *iterator;
+
+    iterator = redirections;
+    while (iterator)
+    {
+        redirection_handle(command, iterator->content);
+        iterator = iterator->next;
+    }
     return (0);
 }
