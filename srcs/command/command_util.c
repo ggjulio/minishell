@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_util.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:45:43 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/30 12:11:02 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/02 01:21:19 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ char	*get_exec_path(char *exec_name)
 
 	if (!ft_strncmp("./", exec_name, 2) || !ft_strncmp("/", exec_name, 1))
 		return (ft_strdup(exec_name));
-	paths = malloc_environment_path();
+	if ((paths = malloc_environment_path()) == NULL)
+		return (NULL);
 	i = -1;
 	while (paths[++i])
 	{
@@ -58,27 +59,27 @@ void	print_command(t_command *to_print)
 	ft_printf("\n");
 }
 
-int             is_executable(t_command *command)
+int		is_executable(t_command *command)
 {
-    struct stat		*stats;
+	struct stat		*stats;
 
 	if (!(stats = malloc(sizeof(struct stat))))
 		return (-1);
 	if (stat(command->args[0], stats) == -1)
-    {
-        error(command->args[0], "");
-        return (0);
-    }
-    if (S_ISREG(stats->st_mode) == 0)
-    {
-        free(stats);
-        return (permission_error(command->args[0], 1));
-    }
-    else if ((stats->st_mode & S_IXUSR) == 0)
-    {
-        free(stats);
-        return (permission_error(command->args[0], 2));
-    }
-    free(stats);
-    return (1);
+	{
+		error(command->args[0], "");
+		return (0);
+	}
+	if (S_ISREG(stats->st_mode) == 0)
+	{
+		free(stats);
+		return (permission_error(command->args[0], 1));
+	}
+	else if ((stats->st_mode & S_IXUSR) == 0)
+	{
+		free(stats);
+		return (permission_error(command->args[0], 2));
+	}
+	free(stats);
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 23:37:33 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/31 16:31:23 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/01 17:08:27 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ t_command			*get_pipeline(char *input)
 	t_list		*tokens;
 
 	tokens = tokenize(input);
+	if (tokens == NULL)
+		return (NULL);
 	result = convert_tokens_to_command(tokens);
 	ft_lstclear(&tokens, lst_del_token);
 	if (!is_valid_pipeline(result))
