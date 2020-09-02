@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 18:57:27 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/02 01:30:44 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/02 19:41:50 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,9 @@ static int		count_words(const char *str, char c)
 	while (str[++i])
 	{
 		if (str[i] != c && (str[i + 1] == c || !str[i + 1]))
-			if (!is_between_quotes(str, i + 1) && !is_escaped(str, i + 1, ';'))
+			if (
+			!(str[i] == c && !is_between_quotes(str, i + 1)
+				&& !is_escaped(str, i + 1, ';')))
 				count_words++;
 	}
 	return (count_words);
