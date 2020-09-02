@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 18:57:27 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/01 19:21:47 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/02 01:30:44 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static int		is_between_quotes(const char *s, size_t index)
 
 	i = 0;
 	has_open_quote = 0;
+	quote_type = '\0';
 	while (s[i] && i < index)
 	{
 		if (ft_in_charset(s[i], "\"'")
