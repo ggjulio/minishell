@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:12 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/31 16:01:01 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/02 19:46:03 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void				manage_quotes(t_list **tokens)
 			actual->type = Token_literal;
 		iterator = iterator->next;
 	}
+	if (has_open_quote)
+		print_syntax_error(quote_type);
 	token_ref = malloc_token("", Token_quote);
 	ft_lst_remove_if(tokens, token_ref, cmp_token_type, lst_del_token);
 	free_token(token_ref);
@@ -71,7 +73,7 @@ void				do_escape(t_list **begin_tokens)
 	t_list	*iterator;
 	t_token	*actual;
 	t_token	*next;
-	t_list 	*elem_to_del;
+	t_list	*elem_to_del;
 
 	iterator = *begin_tokens;
 	while (iterator && iterator->next)
@@ -95,7 +97,7 @@ void				do_escape(t_list **begin_tokens)
 	}
 }
 
-t_list				*tokenize(char *input)
+static t_list		*assign_token_type_to_each_char(char *input)
 {
 	t_list	*result;
 	char	one_char[2];
@@ -110,22 +112,26 @@ t_list				*tokenize(char *input)
 		ft_lstadd_back(&result, ft_lstnew(
 				malloc_token(one_char, get_token_type(one_char[0]))));
 	}
+	return (result);
+}
+
+t_list				*tokenize(char *input)
+{
+	t_list	*result;
+
+	result = assign_token_type_to_each_char(input);
 	do_escape(&result);
 	concatenate_variables(&result);
 	expand_variables(&result);
 	manage_quotes(&result);
 	concatenate_literals(&result);
 	remove_spaces(&result);
-		// ft_printf("###########################################\n");
-		// print_lst_tokens(result);
-		// ft_printf("###########################################\n");
 	redirection_detect_operator(&result);
-	// 	// ft_printf("###########################################\n");
-	// 	// print_lst_tokens(result);
-	// 	// ft_printf("###########################################\n");
 	redirection_join_arg(&result);
-	// 	ft_printf("###########################################\n");
-	// 	print_lst_tokens(result);
-	// 	ft_printf("###########################################\n");
+	if (has_syntax_error(0))
+	{
+		ft_lstclear(&result, lst_del_token);
+		return (NULL);
+	}
 	return (result);
 }

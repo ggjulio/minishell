@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:38 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/31 18:43:44 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/02 19:46:11 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,13 @@ void			concatenate_variables(t_list **tokens);
 void			expand_variables(t_list **begin_tokens);
 
 /*
-**	token_util.c
+**	tokenizer_eror.c
+*/
+int				has_syntax_error(char c);
+void			print_syntax_error(char c);
+
+/*
+**	tokenizer_redirection.c
 */
 void			redirection_detect_operator(t_list **begin_tokens);
 void			redirection_join_arg(t_list **begin_tokens);

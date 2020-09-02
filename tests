@@ -6,6 +6,7 @@ echo '$LESS'
 echo "\$LESS"
 echo "\$LESS"'OK'
 echo "$?"
+echo '$?'
 echo "$?salut"
 echo "\\"
 echo "\\\\"
