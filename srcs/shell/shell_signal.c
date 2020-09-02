@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/31 18:49:36 by hwinston          #+#    #+#             */
-/*   Updated: 2020/08/31 18:50:39 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/02 16:02:38 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	sigint_handler(int sig)
 	{
 		g_sh.status = 130;
 		ft_printf("\n");
-		
 	}
 	else
 	{

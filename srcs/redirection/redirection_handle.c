@@ -6,13 +6,13 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/01 01:38:36 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/01 17:19:00 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/02 19:31:01 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int      open_file(t_redirection *r)
+static int  open_file(t_redirection *r)
 {
     int fd;
 
@@ -28,16 +28,12 @@ static int      open_file(t_redirection *r)
     return (fd);
 }
 
-int             redirection_handle(t_command *command, t_redirection *r)
+static int  fork_redirection(t_command *command, t_redirection *r, int fd)
 {
-    int fd;
     int pid;
 
-    if ((fd = open_file(r)) == -1)
-    {
-        error(command->args[0], r->str);
-        return (-1);
-    }
+    (void)command;
+
     if ((pid = fork()) == -1)
         return (-1);
     if (pid > 0)
@@ -55,15 +51,40 @@ int             redirection_handle(t_command *command, t_redirection *r)
     return (0);
 }
 
-
-int        redirection_hub(t_command *command, t_list *redirections)
+static int  skip_redirection(t_list *redirections)
 {
-    t_list *iterator;
+    t_redirection *current;
+    t_redirection *next;
+
+    current = redirections->content;
+    if (!redirections->next)
+        return (0);
+    else
+        next = redirections->next->content;
+    if ((current->type == Redirection_great || current->type == Redirection_dgreat))
+        if (next->type == Redirection_great || next->type == Redirection_dgreat)
+            return (1);
+    return (0);
+}
+
+int         redirection_hub(t_command *command, t_list *redirections)
+{
+    t_list          *iterator;
+    t_redirection   *current;
+    int             fd;
 
     iterator = redirections;
     while (iterator)
     {
-        redirection_handle(command, iterator->content);
+        current = iterator->content;
+        if ((fd = open_file(current)) == -1)
+        {
+            error(command->args[0], current->str);
+            return (-1);
+        }
+        if (!skip_redirection(iterator))
+            fork_redirection(command, current, fd);
+        close(fd);
         iterator = iterator->next;
     }
     return (0);
