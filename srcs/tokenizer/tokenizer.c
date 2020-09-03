@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:12 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/02 20:51:09 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/03 18:46:57 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void				manage_quotes(t_list **tokens)
 		iterator = iterator->next;
 	}
 	if (has_open_quote)
-		syntax_error(quote_type);
+		syntax_error((char[2]){quote_type, '\0'});
 	token_ref = malloc_token("", Token_quote);
 	ft_lst_remove_if(tokens, token_ref, cmp_token_type, lst_del_token);
 	free_token(token_ref);

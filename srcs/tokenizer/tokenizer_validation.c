@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/02 20:30:21 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/02 20:57:50 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/03 17:28:16 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	validation_backslash(t_list *begin_list)
 		actual = iterator->content;
 		if (actual->type == Token_escape)
 		{
-			syntax_error('\\');
+			syntax_error("\\");
 			return ;
 		}
 		iterator = iterator->next;
@@ -47,7 +47,7 @@ void	validation_pipes(t_list *begin_list)
 			if (previous == NULL
 			|| next_tok == NULL
 			|| next_tok->type == Token_op_pipe)
-				return (syntax_error('|'));
+				return (syntax_error("|"));
 		previous = iterator;
 		iterator = iterator->next;
 	}

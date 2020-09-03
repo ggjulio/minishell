@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:38 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/02 20:51:38 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/03 17:27:13 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ void			expand_variables(t_list **begin_tokens);
 /*
 **	tokenizer_error.c
 */
-int				has_syntax_error(char c);
-void			syntax_error(char c);
+int				has_syntax_error(int raise_error);
+void			syntax_error(char *op);
 /*
 **	tokenizer_validation.c
 */
