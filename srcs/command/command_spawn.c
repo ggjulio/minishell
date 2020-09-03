@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:45:43 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/02 19:21:04 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/03 17:51:09 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,6 @@ int			fork_command(t_command *pipeline, int *pfd, int in)
     	close(pfd[0]);	
 		run_command(pipeline);
     }
-	waitpid(pid, &g_sh.status, 0);
-	if (g_sh.status == 256)
-		g_sh.status = 126;
 	close(pfd[1]);
 	return (0);
 }
@@ -80,5 +77,7 @@ int			spawn_pipeline(t_command *pipeline)
 		}
 		pipeline = pipeline->pipe;
     }
+	while (wait(&g_sh.status) > 0)
+		;
 	return (0);
 }

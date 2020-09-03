@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/01 01:38:36 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/03 12:49:28 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/03 17:58:53 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,10 @@ int             redirection_hub(t_command *command, t_list *r)
     int         fdout;
     int         fd;
 
-    //(void)command;
-
     iterator = r;
     set_fds(iterator, &fdin, &fdout);
     if (fdin > 0 && iterator->next)
         iterator = iterator->next;
-    ft_dprintf(2, " IN = %d | OUT = %d\n", fdin, fdout);
     while (iterator)
     {
         fd = open_file(iterator->content);
