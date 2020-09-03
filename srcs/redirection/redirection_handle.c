@@ -6,13 +6,13 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/01 01:38:36 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/02 19:31:01 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/03 12:49:28 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int  open_file(t_redirection *r)
+static int      open_file(t_redirection *r)
 {
     int fd;
 
@@ -28,64 +28,65 @@ static int  open_file(t_redirection *r)
     return (fd);
 }
 
-static int  fork_redirection(t_command *command, t_redirection *r, int fd)
+static void     set_fds(t_list *r, int *fdin, int *fdout)
+{
+    t_list          *last;
+    t_redirection   *content;
+    t_redirection   *last_content;
+    
+    content = r->content;
+    last = ft_lstlast(r);
+    last_content = last->content;
+    
+    if (content->type == Redirection_less)
+        *fdin = open_file(content);
+    else
+        *fdin = STDIN_FILENO;
+    if (last_content->type != Redirection_less)
+        *fdout = open_file(last->content);
+    else
+        *fdout = STDOUT_FILENO;
+}
+
+static int      fork_redirection(t_command *command, int fdin, int fdout)
 {
     int pid;
 
-    (void)command;
-
     if ((pid = fork()) == -1)
         return (-1);
-    if (pid > 0)
-        waitpid(pid, &g_sh.status, 0);
     if (pid == 0)
     {
-        if (r->type == Redirection_less)
-            redirect_pipe_end(fd, STDIN_FILENO);
-        else
-            redirect_pipe_end(fd, STDOUT_FILENO);
+        redirect_pipe_end(fdin, STDIN_FILENO);
+        redirect_pipe_end(fdout, STDOUT_FILENO);
 		run_command(command);
         exit(EXIT_FAILURE);
     }
-    close(fd);
+    waitpid(pid, &g_sh.status, 0);
+    close(fdin);
+    close(fdout);
     return (0);
 }
 
-static int  skip_redirection(t_list *redirections)
+int             redirection_hub(t_command *command, t_list *r)
 {
-    t_redirection *current;
-    t_redirection *next;
+    t_list      *iterator;
+    int         fdin;
+    int         fdout;
+    int         fd;
 
-    current = redirections->content;
-    if (!redirections->next)
-        return (0);
-    else
-        next = redirections->next->content;
-    if ((current->type == Redirection_great || current->type == Redirection_dgreat))
-        if (next->type == Redirection_great || next->type == Redirection_dgreat)
-            return (1);
-    return (0);
-}
+    //(void)command;
 
-int         redirection_hub(t_command *command, t_list *redirections)
-{
-    t_list          *iterator;
-    t_redirection   *current;
-    int             fd;
-
-    iterator = redirections;
+    iterator = r;
+    set_fds(iterator, &fdin, &fdout);
+    if (fdin > 0 && iterator->next)
+        iterator = iterator->next;
+    ft_dprintf(2, " IN = %d | OUT = %d\n", fdin, fdout);
     while (iterator)
     {
-        current = iterator->content;
-        if ((fd = open_file(current)) == -1)
-        {
-            error(command->args[0], current->str);
-            return (-1);
-        }
-        if (!skip_redirection(iterator))
-            fork_redirection(command, current, fd);
+        fd = open_file(iterator->content);
         close(fd);
         iterator = iterator->next;
     }
+    fork_redirection(command, fdin, fdout);
     return (0);
 }
