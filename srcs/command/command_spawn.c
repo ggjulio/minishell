@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:45:43 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/04 18:58:51 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/05 00:37:02 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,14 @@ int			run_command(t_command *command)
 	t_builtin_ptr	builtin;
 
 	if ((builtin = get_internal_builtin_ptr(command->args[0])) != NULL)
-		exit(EXIT_SUCCESS);
-	if ((builtin = get_builtin_ptr(command->args[0])) != NULL)
+		(*builtin)((const char **)command->args);
+	else if ((builtin = get_builtin_ptr(command->args[0])) != NULL)
 		(*builtin)((const char **)command->args);
 	else if (ft_strchr(command->args[0], '/') && !is_executable(command))
 		exit(EXIT_FAILURE);
 	else if (!(execve(command->bin_path, command->args, (char **)g_sh.env)))
 		exit(EXIT_FAILURE);
+	exit(EXIT_SUCCESS);
 	return (0);
 }
 
@@ -66,7 +67,7 @@ int			spawn_pipeline(t_command *pipeline)
 	{
 		if ((builtin = get_internal_builtin_ptr(pipeline->args[0])) != NULL
 		&& !pipeline->pipe)
-			(*builtin)((const char **)pipeline->args);
+			g_sh.status = (*builtin)((const char **)pipeline->args);
 		if (pipeline->redirections)
 			redirection_hub(pipeline, pipeline->redirections);
 		else
