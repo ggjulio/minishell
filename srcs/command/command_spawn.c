@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:45:43 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/05 00:37:02 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/05 01:26:6:59 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,17 @@ int			spawn_pipeline(t_command *pipeline)
 	t_builtin_ptr	builtin;
 	int				pfd[2];
 	int				in;
+	t_command		*first;
 
-	in = 0;
+	first = pipeline;
 	while (pipeline)
 	{
-		if ((builtin = get_internal_builtin_ptr(pipeline->args[0])) != NULL
-		&& !pipeline->pipe)
-			g_sh.status = (*builtin)((const char **)pipeline->args);
+		if ((builtin = get_internal_builtin_ptr(pipeline->args[0])) != NULL && !pipeline->pipe
+			&& ((builtin == exit_builtin && first == pipeline) || builtin != exit_builtin))
+				g_sh.status = (*builtin)((const char **)pipeline->args);
 		if (pipeline->redirections)
 			redirection_hub(pipeline, pipeline->redirections);
-		else
+		else if (builtin != exit_builtin)
 		{
 			fork_command(pipeline, pfd, in);
 			in = pfd[0];
