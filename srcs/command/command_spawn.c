@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:45:43 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/04 18:26:28 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/04 18:29:46 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int			run_command(t_command *command)
 {
 	t_builtin_ptr	builtin;
 
-	if ((builtin = get_internal_builtin_ptr(command->args[0])) != NULL)
+	if ((builtin = get_internal_builtin_ptr(command->args[0])) != NULL \
+	&& !command->pipe)
 		(*builtin)((const char **)command->args);
 	else if ((builtin = get_builtin_ptr(command->args[0])) != NULL)
 		(*builtin)((const char **)command->args);
