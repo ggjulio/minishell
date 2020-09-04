@@ -6,13 +6,13 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:45:43 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/03 17:51:09 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/04 16:12:17 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void 		redirect_pipe_end(int old, int new) 
+void		redirect_pipe_end(int old, int new)
 {
 	if (old != new)
 	{
@@ -40,15 +40,15 @@ int			fork_command(t_command *pipeline, int *pfd, int in)
 
 	pipe(pfd);
 	if ((pid = fork()) == -1)
-        exit(EXIT_FAILURE);
-    else if (pid == 0)
-    {
+		exit(EXIT_FAILURE);
+	else if (pid == 0)
+	{
 		redirect_pipe_end(in, STDIN_FILENO);
-    	if (pipeline->pipe)
+		if (pipeline->pipe)
 			redirect_pipe_end(pfd[1], STDOUT_FILENO);
-    	close(pfd[0]);	
+		close(pfd[0]);
 		run_command(pipeline);
-    }
+	}
 	close(pfd[1]);
 	return (0);
 }
@@ -61,7 +61,7 @@ int			spawn_pipeline(t_command *pipeline)
 
 	in = 0;
 	while (pipeline)
-    {
+	{
 		if ((builtin = get_internal_builtin_ptr(pipeline->args[0])) \
 		!= NULL && !pipeline->pipe)
 			g_sh.status = (*builtin)((const char **)pipeline->args);
@@ -76,7 +76,7 @@ int			spawn_pipeline(t_command *pipeline)
 			}
 		}
 		pipeline = pipeline->pipe;
-    }
+	}
 	while (wait(&g_sh.status) > 0)
 		;
 	return (0);

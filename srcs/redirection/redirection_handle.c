@@ -6,84 +6,115 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/01 01:38:36 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/03 17:58:53 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/04 17:24:46 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int      open_file(t_redirection *r)
+static int		open_file(t_redirection *r)
 {
-    int fd;
+	int fd;
 
-    fd = 0;
-    if (r->type == Redirection_great)
-        fd = open(r->str, O_WRONLY | O_TRUNC | O_CREAT, \
-			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-    else if (r->type == Redirection_dgreat)
-        fd = open(r->str, O_WRONLY | O_APPEND | O_CREAT, \
-			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-    else if (r->type == Redirection_less)
-        fd = open(r->str, O_RDONLY);
-    return (fd);
+	fd = 0;
+	if (r->type == Redirection_great)
+		fd = open(r->str, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+	else if (r->type == Redirection_dgreat)
+		fd = open(r->str, O_WRONLY | O_APPEND | O_CREAT, 0644);
+	else if (r->type == Redirection_less)
+		fd = open(r->str, O_RDONLY);
+	return (fd);
 }
 
-static void     set_fds(t_list *r, int *fdin, int *fdout)
+static int		get_fdin_pos(t_list *r)
 {
-    t_list          *last;
-    t_redirection   *content;
-    t_redirection   *last_content;
-    
-    content = r->content;
-    last = ft_lstlast(r);
-    last_content = last->content;
-    
-    if (content->type == Redirection_less)
-        *fdin = open_file(content);
-    else
-        *fdin = STDIN_FILENO;
-    if (last_content->type != Redirection_less)
-        *fdout = open_file(last->content);
-    else
-        *fdout = STDOUT_FILENO;
+	t_redirection	*content;
+	int				i;
+
+	content = r->content;
+	if (content->type != Redirection_less)
+		return (-1);
+	i = 0;
+	while (r && content->type == Redirection_less)
+	{
+		if ((r = r->next) != NULL)
+		{
+			content = r->content;
+			if (content->type == Redirection_less)
+				i++;
+		}
+	}
+	return (i);
 }
 
-static int      fork_redirection(t_command *command, int fdin, int fdout)
+static int		get_fdout_pos(t_list *r)
 {
-    int pid;
+	t_redirection	*content;
+	int				i;
 
-    if ((pid = fork()) == -1)
-        return (-1);
-    if (pid == 0)
-    {
-        redirect_pipe_end(fdin, STDIN_FILENO);
-        redirect_pipe_end(fdout, STDOUT_FILENO);
+	content = r->content;
+	i = 0;
+	while (r->next && content->type == Redirection_less)
+	{
+		r = r->next;
+		content = r->content;
+		i++;
+	}
+	while (r->next && content->type != Redirection_less)
+	{
+		r = r->next;
+		content = r->content;
+		i++;
+	}
+	if (i == 0 && content->type == Redirection_less)
+		return (-1);
+	return (i);
+}
+
+static int		fork_redirection(t_command *command, int fdin, int fdout)
+{
+	int pid;
+
+	if ((pid = fork()) == -1)
+		return (-1);
+	if (pid == 0)
+	{
+		if (fdin != STDIN_FILENO)
+			redirect_pipe_end(fdin, STDIN_FILENO);
+		if (fdout != STDOUT_FILENO)
+			redirect_pipe_end(fdout, STDOUT_FILENO);
 		run_command(command);
-        exit(EXIT_FAILURE);
-    }
-    waitpid(pid, &g_sh.status, 0);
-    close(fdin);
-    close(fdout);
-    return (0);
+		exit(EXIT_FAILURE);
+	}
+	waitpid(pid, &g_sh.status, 0);
+	return (0);
 }
 
-int             redirection_hub(t_command *command, t_list *r)
+int				redirection_hub(t_command *command, t_list *r)
 {
-    t_list      *iterator;
-    int         fdin;
-    int         fdout;
-    int         fd;
+	int		fd[ft_lstsize(r)];
+	int		fdpos[2];
+	int		pfd[2];
+	int		i;
 
-    iterator = r;
-    set_fds(iterator, &fdin, &fdout);
-    if (fdin > 0 && iterator->next)
-        iterator = iterator->next;
-    while (iterator)
-    {
-        fd = open_file(iterator->content);
-        close(fd);
-        iterator = iterator->next;
-    }
-    fork_redirection(command, fdin, fdout);
-    return (0);
+	if ((fdpos[0] = get_fdin_pos(r)) == -1)
+		pfd[0] = 0;
+	if ((fdpos[1] = get_fdout_pos(r)) == -1)
+		pfd[1] = 1;
+	i = 0;
+	while (r)
+	{
+		if ((fd[i] = open_file(r->content)) == -1)
+			return (-1);
+		if (i != fdpos[0] && i != fdpos[1])
+			close(fd[i]);
+		else if (i == fdpos[0])
+			pfd[0] = fd[i];
+		else if (i == fdpos[1])
+			pfd[1] = fd[i];
+		r = r->next;
+		i++;
+	}
+	fork_redirection(command, pfd[0], pfd[1]);
+	return (0);
 }
