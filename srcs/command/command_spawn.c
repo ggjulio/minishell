@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:45:43 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/04 18:17:45 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/04 18:18:22 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int			spawn_pipeline(t_command *pipeline)
 	in = 0;
 	while (pipeline)
 	{
-
 		if (pipeline->redirections)
 			redirection_hub(pipeline, pipeline->redirections);
 		else
