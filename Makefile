@@ -62,7 +62,7 @@ vpath %.h $(INC_DIR)
 
 # Minishell
 SRC = main.c 
-SRC+= shell.c shell_util.c shell_exit.c shell_signal.c shell_split_input.c
+SRC+= shell.c shell_util.c shell_signal.c shell_split_input.c
 SRC+= environment.c environment_util.c environment_path.c
 
 SRC+= tokenizer.c tokenizer_util.c tokenizer_variable.c tokenizer_redirection.c
@@ -109,7 +109,7 @@ debug: $(NAME)
 	@lldb $(NAME)
 
 valgrind: $(NAME)
-	@valgrind --leak-check=full --show-leak-kinds=all --show-reachable=yes --trace-children=yes --track-origins=yes --log-file=output_valgrind ./$(NAME)
+	@valgrind --leak-check=full --child-silent-after-fork=yes --show-leak-kinds=all --show-reachable=yes --track-origins=yes --log-file=output_valgrind ./$(NAME)
 	@printf "$(_BOLD)$(_RED)################################################################$(_R)\n"
 	@printf "$(_BOLD)$(_RED)##########################  $(_GREEN)Valgrind$(_RED)  ##########################$(_R)\n"
 	@printf "$(_BOLD)$(_RED)################################################################$(_R)\n\n"

@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 13:32:17 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/29 16:04:06 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/04 21:37:55 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,5 @@ int	main(int ac, const char **av, t_environment envp)
 	else
 		ft_printf("probleme args\n");	
 	destroy_shell(g_sh);
-	return (0);
+	return (g_sh.status);
 }

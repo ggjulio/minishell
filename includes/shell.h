@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 17:54:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/01 19:24:53 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/04 21:28:19 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct		s_shell
 	t_environment	env;
 	char			cwd[PATH_MAX + 1];
 	int				status;
+	int				running;
 }					t_shell;
 
 /*
@@ -37,12 +38,6 @@ void				free_shell(t_shell *to_free);
 void				run_shell(void);
 void				execute_pipelines(t_list *commands);
 void				prompt_name(void);
-
-/*
-**	shell_exit.c
-*/
-void				exit_shell(int status);
-void				d_exit_shell();
 
 /*
 **	shell_signal.c

@@ -36,6 +36,12 @@ http://www.idc-online.com/technical_references/pdfs/information_technology/How_L
 
 https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#tag_18_10   
 
+https://stackoverflow.com/questions/61953361/uncleanly-exiting-from-c-child-process-without-valgrind-complaining   
+https://valgrind.org/docs/manual/ms-manual.html#ms-manual.forkingprograms   
+https://shapeshed.com/unix-exit-codes/  
+https://tldp.org/LDP/abs/html/exitcodes.html
+https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#tag_18_08_02   
+
 - [x] Afficher un prompt en l’attente d’une nouvelle commande
 - [x] Chercher et lancer le bon executable (basé sur une variable d’environnement PATH ou en utilisant un path absolu), comme dans bash
 - [x] Vous devez implémenter les builtins suivants :
