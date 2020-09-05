@@ -3,29 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/01 22:29:25 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/05 17:41:46 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		cd_no_args(const char **args)
+int		cd_no_args(const char **args, char *var)
 {
-	if (!get_environment_variable("HOME"))
+	if (!get_environment_variable(var))
 	{
-		ft_dprintf(2, "%s: %s: HOME not set\n", g_sh.name, args[0]);
+		ft_dprintf(2, "%s: %s: %s not set\n", g_sh.name, args[0], var);
 		g_sh.status = 1;
 		return (0);
 	}
-	if (chdir(get_environment_variable_value("HOME")) == -1)
+	if (chdir(get_environment_variable_value(var)) == -1)
 	{
-		if (get_environment_variable("HOME")
-			&& get_environment_variable_value("HOME")[0] == '\0')
+		if (get_environment_variable(var)
+			&& get_environment_variable_value(var)[0] == '\0')
 			return (0);
-		error("cd", get_environment_variable_value("HOME"));
+		error("cd", get_environment_variable_value(var));
 		return (0);
 	}
 	return (1);
@@ -36,7 +36,12 @@ int		cd(const char **args)
 	errno = 0;
 	if (args[1] == NULL)
 	{
-		if (!cd_no_args(args))
+		if (!cd_no_args(args, "HOME"))
+			return (-1);
+	}
+	else if (ft_strcmp(args[1], "-") == 0)
+	{
+		if (!cd_no_args(args, "OLDPWD"))
 			return (-1);
 	}
 	else if (chdir(args[1]) == -1)
