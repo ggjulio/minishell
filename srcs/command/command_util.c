@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:45:43 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/02 01:21:19 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/05 15:59:25 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ char			*get_exec_path(char *exec_name)
 	char			**paths;
 	char			*result;
 
+	if (exec_name == NULL)
+		return (NULL);
 	if (!ft_strncmp("./", exec_name, 2) || !ft_strncmp("/", exec_name, 1))
 		return (ft_strdup(exec_name));
 	if ((paths = malloc_environment_path()) == NULL)
