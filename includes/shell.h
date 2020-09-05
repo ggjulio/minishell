@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 17:54:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/04 21:28:19 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/05 16:42:48 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,19 @@
 # define SHELL_H
 
 # include "minishell.h"
+
+/*
+** STATUS CODES
+** https://tldp.org/LDP/abs/html/exitcodes.html
+** https://shapeshed.com/unix-exit-codes/
+*/
+# define STATUS_SUCCESS				0
+# define STATUS_FAILURE 			1
+# define STATUS_FAILURE_BUILTIN 	2
+# define STATUS_NOT_EXECUTABLE		126
+# define STATUS_CMD_NOT_FOUND		127
+# define STATUS_EXIT_INVALID_ARGS	128
+# define STATUS_CTRL_C				130
 
 typedef struct		s_shell
 {
