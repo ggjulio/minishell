@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/05 16:12:52 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/05 16:51:13 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static int	is_valid_command(t_command *pipeline)
 		&& (pipeline->args[0] != NULL))
 	{
 		bad_command(pipeline->args[0]);
-		ft_printf("ok");
 		ret = 0;
 	}
 	if (pipeline->pipe != NULL)
