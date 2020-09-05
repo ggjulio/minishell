@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/31 18:49:36 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/02 16:02:38 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/05 23:32:49 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,16 @@
 void	sigint_handler(int sig)
 {
 	(void)sig;
-	wait(&g_sh.status);
+	while (wait(&g_sh.status) > 0)
+		;
 	if (g_sh.status == 2)
 	{
-		g_sh.status = 130;
+		g_sh.status = STATUS_CTRL_C;
 		ft_printf("\n");
 	}
 	else
 	{
-		g_sh.status = 1;
+		g_sh.status = STATUS_FAILURE;
 		ft_printf("\n");
 		prompt_name();
 	}
@@ -35,7 +36,18 @@ void	sigquit_handler(int sig)
 	wait(&g_sh.status);
 	if (g_sh.status == 3)
 	{
-		g_sh.status = 131;
+		g_sh.status = STATUS_CTRL_BACKSLASH;
 		ft_dprintf(1, "Quit: 3\n");
-	}	
+	}
+}
+
+int		set_signal(void)
+{
+	int status;
+
+	while (wait(&status) > 0)
+		;
+	if (g_sh.status != STATUS_CTRL_C && g_sh.status != STATUS_CTRL_BACKSLASH)
+		g_sh.status = WEXITSTATUS(status);
+	return (0);
 }

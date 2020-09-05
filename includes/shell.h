@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 17:54:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/05 16:42:48 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/05 23:32:58 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define STATUS_CMD_NOT_FOUND		127
 # define STATUS_EXIT_INVALID_ARGS	128
 # define STATUS_CTRL_C				130
+# define STATUS_CTRL_BACKSLASH		131
 
 typedef struct		s_shell
 {
@@ -57,6 +58,7 @@ void				prompt_name(void);
 */
 void				sigint_handler(int sig);
 void				sigquit_handler(int sig);
+int					set_signal(void);
 
 /*
 **	shell_split_input.c

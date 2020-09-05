@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/04 23:55:16 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/05 19:21:30 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ int				exit_builtin(const char **args)
 	{
 		if ((ret = exit_error(args)) == -1)
 		{
-			g_sh.status = 1;
-			return (0);
+			g_sh.status = STATUS_FAILURE;
+			return (ret);
 		}
 	}
-	g_sh.status = 0;
+	g_sh.status = STATUS_SUCCESS;
 	g_sh.running = 0;
-	return (0);
+	return (STATUS_SUCCESS);
 }

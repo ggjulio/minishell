@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/05 17:41:46 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/05 19:12:44 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		cd_no_args(const char **args, char *var)
 	if (!get_environment_variable(var))
 	{
 		ft_dprintf(2, "%s: %s: %s not set\n", g_sh.name, args[0], var);
-		g_sh.status = 1;
+		g_sh.status = STATUS_FAILURE;
 		return (0);
 	}
 	if (chdir(get_environment_variable_value(var)) == -1)
@@ -37,20 +37,20 @@ int		cd(const char **args)
 	if (args[1] == NULL)
 	{
 		if (!cd_no_args(args, "HOME"))
-			return (-1);
+			return (STATUS_FAILURE);
 	}
 	else if (ft_strcmp(args[1], "-") == 0)
 	{
 		if (!cd_no_args(args, "OLDPWD"))
-			return (-1);
+			return (STATUS_FAILURE);
 	}
 	else if (chdir(args[1]) == -1)
 	{
 		error("cd", args[1]);
-		return (-1);
+		return (STATUS_FAILURE);
 	}
 	set_environment_variable_value("OLDPWD", g_sh.cwd);
 	getcwd(g_sh.cwd, sizeof(g_sh.cwd));
 	set_environment_variable_value("PWD", g_sh.cwd);
-	return (0);
+	return (STATUS_SUCCESS);
 }

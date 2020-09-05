@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_util.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:45:43 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/05 15:59:25 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/05 18:33:39 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int				is_executable(t_command *command)
 	struct stat		*stats;
 
 	if (!(stats = malloc(sizeof(struct stat))))
-		return (-1);
+		return (0);
 	if (stat(command->args[0], stats) == -1)
 	{
 		error(command->args[0], "");
