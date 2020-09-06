@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/05 19:21:30 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/06 11:11:28 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,5 @@ int				exit_builtin(const char **args)
 	}
 	g_sh.status = STATUS_SUCCESS;
 	g_sh.running = 0;
-	return (STATUS_SUCCESS);
+	return (ret);
 }
