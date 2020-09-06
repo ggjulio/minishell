@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_spawn.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:45:43 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/05 23:26:08 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/06 01:26:31 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int				run_command(t_command *command)
 		exit(EXIT_SUCCESS);
 	else if (ft_strchr(command->args[0], '/') && !is_executable(command))
 		exit(g_sh.status);
-	else if (!(execve(command->bin_path, command->args, (char **)g_sh.env)))
+	else if (command->bin_path != NULL
+	&& !execve(command->bin_path, command->args, (char **)g_sh.env))
 		exit(EXIT_FAILURE);
 	exit(g_sh.status);
 	return (0);

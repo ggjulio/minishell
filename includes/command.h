@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:37:23 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/01 05:40:53 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/06 02:03:33 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ void			lst_del_command(void *to_free);
 */
 char			*get_exec_path(char *exec_name);
 void			print_command(t_command *to_print);
-int             is_executable(t_command *command);
+int				is_executable(t_command *command);
 
 /*
 ** command_validation.c
 */
-int				is_valid_pipeline(t_command *pipeline);
+void			show_command_not_found(t_command *pipeline);
 
 /*
 ** command_pipelines.c
@@ -54,6 +54,6 @@ t_command		*get_pipeline(char *input);
 */
 int				spawn_pipeline(t_command *command);
 int				run_command(t_command *command);
-void 			redirect_pipe_end(int old, int new);
+void			redirect_pipe_end(int old, int new);
 
 #endif
