@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:45:43 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/06 01:26:31 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/06 20:50:25 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,15 @@ static int		must_exec(t_builtin_ptr b, t_command *p, t_command *f)
 	return (0);
 }
 
+static void		exec_internal_builtin(t_builtin_ptr to_exec, char **args)
+{
+	if (to_exec != exit_builtin)
+		redirect_parent_to_null_on();
+	g_sh.status = (*to_exec)((const char **)args);
+	if (to_exec != exit_builtin)
+		redirect_parent_to_null_off();
+}
+
 int				spawn_pipeline(t_command *pipeline)
 {
 	t_builtin_ptr	builtin;
@@ -79,7 +88,7 @@ int				spawn_pipeline(t_command *pipeline)
 	{
 		if ((builtin = get_internal_builtin_ptr(pipeline->args[0])) != NULL)
 			if (must_exec(builtin, pipeline, first))
-				g_sh.status = (*builtin)((const char **)pipeline->args);
+				exec_internal_builtin(builtin, pipeline->args);
 		if (pipeline->redirections)
 			redirection_hub(pipeline, pipeline->redirections);
 		else if (builtin != exit_builtin)
