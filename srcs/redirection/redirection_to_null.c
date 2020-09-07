@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_to_null.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 14:54:27 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/06 19:22:25 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/07 13:34:23 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int stdout_copy;
-static int stderr_copy;
-static int stdout_to_null;
-static int stderr_to_null;
+static int	stdout_copy;
+static int	stderr_copy;
+static int	stdout_to_null;
+static int	stderr_to_null;
 
 void	redirect_parent_to_null_on(void)
 {
