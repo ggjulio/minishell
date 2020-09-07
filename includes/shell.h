@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 17:54:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/05 23:32:58 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/07 18:45:13 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,5 @@ void				prompt_name(void);
 void				sigint_handler(int sig);
 void				sigquit_handler(int sig);
 int					set_signal(void);
-
-/*
-**	shell_split_input.c
-*/
-char				**split_input(char const *s, char c);
 
 #endif

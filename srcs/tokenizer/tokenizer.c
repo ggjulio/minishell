@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:12 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/03 18:46:57 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/07 18:42:19 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ void				manage_quotes(t_list **tokens)
 	t_token	*actual;
 	int		has_open_quote;
 	char	quote_type;
-	t_token	*token_ref;
 
 	iterator = *tokens;
 	if (iterator == NULL)
@@ -110,9 +109,7 @@ void				manage_quotes(t_list **tokens)
 	}
 	if (has_open_quote)
 		syntax_error((char[2]){quote_type, '\0'});
-	token_ref = malloc_token("", Token_quote);
-	ft_lst_remove_if(tokens, token_ref, cmp_token_type, lst_del_token);
-	free_token(token_ref);
+
 }
 
 t_list				*tokenize(char *input)
@@ -124,6 +121,11 @@ t_list				*tokenize(char *input)
 	concatenate_variables(&result);
 	expand_variables(&result);
 	manage_quotes(&result);
+	
+	t_token	*token_ref = malloc_token("", Token_quote);
+	ft_lst_remove_if(&result, token_ref, cmp_token_type, lst_del_token);
+	free_token(token_ref);
+
 	concatenate_literals(&result);
 	remove_spaces(&result);
 	redirection_detect_operator(&result);
@@ -136,3 +138,6 @@ t_list				*tokenize(char *input)
 	}
 	return (result);
 }
+
+
+
