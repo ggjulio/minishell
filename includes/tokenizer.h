@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:38 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/07 18:44:29 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/07 18:58:31 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,12 @@ t_token			*merge_tokens(t_token *t1, t_token *t2, t_token_type type);
 void			print_lst_tokens(t_list *lst);
 void			print_token(void *token);
 int				cmp_token_type(t_token *t1, t_token *t2);
+
+
+
+t_list			*assign_token_type_to_each_char(char *input);
+void				do_escape(t_list **begin_tokens);
+void				manage_quotes(t_list **tokens);
+
 
 #endif

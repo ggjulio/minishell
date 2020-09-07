@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 18:09:07 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/07 18:44:17 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/07 19:00:42 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,20 @@ char	**split_input(char *input)
 	pipelines = assign_token_type_to_each_char(input);
 	do_escape(&pipelines);
 	manage_quotes(&pipelines);
-	concatenate_literals(&pipelines);
+	// concatenate_literals(&pipelines);
+	print_lst_tokens(pipelines);
 	concatenate_commands(&pipelines);
+	ft_printf("################\n");
+	print_lst_tokens(pipelines);
 	// if (has_syntax_error(-1))
 	// {
 		// ft_lstclear(&pipelines, lst_del_token);
 		// return (NULL);
 	// }
 	result = lst_token_to_string_array(pipelines);
+	ft_printf("################\n");
+	int i = 0;
+	while (result[i])
+		ft_printf("  %s\n", result[i++]);
 	return (result);
 }

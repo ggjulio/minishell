@@ -6,13 +6,13 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:12 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/07 18:42:19 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/07 18:57:31 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_list		*assign_token_type_to_each_char(char *input)
+t_list			*assign_token_type_to_each_char(char *input)
 {
 	t_list	*result;
 	char	one_char[2];
