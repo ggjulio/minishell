@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/05 22:16:14 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/07 13:11:32 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 void        error(char *cmd, const char *arg)
 {
     ft_dprintf(STDERR_FILENO, "%s: ", g_sh.name);
-    ft_dprintf(STDERR_FILENO, "%s: ", cmd);
-    ft_dprintf(STDERR_FILENO, "%s: ", arg);
+    if (cmd[0] != '\0')
+        ft_dprintf(STDERR_FILENO, "%s: ", cmd);
+    if (arg[0] != '\0')
+        ft_dprintf(STDERR_FILENO, "%s: ", arg);
     ft_dprintf(STDERR_FILENO, "%s\n", strerror(errno));
     g_sh.status = STATUS_CMD_NOT_FOUND;
 }

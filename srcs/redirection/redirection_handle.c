@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/01 01:38:36 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/04 17:24:46 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/07 13:15:52 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static int		open_file(t_redirection *r)
 		fd = open(r->str, O_WRONLY | O_APPEND | O_CREAT, 0644);
 	else if (r->type == Redirection_less)
 		fd = open(r->str, O_RDONLY);
+	if (fd == -1)
+		error("", r->str);
 	return (fd);
 }
 
@@ -68,6 +70,8 @@ static int		get_fdout_pos(t_list *r)
 	}
 	if (i == 0 && content->type == Redirection_less)
 		return (-1);
+	if (content->type == Redirection_less)
+		i--;
 	return (i);
 }
 
