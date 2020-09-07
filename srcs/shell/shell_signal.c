@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/31 18:49:36 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/07 17:52:59 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/07 18:19:37 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int		set_signal(void)
 		;
 	if (g_sh.status != STATUS_CTRL_C
 	&& g_sh.status != STATUS_CTRL_BACKSLASH)
-	//&& g_sh.running > 0)
 		g_sh.status = status % 255;
 	return (0);
 }
