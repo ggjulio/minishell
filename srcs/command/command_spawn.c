@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   command_spawn.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:45:43 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/06 20:50:25 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/07 18:12:39 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void			redirect_pipe_end(int old, int new)
-{
-	if (old != new)
-	{
-		dup2(old, new);
-		close(old);
-	}
-}
 
 int				run_command(t_command *command)
 {
@@ -59,21 +50,33 @@ int				fork_command(t_command *pipeline, int *pfd, int in)
 	return (0);
 }
 
-static int		must_exec(t_builtin_ptr b, t_command *p, t_command *f)
-{
-	if (!p->pipe && ((b == exit_builtin
-	&& f == p) || b != exit_builtin))
-		return (1);
-	return (0);
-}
-
 static void		exec_internal_builtin(t_builtin_ptr to_exec, char **args)
 {
 	if (to_exec != exit_builtin)
 		redirect_parent_to_null_on();
-	g_sh.status = (*to_exec)((const char **)args);
+	if (to_exec == exit_builtin)
+		g_sh.status = (*to_exec)((const char **)args);
+	else
+		(*to_exec)((const char **)args);
 	if (to_exec != exit_builtin)
 		redirect_parent_to_null_off();
+}
+
+static int		run_internal_builtins(t_command *pipeline)
+{
+	t_builtin_ptr	builtin;
+	t_command		*first;
+
+	first = pipeline;
+	while (pipeline)
+	{
+		if ((builtin = get_internal_builtin_ptr(pipeline->args[0])) != NULL)
+			if (!pipeline->pipe && ((builtin == exit_builtin
+			&& first == pipeline) || builtin != exit_builtin))
+				exec_internal_builtin(builtin, pipeline->args);
+		pipeline = pipeline->pipe;
+	}
+	return (0);
 }
 
 int				spawn_pipeline(t_command *pipeline)
@@ -86,9 +89,7 @@ int				spawn_pipeline(t_command *pipeline)
 	first = pipeline;
 	while (pipeline)
 	{
-		if ((builtin = get_internal_builtin_ptr(pipeline->args[0])) != NULL)
-			if (must_exec(builtin, pipeline, first))
-				exec_internal_builtin(builtin, pipeline->args);
+		builtin = get_internal_builtin_ptr(pipeline->args[0]);
 		if (pipeline->redirections)
 			redirection_hub(pipeline, pipeline->redirections);
 		else if (builtin != exit_builtin)
@@ -98,5 +99,7 @@ int				spawn_pipeline(t_command *pipeline)
 		}
 		pipeline = pipeline->pipe;
 	}
-	return (set_signal());
+	set_signal();
+	run_internal_builtins(first);
+	return (0);
 }

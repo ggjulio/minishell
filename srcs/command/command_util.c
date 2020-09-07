@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:45:43 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/05 18:33:39 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/07 17:57:39 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,13 @@ int				is_executable(t_command *command)
 	}
 	free(stats);
 	return (1);
+}
+
+void			redirect_pipe_end(int old, int new)
+{
+	if (old != new)
+	{
+		dup2(old, new);
+		close(old);
+	}
 }
