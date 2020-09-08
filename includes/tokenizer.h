@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:38 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/08 16:13:03 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/08 16:25:57 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_token_type	get_token_type(char c);
 char			**lst_string_to_string_array(t_list *lst_strings);
 char			**lst_token_to_string_array(t_list *lst_strings);
 int				is_between_simple_quote(t_list *begin_tokens, t_list *to_find);
-void			remove_token_type(t_list **tokens, t_token_type type_to_remove);
+void			remove_tokens_type(t_list **tokens, t_token_type type_to_remove);
 
 /*
 **	tokenizer_variable.c

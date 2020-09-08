@@ -6,13 +6,13 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:12 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/08 16:14:57 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/08 16:27:31 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_list			*assign_token_type_to_each_char(char *input)
+t_list	*assign_token_type_to_each_char(char *input)
 {
 	t_list	*result;
 	char	one_char[2];
@@ -30,7 +30,7 @@ t_list			*assign_token_type_to_each_char(char *input)
 	return (result);
 }
 
-void				do_escape(t_list **begin_tokens)
+void	do_escape(t_list **begin_tokens)
 {
 	t_list	*iterator;
 	t_token	*actual;
@@ -59,7 +59,7 @@ void				do_escape(t_list **begin_tokens)
 	}
 }
 
-void				concatenate_literals(t_list **tokens)
+void	concatenate_literals(t_list **tokens)
 {
 	t_list	*iterator;
 	t_token	*actual;
@@ -82,7 +82,7 @@ void				concatenate_literals(t_list **tokens)
 	}
 }
 
-void				manage_quotes(t_list **tokens)
+void	manage_quotes(t_list **tokens)
 {
 	t_list	*iterator;
 	t_token	*actual;
@@ -109,10 +109,9 @@ void				manage_quotes(t_list **tokens)
 	}
 	if (has_open_quote)
 		syntax_error((char[2]){quote_type, '\0'});
-
 }
 
-t_list				*tokenize(char *input)
+t_list	*tokenize(char *input)
 {
 	t_list	*result;
 
@@ -121,9 +120,9 @@ t_list				*tokenize(char *input)
 	concatenate_variables(&result);
 	expand_variables(&result);
 	manage_quotes(&result);
-	remove_token_type(&result, Token_quote);
+	remove_tokens_type(&result, Token_quote);
 	concatenate_literals(&result);
-	remove_token_type(&result, Token_space);
+	remove_tokens_type(&result, Token_space);
 	redirection_detect_operator(&result);
 	redirection_join_arg(&result);
 	validation_tokens(result);
@@ -134,6 +133,3 @@ t_list				*tokenize(char *input)
 	}
 	return (result);
 }
-
-
-
