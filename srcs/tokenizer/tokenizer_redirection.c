@@ -6,20 +6,25 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 22:58:47 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/03 18:49:56 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/08 16:34:32 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	redirection_case_last_is_redirection(t_token *last)
+static void	redirection_case_last_is_redirection(t_list *last)
 {
-	if (last == NULL || last->type != Token_operator)
+	t_token	*last_tok;
+
+	if (last == NULL)
+		return;
+	last_tok = last->content;
+	if (last_tok == NULL || last_tok->type != Token_operator)
 		return ;
-	if (last->str[0] == '>')
-		last->type = Token_op_great;
-	else if (last->str[0] == '<')
-		last->type = Token_op_less;
+	if (last_tok->str[0] == '>')
+		last_tok->type = Token_op_great;
+	else if (last_tok->str[0] == '<')
+		last_tok->type = Token_op_less;
 }
 
 void		redirection_detect_operator(t_list **begin_tokens)
@@ -58,7 +63,7 @@ void		redirection_detect_operator(t_list **begin_tokens)
 		}
 		iterator = iterator->next;
 	}
-	redirection_case_last_is_redirection(iterator->content);
+	redirection_case_last_is_redirection(iterator);
 }
 
 void		redirection_join_arg(t_list **begin_tokens)
