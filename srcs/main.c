@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 13:32:17 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/04 21:37:55 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/08 17:12:48 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 t_shell	g_sh;
 
-// void	execute_string(char *input)
-// {
-// 	t_list	*pipelines;
+static void	execute_string(char *input)
+{
+	char	**commands;
 
-// 	pipelines = get_pipelines(input);
-// 	execute_pipelines(pipelines);
-// 	ft_lstclear(&pipelines, lst_del_command);
-// }
+	commands = split_input(input);
+	run_shell_commands(commands);
+	ft_free_array(commands);
+}
 
-int	main(int ac, const char **av, t_environment envp)
+int			main(int ac, const char **av, t_environment envp)
 {
 	(void)ac;
 	(void)av;
@@ -31,9 +31,9 @@ int	main(int ac, const char **av, t_environment envp)
 	if (ac == 1)
 		run_shell();
 	else if (ac == 3 && !ft_strcmp("-c", av[1]))
-		;// execute_string((char *)av[2]);
+		execute_string((char *)av[2]);
 	else
-		ft_printf("probleme args\n");	
+		ft_printf("Bad args\n");
 	destroy_shell(g_sh);
 	return (g_sh.status);
 }

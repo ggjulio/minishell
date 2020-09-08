@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 13:31:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/07 18:51:04 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/08 17:05:04 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void		prompt_name(void)
 	ft_printf("%s%s$%s ", g_sh.cwd, "\e[91m", "\e[0m");
 }
 
-static void	run_shell_commands(char **commands)
+void		run_shell_commands(char **commands)
 {
 	t_command	*to_exec;
 	int			i;

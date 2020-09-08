@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 17:54:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/07 18:45:13 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/08 17:13:05 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void				free_shell(t_shell *to_free);
 /*
 ** shell_util.c
 */
+void				run_shell_commands(char **commands);
 void				run_shell(void);
-void				execute_pipelines(t_list *commands);
 void				prompt_name(void);
 
 /*
