@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 18:09:07 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/08 16:27:48 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/09 00:14:55 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ static void		concatenate_commands(t_list **tokens)
 
 char	**split_input(char *input)
 {
+	char	**result;
 	t_list	*pipelines;
 
 	pipelines = assign_token_type_to_each_char(input);
@@ -104,5 +105,7 @@ char	**split_input(char *input)
 	// 	ft_lstclear(&pipelines, lst_del_token);
 	// 	return (NULL);
 	// }
-	return (lst_token_to_string_array(pipelines));
+	result = lst_token_to_string_array(pipelines);
+	ft_lstclear(&pipelines, lst_del_token);
+	return (result);
 }
