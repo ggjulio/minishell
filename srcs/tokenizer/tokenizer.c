@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:12 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/07 18:57:31 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/08 16:14:57 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,13 +121,9 @@ t_list				*tokenize(char *input)
 	concatenate_variables(&result);
 	expand_variables(&result);
 	manage_quotes(&result);
-	
-	t_token	*token_ref = malloc_token("", Token_quote);
-	ft_lst_remove_if(&result, token_ref, cmp_token_type, lst_del_token);
-	free_token(token_ref);
-
+	remove_token_type(&result, Token_quote);
 	concatenate_literals(&result);
-	remove_spaces(&result);
+	remove_token_type(&result, Token_space);
 	redirection_detect_operator(&result);
 	redirection_join_arg(&result);
 	validation_tokens(result);

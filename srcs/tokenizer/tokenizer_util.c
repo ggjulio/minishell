@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:32:18 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/08 15:30:57 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/08 16:12:24 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,11 @@ int				is_between_simple_quote(t_list *begin_tokens, t_list *to_find)
 	return (-1);
 }
 
-void			remove_spaces(t_list **tokens)
+void			remove_token_type(t_list **tokens, t_token_type type_to_remove)
 {
 	t_token *token_ref;
 
-	token_ref = malloc_token("", Token_space);
+	token_ref = malloc_token("", type_to_remove);
 	ft_lst_remove_if(tokens, token_ref, cmp_token_type, lst_del_token);
 	free_token(token_ref);
 }

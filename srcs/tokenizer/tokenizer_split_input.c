@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 18:09:07 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/08 16:06:04 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/08 16:17:59 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ static void		split_manage_quotes(t_list **tokens)
 			actual->type = Token_literal;
 		iterator = iterator->next;
 	}
-	if (has_open_quote)
-		syntax_error((char[2]){quote_type, '\0'});
+	// if (has_open_quote)
+	// 	syntax_error((char[2]){quote_type, '\0'});
 }
 
 static void		concatenate_commands(t_list **tokens)
@@ -93,16 +93,16 @@ char	**split_input(char *input)
 	pipelines = assign_token_type_to_each_char(input);
 	split_do_escape(&pipelines);
 	split_manage_quotes(&pipelines);
-	print_lst_tokens(pipelines);
+	// print_lst_tokens(pipelines);
 	concatenate_commands(&pipelines);
-	ft_printf("################\n");
-	print_lst_tokens(pipelines);
-
-
+	// ft_printf("################\n");
+	// print_lst_tokens(pipelines);
+	remove_token_type(&pipelines, Token_end);
 	// if (has_syntax_error(-1))
 	// {
-		// ft_lstclear(&pipelines, lst_del_token);
-		// return (NULL);
+		
+	// 	ft_lstclear(&pipelines, lst_del_token);
+	// 	return (NULL);
 	// }
 	return (lst_token_to_string_array(pipelines));
 }
