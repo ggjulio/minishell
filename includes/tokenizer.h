@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:38 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/07 18:58:31 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/08 16:06:57 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ t_list			*tokenize(char *input);
 **	tokenizer_util.c
 */
 t_token_type	get_token_type(char c);
+char			**lst_string_to_string_array(t_list *lst_strings);
 char			**lst_token_to_string_array(t_list *lst_strings);
 int				is_between_simple_quote(t_list *begin_tokens, t_list *to_find);
 void			remove_spaces(t_list **tokens);
@@ -108,10 +109,8 @@ void			print_token(void *token);
 int				cmp_token_type(t_token *t1, t_token *t2);
 
 
-
 t_list			*assign_token_type_to_each_char(char *input);
 void				do_escape(t_list **begin_tokens);
 void				manage_quotes(t_list **tokens);
-
 
 #endif

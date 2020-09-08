@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/31 16:15:06 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/08 15:31:34 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_command	create_command(t_list *p_args, t_list *p_redirections)
 	t_command	result;
 
 	ft_bzero(&result, sizeof(t_command));
-	result.args = lst_token_to_string_array(p_args);
+	result.args = lst_string_to_string_array(p_args);
 	result.bin_path = get_exec_path(result.args[0]);
 	result.pipe = NULL;
 	result.redirections = p_redirections;

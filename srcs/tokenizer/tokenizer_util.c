@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:32:18 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/31 19:12:50 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/08 15:30:57 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_token_type	get_token_type(char c)
 	return (Token_literal);
 }
 
-char			**lst_token_to_string_array(t_list *lst_strings)
+char			**lst_string_to_string_array(t_list *lst_strings)
 {
 	char	**result;
 	int		i;
@@ -41,6 +41,23 @@ char			**lst_token_to_string_array(t_list *lst_strings)
 	{
 		result[i++] = ft_strdup(lst_strings->content);
 		lst_strings = lst_strings->next;
+	}
+	result[i] = 0;
+	return (result);
+}
+
+char			**lst_token_to_string_array(t_list *lst_token)
+{
+	char	**result;
+	int		i;
+
+	if (!(result = malloc((ft_lstsize(lst_token) + 1) * sizeof(char *))))
+		return (NULL);
+	i = 0;
+	while (lst_token)
+	{
+		result[i++] = ft_strdup(((t_token *)(lst_token->content))->str);
+		lst_token = lst_token->next;
 	}
 	result[i] = 0;
 	return (result);

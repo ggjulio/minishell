@@ -6,13 +6,63 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 18:09:07 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/07 19:00:42 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/08 16:06:04 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void				concatenate_commands(t_list **tokens)
+static void		split_do_escape(t_list **begin_tokens)
+{
+	t_list	*iterator;
+	t_token	*actual;
+	t_token	*next;
+
+	iterator = *begin_tokens;
+	while (iterator && iterator->next)
+	{
+		actual = iterator->content;
+		next = iterator->next->content;
+		if (actual->type == Token_escape)
+		{
+			if (!is_between_simple_quote(*begin_tokens, iterator))
+				next->type = Token_literal;
+			actual->type = Token_literal;
+		}
+		iterator = iterator->next;
+	}
+}
+
+static void		split_manage_quotes(t_list **tokens)
+{
+	t_list	*iterator;
+	t_token	*actual;
+	int		has_open_quote;
+	char	quote_type;
+
+	iterator = *tokens;
+	if (iterator == NULL)
+		return ;
+	has_open_quote = 0;
+	while (iterator)
+	{
+		actual = iterator->content;
+		if (actual->type == Token_quote && !has_open_quote)
+		{
+			has_open_quote = 1;
+			quote_type = actual->str[0];
+		}
+		else if (actual->type == Token_quote && quote_type == actual->str[0])
+			has_open_quote = 0;
+		else if (has_open_quote)
+			actual->type = Token_literal;
+		iterator = iterator->next;
+	}
+	if (has_open_quote)
+		syntax_error((char[2]){quote_type, '\0'});
+}
+
+static void		concatenate_commands(t_list **tokens)
 {
 	t_list	*iterator;
 	t_token	*actual;
@@ -25,7 +75,7 @@ void				concatenate_commands(t_list **tokens)
 	{
 		actual = iterator->content;
 		next = iterator->next->content;
-		if (next->type != Token_end)
+		if (actual->type != Token_end && next->type != Token_end)
 		{
 			iterator->content = merge_tokens(actual, next, actual->type);
 			ft_lstdelone(ft_lstpop_elem(tokens, iterator->next), NULL);
@@ -39,25 +89,20 @@ void				concatenate_commands(t_list **tokens)
 char	**split_input(char *input)
 {
 	t_list	*pipelines;
-	char	**result;
 
 	pipelines = assign_token_type_to_each_char(input);
-	do_escape(&pipelines);
-	manage_quotes(&pipelines);
-	// concatenate_literals(&pipelines);
+	split_do_escape(&pipelines);
+	split_manage_quotes(&pipelines);
 	print_lst_tokens(pipelines);
 	concatenate_commands(&pipelines);
 	ft_printf("################\n");
 	print_lst_tokens(pipelines);
+
+
 	// if (has_syntax_error(-1))
 	// {
 		// ft_lstclear(&pipelines, lst_del_token);
 		// return (NULL);
 	// }
-	result = lst_token_to_string_array(pipelines);
-	ft_printf("################\n");
-	int i = 0;
-	while (result[i])
-		ft_printf("  %s\n", result[i++]);
-	return (result);
+	return (lst_token_to_string_array(pipelines));
 }
