@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:38 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/08 16:25:57 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/09 18:23:11 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,20 @@ t_token_type	get_token_type(char c);
 char			**lst_string_to_string_array(t_list *lst_strings);
 char			**lst_token_to_string_array(t_list *lst_strings);
 int				is_between_simple_quote(t_list *begin_tokens, t_list *to_find);
-void			remove_tokens_type(t_list **tokens, t_token_type type_to_remove);
+void			remove_tokens_type(
+					t_list **tokens, t_token_type type_to_remove);
 
 /*
 **	tokenizer_variable.c
 */
 void			concatenate_variables(t_list **tokens);
 void			expand_variables(t_list **begin_tokens);
+
+/*
+**	tokenizer_quote.c
+*/
+void			manage_quotes(t_list **tokens);
+void			manage_empty_quotes(t_list **begin_list);
 
 /*
 **	tokenizer_error.c
@@ -107,7 +114,6 @@ t_token			*merge_tokens(t_token *t1, t_token *t2, t_token_type type);
 void			print_lst_tokens(t_list *lst);
 void			print_token(void *token);
 int				cmp_token_type(t_token *t1, t_token *t2);
-
 
 t_list			*assign_token_type_to_each_char(char *input);
 void				do_escape(t_list **begin_tokens);

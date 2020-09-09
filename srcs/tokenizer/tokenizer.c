@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:12 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/08 16:27:31 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/09 18:17:25 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,35 +82,6 @@ void	concatenate_literals(t_list **tokens)
 	}
 }
 
-void	manage_quotes(t_list **tokens)
-{
-	t_list	*iterator;
-	t_token	*actual;
-	int		has_open_quote;
-	char	quote_type;
-
-	iterator = *tokens;
-	if (iterator == NULL)
-		return ;
-	has_open_quote = 0;
-	while (iterator)
-	{
-		actual = iterator->content;
-		if (actual->type == Token_quote && !has_open_quote)
-		{
-			has_open_quote = 1;
-			quote_type = actual->str[0];
-		}
-		else if (actual->type == Token_quote && quote_type == actual->str[0])
-			has_open_quote = 0;
-		else if (has_open_quote)
-			actual->type = Token_literal;
-		iterator = iterator->next;
-	}
-	if (has_open_quote)
-		syntax_error((char[2]){quote_type, '\0'});
-}
-
 t_list	*tokenize(char *input)
 {
 	t_list	*result;
@@ -120,6 +91,7 @@ t_list	*tokenize(char *input)
 	concatenate_variables(&result);
 	expand_variables(&result);
 	manage_quotes(&result);
+	manage_empty_quotes(&result);
 	remove_tokens_type(&result, Token_quote);
 	concatenate_literals(&result);
 	remove_tokens_type(&result, Token_space);
