@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/02 18:19:46 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/03 17:27:52 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/09 18:43:54 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	syntax_error(char *op)
 {
+	g_sh.status = STATUS_FAILURE_PARSER;
 	if (has_syntax_error(1))
 		return ;
 	ft_printf("%s: syntax error near unexpected token `%s'\n", g_sh.name, op);

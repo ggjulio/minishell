@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 17:54:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/08 17:13:05 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/09 18:48:38 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define STATUS_EXIT_INVALID_ARGS	128
 # define STATUS_CTRL_C				130
 # define STATUS_CTRL_BACKSLASH		131
+# define STATUS_FAILURE_PARSER		258
 
 typedef struct		s_shell
 {
