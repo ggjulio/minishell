@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/05 19:15:15 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/09 02:41:09 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	export_error(const char *arg)
 {
 	ft_printf("%s: ", g_sh.name);
 	ft_printf("export: ");
-	ft_printf("`%s`: ", arg);
+	ft_printf("`%s': ", arg);
 	ft_printf("not a valid identifier\n");
 }
 
@@ -37,6 +37,22 @@ static void	print_export_no_args(void)
 	}
 }
 
+static int	is_valid_identifier(const char *arg)
+{
+	int i;
+
+	if (ft_isdigit(arg[0]) || arg[0] == '=')
+		return (0);
+	i = 0;
+	while (arg[i] && arg[i] != '=')
+	{
+		if (ft_in_charset(arg[i], " \\\"'$&|;"))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int			export(const char **args)
 {
 	int			i;
@@ -46,8 +62,11 @@ int			export(const char **args)
 	if (ft_array_len((char **)args) > 1)
 	{
 		while (args[++i])
-			if (!ft_isalpha(args[i][0]))
+			if (!is_valid_identifier(args[i]))
+			{
 				export_error(args[i]);
+				return (STATUS_FAILURE);
+			}
 			else if ((equal_pos = ft_strchr(args[i], '=')) != NULL)
 			{
 				*equal_pos = '\0';

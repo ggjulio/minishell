@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 17:52:21 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/05 22:49:41 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/09 02:30:53 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ t_shell	create_shell(const char *name, t_environment envp)
 {
 	t_shell result;
 
+	(void)name;
 	ft_bzero(&result, sizeof(t_shell));
-	result.name = ft_strdup(name + 2);
+	result.name = ft_strdup("minishell");
 	result.env = malloc_environment(envp);
 	result.status = 0;
 	result.running = 42;
