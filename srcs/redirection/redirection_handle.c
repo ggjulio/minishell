@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/01 01:38:36 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/09 15:30:26 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/09 23:25:47 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static int		get_fdout_pos(t_list *r)
 {
 	t_redirection	*content;
 	int				i;
+	int				j;
 
 	content = r->content;
 	i = 0;
@@ -62,20 +63,21 @@ static int		get_fdout_pos(t_list *r)
 		content = r->content;
 		i++;
 	}
+	j = 0;
 	while (r->next && content->type != Redirection_less)
 	{
 		r = r->next;
 		content = r->content;
-		i++;
+		j++;
 	}
-	if (i == 0 && content->type == Redirection_less)
+	if (j == 0 && content->type == Redirection_less)
 		return (-1);
 	if (content->type == Redirection_less)
 		i--;
-	return (i);
+	return (i + j);
 }
 
-static int		fork_redirection(t_command *command, int fdin, int fdout)
+static int		fork_redirection(t_command *command, int *pfd)
 {
 	int pid;
 
@@ -83,10 +85,8 @@ static int		fork_redirection(t_command *command, int fdin, int fdout)
 		return (-1);
 	if (pid == 0)
 	{
-		if (fdin != STDIN_FILENO)
-			redirect_pipe_end(fdin, STDIN_FILENO);
-		if (fdout != STDOUT_FILENO)
-			redirect_pipe_end(fdout, STDOUT_FILENO);
+		redirect_pipe_end(pfd[0], STDIN_FILENO);
+		redirect_pipe_end(pfd[1], STDOUT_FILENO);
 		run_command(command);
 		exit(EXIT_FAILURE);
 	}
@@ -94,17 +94,16 @@ static int		fork_redirection(t_command *command, int fdin, int fdout)
 	return (0);
 }
 
-int				redirection_hub(t_command *command, t_list *r, int in)
+int				redirection_hub(t_command *cmd, t_list *r, int *pfd, int in)
 {
 	int		fd[ft_lstsize(r)];
 	int		fdpos[2];
-	int		pfd[2];
 	int		i;
 
 	if ((fdpos[0] = get_fdin_pos(r)) == -1)
 		pfd[0] = in;
 	if ((fdpos[1] = get_fdout_pos(r)) == -1)
-		pfd[1] = 1;
+		pfd[1] = STDOUT_FILENO;
 	i = 0;
 	while (r)
 	{
@@ -119,6 +118,6 @@ int				redirection_hub(t_command *command, t_list *r, int in)
 		r = r->next;
 		i++;
 	}
-	fork_redirection(command, pfd[0], pfd[1]);
+	fork_redirection(cmd, pfd);
 	return (0);
 }
