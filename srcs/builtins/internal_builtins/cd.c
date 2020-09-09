@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/05 19:12:44 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/09 16:57:53 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int		cd_no_args(const char **args, char *var)
 		error("cd", get_environment_variable_value(var));
 		return (0);
 	}
+	if (ft_strcmp(var, "OLDPWD") == 0)
+		ft_printf("%s\n", get_environment_variable_value(var));
 	return (1);
 }
 
