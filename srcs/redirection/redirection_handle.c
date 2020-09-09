@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/01 01:38:36 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/07 13:15:52 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/09 15:30:26 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ static int		fork_redirection(t_command *command, int fdin, int fdout)
 	return (0);
 }
 
-int				redirection_hub(t_command *command, t_list *r)
+int				redirection_hub(t_command *command, t_list *r, int in)
 {
 	int		fd[ft_lstsize(r)];
 	int		fdpos[2];
@@ -102,7 +102,7 @@ int				redirection_hub(t_command *command, t_list *r)
 	int		i;
 
 	if ((fdpos[0] = get_fdin_pos(r)) == -1)
-		pfd[0] = 0;
+		pfd[0] = in;
 	if ((fdpos[1] = get_fdout_pos(r)) == -1)
 		pfd[1] = 1;
 	i = 0;

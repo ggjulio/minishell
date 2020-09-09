@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:45:43 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/07 18:12:39 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/09 15:29:41 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,12 @@ int				spawn_pipeline(t_command *pipeline)
 	t_command		*first;
 
 	first = pipeline;
+	in = 0;
 	while (pipeline)
 	{
 		builtin = get_internal_builtin_ptr(pipeline->args[0]);
 		if (pipeline->redirections)
-			redirection_hub(pipeline, pipeline->redirections);
+			redirection_hub(pipeline, pipeline->redirections, in);
 		else if (builtin != exit_builtin)
 		{
 			fork_command(pipeline, pfd, in);
