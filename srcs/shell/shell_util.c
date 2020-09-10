@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 13:31:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/08 17:05:04 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/10 21:54:55 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void		prompt_name(void)
 {
-	ft_printf("%s%s:%s ", "\e[92m", g_sh.name, "\e[94m");
-	ft_printf("%s%s$%s ", g_sh.cwd, "\e[91m", "\e[0m");
+	ft_dprintf(STDERR_FILENO, "%s%s:%s ", "\e[92m", g_sh.name, "\e[94m");
+	ft_dprintf(STDERR_FILENO, "%s%s$%s ", g_sh.cwd, "\e[91m", "\e[0m");
 }
 
 void		run_shell_commands(char **commands)
@@ -50,10 +50,7 @@ void		run_shell(void)
 			ft_free_array(commands);
 		}
 		else
-		{
 			g_sh.running = 0;
-			ft_printf("exit\n");
-		}
 		free(input);
 	}
 }

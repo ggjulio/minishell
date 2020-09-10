@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/07 13:28:34 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/10 20:51:59 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void		error(char *cmd, const char *arg)
 
 void		bad_command(char *cmd)
 {
-	ft_printf("%s: %s: command not found\n", g_sh.name, cmd);
+	ft_dprintf(STDERR_FILENO, "%s: %s: command not found\n", g_sh.name, cmd);
 	g_sh.status = STATUS_CMD_NOT_FOUND;
 }
 

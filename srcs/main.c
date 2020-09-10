@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 13:32:17 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/08 17:12:48 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/10 22:09:22 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ int			main(int ac, const char **av, t_environment envp)
 	(void)av;
 	g_sh = create_shell(av[0], envp);
 	if (ac == 1)
+	{
 		run_shell();
+		ft_dprintf(STDERR_FILENO, "exit\n");
+	}
 	else if (ac == 3 && !ft_strcmp("-c", av[1]))
 		execute_string((char *)av[2]);
 	else
