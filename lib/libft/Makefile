@@ -70,6 +70,7 @@ SRC+= ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c
 SRC+= ft_lstclear.c ft_lstiter.c ft_lstmap.c
 SRC+= ft_lstpop_front.c ft_lstsort.c ft_lst_remove_if.c
 SRC+= ft_lstpop_elem.c ft_lst_print.c
+SRC+= ft_lstinsert_lst_after.c
 
 SRC+= ft_abs.c ft_iscntrl.c	ft_isupper.c ft_isgraph.c
 SRC+= ft_isblank.c ft_islower.c	ft_isspace.c ft_isxdigit.c

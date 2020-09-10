@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:12 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/09 18:17:25 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/10 17:58:51 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ t_list	*tokenize(char *input)
 	do_escape(&result);
 	concatenate_variables(&result);
 	expand_variables(&result);
+	remove_tokens_type(&result, Token_variable);
 	manage_quotes(&result);
 	manage_empty_quotes(&result);
 	remove_tokens_type(&result, Token_quote);

@@ -6,13 +6,13 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 22:52:47 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/08 16:25:16 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/10 18:51:14 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	concatenate_variables(t_list **tokens)
+void		concatenate_variables(t_list **tokens)
 {
 	t_list	*iterator;
 	t_token	*actual;
@@ -35,14 +35,35 @@ void	concatenate_variables(t_list **tokens)
 	}
 }
 
-void	expand_variables(t_list **begin_tokens)
+static void	expand_variables_do_expansion(t_list *iterator)
+{
+	t_list		*lst_to_insert;
+	const char	*var_value;
+
+	var_value = (char *)get_environment_variable_value(
+							((t_token *)(iterator->content))->str);
+	if (var_value)
+	{
+		lst_to_insert = assign_token_type_to_each_char((char *)var_value);
+		ft_lstinsert_lst_after(iterator, lst_to_insert);
+	}
+}
+
+static void	expand_variables_expand_status(t_token *actual)
+{
+	char		*tmp;
+
+	ft_asprintf(&tmp, "%d%s", g_sh.status, actual->str + 2);
+	free(actual->str);
+	actual->str = tmp;
+	actual->type = Token_literal;
+}
+
+void		expand_variables(t_list **begin_tokens)
 {
 	t_list		*iterator;
 	t_token		*actual;
-	const char	*var_value;
-	char		*tmp;
 
-	tmp = NULL;
 	iterator = *begin_tokens;
 	while (iterator)
 	{
@@ -52,21 +73,14 @@ void	expand_variables(t_list **begin_tokens)
 			if (!is_between_simple_quote(*begin_tokens, iterator))
 			{
 				if (!ft_strcmp(actual->str, "$"))
-					;
+					actual->type = Token_literal;
 				else if (!ft_strncmp("$?", actual->str, 2))
-				{
-					ft_asprintf(&tmp, "%d%s", g_sh.status, actual->str + 2);
-					free(actual->str);
-					actual->str = tmp;
-				}
+					expand_variables_expand_status(actual);
 				else
-				{
-					var_value = get_environment_variable_value(actual->str);
-					free(actual->str);
-					actual->str = ft_strdup(var_value ? var_value : "");
-				}
+					expand_variables_do_expansion(iterator);
 			}
-			actual->type = Token_literal;
+			else
+				actual->type = Token_literal;
 		}
 		iterator = iterator->next;
 	}
