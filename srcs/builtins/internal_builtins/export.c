@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/09 02:41:09 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/10 16:09:39 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	is_valid_identifier(const char *arg)
 {
 	int i;
 
-	if (ft_isdigit(arg[0]) || arg[0] == '=')
+	if (arg[0] == '\0' || ft_isdigit(arg[0]) || arg[0] == '=')
 		return (0);
 	i = 0;
 	while (arg[i] && arg[i] != '=')
@@ -57,15 +57,17 @@ int			export(const char **args)
 {
 	int			i;
 	char		*equal_pos;
+	int			ret;
 
 	i = 0;
+	ret = STATUS_SUCCESS;
 	if (ft_array_len((char **)args) > 1)
 	{
 		while (args[++i])
 			if (!is_valid_identifier(args[i]))
 			{
 				export_error(args[i]);
-				return (STATUS_FAILURE);
+				ret = STATUS_FAILURE;
 			}
 			else if ((equal_pos = ft_strchr(args[i], '=')) != NULL)
 			{
@@ -76,5 +78,5 @@ int			export(const char **args)
 	}
 	else
 		print_export_no_args();
-	return (STATUS_SUCCESS);
+	return (ret);
 }
