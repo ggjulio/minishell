@@ -12,3 +12,4 @@ a.out.dSYM
 output_valgrind
 minishell_challenger/
 minishell_test/
+minishell-tester/

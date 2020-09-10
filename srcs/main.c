@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 13:32:17 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/10 22:09:22 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/11 01:21:44 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int			main(int ac, const char **av, t_environment envp)
 	(void)ac;
 	(void)av;
 	g_sh = create_shell(av[0], envp);
+	set_environment_variable_value("PWD", g_sh.cwd);
 	if (ac == 1)
 	{
 		run_shell();

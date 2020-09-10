@@ -87,6 +87,15 @@ CC = clang
 CFLAGS  = -Wall -Wextra -Werror -g -fsanitize=address  -fsanitize=undefined -fstack-protector  
 IFLAGS  = $(foreach inc, $(INC_DIR),-I$(inc))
 
+#OS specific
+ifeq ($(UNAME), Darwin)
+	# mac
+	CFLAGS += -D DARWIN
+else
+	#Linus and others...
+	CFLAGS += -D LINUX
+endif
+
 all: $(NAME)
 
 $(OBJ_DIR)/%.o: %.c
