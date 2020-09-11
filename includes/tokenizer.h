@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:38 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/11 18:29:05 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/11 18:56:45 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ t_list			*tokenize(char *input);
 t_token_type	get_token_type(char c);
 char			**lst_string_to_string_array(t_list *lst_strings);
 char			**lst_token_to_string_array(t_list *lst_strings);
-int				is_between_simple_quote(t_list *begin_tokens, t_list *to_find);
+int				in_simple_quote(t_list *begin_tokens, t_list *to_find);
+int				in_double_quote(t_list *begin_tokens, t_list *to_find);
 void			remove_tokens_type(
 					t_list **tokens, t_token_type type_to_remove);
 

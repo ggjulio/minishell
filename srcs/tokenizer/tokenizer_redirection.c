@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 22:58:47 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/08 16:34:32 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/11 19:06:59 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	redirection_case_last_is_redirection(t_list *last)
 	t_token	*last_tok;
 
 	if (last == NULL)
-		return;
+		return ;
 	last_tok = last->content;
 	if (last_tok == NULL || last_tok->type != Token_operator)
 		return ;

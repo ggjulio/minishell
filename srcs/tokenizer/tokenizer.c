@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:12 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/11 14:33:49 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/11 18:57:18 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	do_escape(t_list **begin_tokens)
 		next = iterator->next->content;
 		if (actual->type == Token_escape)
 		{
-			if (!is_between_simple_quote(*begin_tokens, iterator))
+			if (!in_simple_quote(*begin_tokens, iterator))
 			{
 				next->type = Token_literal;
 				elem_to_del = ft_lstpop_elem(begin_tokens, iterator);
