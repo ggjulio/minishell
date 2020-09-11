@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 22:52:47 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/11 18:57:39 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/11 20:45:55 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	expand_variables_do_expansion(t_list *iterator)
 
 	var_value = (char *)get_environment_variable_value(
 							((t_token *)(iterator->content))->str);
-	if (var_value)
+	if (var_value && var_value[0] != '\0')
 	{
 		lst_to_insert = assign_token_type_to_each_char((char *)var_value);
 		ft_lstinsert_lst_after(iterator, lst_to_insert);
