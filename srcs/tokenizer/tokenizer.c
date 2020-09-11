@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:12 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/11 19:46:09 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/11 21:24:13 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	do_escape(t_list **begin_tokens)
 	t_list	*iterator;
 	t_token	*actual;
 	t_token	*next;
-	t_list	*elem_to_del;
 
 	iterator = *begin_tokens;
 	while (iterator && iterator->next)
@@ -49,15 +48,9 @@ void	do_escape(t_list **begin_tokens)
 						&& !ft_in_charset(next->str[0], "$\"\\")))
 				actual->type = Token_literal;
 			else
-			{
 				next->type = Token_literal;
-				elem_to_del = ft_lstpop_elem(begin_tokens, iterator);
-				iterator = elem_to_del->next;
-				ft_lstdelone(elem_to_del, lst_del_token);
-			}
 		}
-		else
-			iterator = iterator->next;
+		iterator = iterator->next;
 	}
 }
 
@@ -106,6 +99,7 @@ t_list	*tokenize(char *input)
 	result = assign_token_type_to_each_char(input);
 	do_escape(&result);
 	concatenate_variables(&result);
+	remove_tokens_type(&result, Token_escape);
 	expand_variables(&result);
 	remove_tokens_type(&result, Token_variable);
 	manage_quotes(&result);
