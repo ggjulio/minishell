@@ -6,61 +6,67 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/10 20:56:26 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/11 04:08:45 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+// static int		is_number(const char *s)
+// {
+// 	int i;
+
+// 	if (*s != '-' && *s != '+' && !ft_isdigit(*s) && !ft_isspace(*s))
+// 		return (0);
+// 	i = 0;
+// 	while (s[++i])
+// 		if (!ft_isdigit(s[i]) && !ft_isspace(s[i]))
+// 			return (0);
+// 	return (1);
+// }
+
 static int		is_number(const char *s)
 {
 	int i;
 
-	i = -1;
-	while (s[++i])
-		if ((i == 0 && s[i] != '-' && !ft_isdigit((int)s[i]))
-		|| (i > 0 && !ft_isdigit((int)s[i])))
-			return (0);
+	if (*s != '-' && *s != '+' && !ft_isdigit(*s) && !ft_isspace(*s))
+		return (0);
+	i = 1;
+	while (s[i] && ft_isspace(s[i]))
+		i++;
+	while (s[i] && ft_isdigit(s[i]))
+		i++;
+	if (s[i] != '\0')
+		return (0);
 	return (1);
 }
 
-static int		exit_error(const char **args)
+static int		get_status(char *str, const char **args)
 {
-	int ret;
-
-	ret = 0;
-	if (ft_strcmp(args[1], "--") == 0 && !args[2])
-		return (ret);
-	if (is_number(args[1]) && args[2])
+	(void)args;
+	if (is_number(str))
 	{
-		ft_dprintf(2, "%s: %s: too many arguments\n", g_sh.name, args[0]);
-		return (-1);
+		return (ft_atoi(str));
 	}
-	else if (is_number(args[1]) && ft_strcmp(args[1], "-") != 0)
-		ret = ft_atoi(args[1]);
-	else
-	{
-		ret = 255;
-		ft_dprintf(2, "%s: %s: %s: numeric argument required\n",
-		g_sh.name, args[0], args[1]);
-	}
-	return (ret);
+	return (STATUS_FAILURE_BUILTIN);
 }
 
 int				exit_builtin(const char **args)
 {
-	int		ret;
-
-	ret = 0;
-	if (args[1])
-	{
-		if ((ret = exit_error(args)) == -1)
-		{
-			g_sh.status = STATUS_FAILURE;
-			return (ret);
-		}
-	}
-	g_sh.status = STATUS_SUCCESS;
 	g_sh.running = 0;
-	return (ret);
+	if (ft_array_len((char **)args) < 2)
+		return (STATUS_SUCCESS);
+	if (!is_number(args[1]))
+	{
+		ft_dprintf(2, "%s: %s: %s: numeric argument required\n",
+			g_sh.name, args[0], args[1]);
+		return (STATUS_FAILURE_BUILTIN);
+	}
+	if (ft_array_len((char **)args) > 2)
+	{
+		g_sh.running = 1;
+		ft_dprintf(2, "%s: %s: too many arguments\n", g_sh.name, args[0]);
+		return (STATUS_FAILURE);
+	}
+	return (get_status((char *)args[1], args));
 }
