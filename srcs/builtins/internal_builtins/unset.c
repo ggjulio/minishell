@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/11 18:16:52 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/11 21:28:15 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	is_valid_identifier(const char *arg)
 {
 	int i;
 
-	if (arg[0] == '\0' || ft_isdigit(arg[0]))
+	if (arg[0] == '\0' || ft_isdigit(arg[0]) || ft_strchr(arg, '='))
 		return (0);
 	i = 0;
 	while (arg[i])
