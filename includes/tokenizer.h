@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:38 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/11 18:56:45 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/11 19:19:55 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define TOKEN_SPACE " \f\n\r\t\v"
 # define TOKEN_VARIABLE "$"
 # define TOKEN_ESCAPE "\\"
-# define TOKEN_SEPARATOR ",[]"
+# define TOKEN_SEPARATOR ","
 # define TOKEN_END ";"
 
 # define DGREAT ">>"

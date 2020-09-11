@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:12 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/11 18:57:18 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/11 19:28:52 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,17 @@ void	do_escape(t_list **begin_tokens)
 		next = iterator->next->content;
 		if (actual->type == Token_escape)
 		{
-			if (!in_simple_quote(*begin_tokens, iterator))
+			if (in_simple_quote(*begin_tokens, iterator) ||
+					(in_double_quote(*begin_tokens, iterator)
+						&& !ft_in_charset(next->str[0], "$\"\\")))
+				actual->type = Token_literal;
+			else
 			{
 				next->type = Token_literal;
 				elem_to_del = ft_lstpop_elem(begin_tokens, iterator);
 				iterator = elem_to_del->next;
 				ft_lstdelone(elem_to_del, lst_del_token);
 			}
-			else
-				actual->type = Token_literal;
 		}
 		else
 			iterator = iterator->next;
