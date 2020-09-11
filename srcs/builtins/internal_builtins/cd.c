@@ -6,13 +6,13 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/11 01:11:00 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/11 02:14:14 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		cd_no_args(const char **args, char *var)
+static int		cd_no_args(const char **args, char *var)
 {
 	if (!get_environment_variable(var))
 	{
@@ -32,7 +32,7 @@ int		cd_no_args(const char **args, char *var)
 	return (STATUS_FAILURE);
 }
 
-int		too_many_arguments(const char **args)
+static int		too_many_arguments(const char **args)
 {
 	if (ft_array_len((char **)args) <= 2)
 		return (STATUS_SUCCESS);
@@ -40,7 +40,31 @@ int		too_many_arguments(const char **args)
 	return (STATUS_FAILURE);
 }
 
-int		cd(const char **args)
+static int		has_only_slashes(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+		if (str[i++] != '/')
+			return (0);
+	return (1);
+}
+
+static void		do_cd(char *path)
+{
+	set_environment_variable_value("OLDPWD", g_sh.cwd);
+	getcwd(g_sh.cwd, sizeof(g_sh.cwd));
+	if ((!strncmp(path, "//", 2) && !has_only_slashes(path))
+		|| !strcmp(path, "//"))
+	{
+		ft_memmove(g_sh.cwd + 1, g_sh.cwd, ft_strlen(g_sh.cwd) + 1);
+		g_sh.cwd[0] = '/';
+	}
+	set_environment_variable_value("PWD", g_sh.cwd);
+}
+
+int				cd(const char **args)
 {
 	if (too_many_arguments(args) == STATUS_FAILURE)
 		return (STATUS_FAILURE);
@@ -61,8 +85,6 @@ int		cd(const char **args)
 		error("cd", args[1]);
 		return (STATUS_FAILURE);
 	}
-	set_environment_variable_value("OLDPWD", g_sh.cwd);
-	getcwd(g_sh.cwd, sizeof(g_sh.cwd));
-	set_environment_variable_value("PWD", g_sh.cwd);
+	do_cd((char *)args[1]);
 	return (STATUS_SUCCESS);
 }
