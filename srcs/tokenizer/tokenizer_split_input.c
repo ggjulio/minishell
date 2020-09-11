@@ -6,60 +6,36 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 18:09:07 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/11 18:57:55 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/11 22:49:33 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void		split_do_escape(t_list **begin_tokens)
+static void		concatenate_commands_keep_spaces(t_list **tokens)
 {
 	t_list	*iterator;
 	t_token	*actual;
 	t_token	*next;
 
-	iterator = *begin_tokens;
+	iterator = *tokens;
+	if (iterator == NULL)
+		return ;
 	while (iterator && iterator->next)
 	{
 		actual = iterator->content;
 		next = iterator->next->content;
-		if (actual->type == Token_escape)
+		if (actual->type != Token_end
+			&& actual->type != Token_space
+			&& next->type != Token_end
+			&& next->type != Token_space)
 		{
-			if (!in_simple_quote(*begin_tokens, iterator))
-				next->type = Token_literal;
-			actual->type = Token_literal;
+			iterator->content = merge_tokens(actual, next, actual->type);
+			ft_lstdelone(ft_lstpop_elem(tokens, iterator->next), NULL);
 		}
-		iterator = iterator->next;
+		else
+			iterator = iterator->next;
 	}
-}
-
-static void		split_manage_quotes(t_list **tokens)
-{
-	t_list	*iterator;
-	t_token	*actual;
-	int		has_open_quote;
-	char	quote_type;
-
-	iterator = *tokens;
-	if (iterator == NULL)
-		return ;
-	has_open_quote = 0;
-	while (iterator)
-	{
-		actual = iterator->content;
-		if (actual->type == Token_quote && !has_open_quote)
-		{
-			has_open_quote = 1;
-			quote_type = actual->str[0];
-		}
-		else if (actual->type == Token_quote && quote_type == actual->str[0])
-			has_open_quote = 0;
-		else if (has_open_quote)
-			actual->type = Token_literal;
-		iterator = iterator->next;
-	}
-	// if (has_open_quote)
-	// 	syntax_error((char[2]){quote_type, '\0'});
 }
 
 static void		concatenate_commands(t_list **tokens)
@@ -85,8 +61,31 @@ static void		concatenate_commands(t_list **tokens)
 	}
 }
 
+static void		validation_end(t_list *begin_list)
+{
+	t_list	*iterator;
+	t_token	*actual_tok;
+	int		last_was_end;
 
-char	**split_input(char *input)
+	last_was_end = 1;
+	iterator = begin_list;
+	while (iterator)
+	{
+		actual_tok = iterator->content;
+		if (actual_tok->type == Token_end)
+		{
+			if (last_was_end)
+				return (syntax_error(";"));
+			else
+				last_was_end = 1;
+		}
+		else if (actual_tok->type != Token_space)
+			last_was_end = 0;
+		iterator = iterator->next;
+	}
+}
+
+char			**split_input(char *input)
 {
 	char	**result;
 	t_list	*pipelines;
@@ -94,17 +93,15 @@ char	**split_input(char *input)
 	pipelines = assign_token_type_to_each_char(input);
 	split_do_escape(&pipelines);
 	split_manage_quotes(&pipelines);
-	// print_lst_tokens(pipelines);
+	concatenate_commands_keep_spaces(&pipelines);
+	validation_end(pipelines);
+	if (has_syntax_error(-1))
+	{
+		ft_lstclear(&pipelines, lst_del_token);
+		return (NULL);
+	}
 	concatenate_commands(&pipelines);
-	// ft_printf("################\n");
-	// print_lst_tokens(pipelines);
 	remove_tokens_type(&pipelines, Token_end);
-	// if (has_syntax_error(-1))
-	// {
-		
-	// 	ft_lstclear(&pipelines, lst_del_token);
-	// 	return (NULL);
-	// }
 	result = lst_token_to_string_array(pipelines);
 	ft_lstclear(&pipelines, lst_del_token);
 	return (result);

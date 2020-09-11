@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:38 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/11 19:19:55 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/11 22:50:32 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,12 @@ void			redirection_join_arg(t_list **begin_tokens);
 ** tokenizer_split_input.c
 */
 char			**split_input(char *input);
+
+/*
+** tokenizer_split_input_util.c
+*/
+void			split_do_escape(t_list **begin_tokens);
+void			split_manage_quotes(t_list **tokens);
 
 /*
 **	token.c

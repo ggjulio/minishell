@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 13:31:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/10 21:54:55 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/11 22:19:06 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,11 @@ void		run_shell(void)
 		if (get_next_line(STDIN_FILENO, &input) != 0)
 		{
 			commands = split_input(input);
-			run_shell_commands(commands);
-			ft_free_array(commands);
+			if (commands != NULL)
+			{
+				run_shell_commands(commands);
+				ft_free_array(commands);
+			}
 		}
 		else
 			g_sh.running = 0;

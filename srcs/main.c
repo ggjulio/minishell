@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 13:32:17 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/11 01:21:44 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/11 22:20:43 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@ static void	execute_string(char *input)
 	char	**commands;
 
 	commands = split_input(input);
-	run_shell_commands(commands);
-	ft_free_array(commands);
+	if (commands != NULL)
+	{
+		run_shell_commands(commands);
+		ft_free_array(commands);
+	}
 }
 
 int			main(int ac, const char **av, t_environment envp)
