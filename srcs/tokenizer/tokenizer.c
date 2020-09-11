@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:12 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/10 17:58:51 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/11 14:33:49 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,21 @@ void	concatenate_literals(t_list **tokens)
 	}
 }
 
+void	separator_to_literal(t_list **tokens)
+{
+	t_list	*iterator;
+	t_token	*actual;
+
+	iterator = *tokens;
+	while (iterator)
+	{
+		actual = iterator->content;
+		if (actual->type == Token_separator)
+			actual->type = Token_literal;
+		iterator = iterator->next;
+	}
+}
+
 t_list	*tokenize(char *input)
 {
 	t_list	*result;
@@ -94,6 +109,7 @@ t_list	*tokenize(char *input)
 	manage_quotes(&result);
 	manage_empty_quotes(&result);
 	remove_tokens_type(&result, Token_quote);
+	separator_to_literal(&result);
 	concatenate_literals(&result);
 	remove_tokens_type(&result, Token_space);
 	redirection_detect_operator(&result);
