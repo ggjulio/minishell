@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/09 02:51:12 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/11 18:16:52 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	is_valid_identifier(const char *arg)
 	i = 0;
 	while (arg[i])
 	{
-		if (ft_in_charset(arg[i], " \\\"'$&|;="))
+		if (ft_in_charset(arg[i], NOT_VALID_CHARS_IN_VAR))
 			return (0);
 		i++;
 	}

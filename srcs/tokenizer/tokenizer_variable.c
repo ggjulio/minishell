@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 22:52:47 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/10 18:51:14 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/11 18:20:11 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void		concatenate_variables(t_list **tokens)
 	{
 		actual = iterator->content;
 		next = iterator->next->content;
-		if (actual->type == Token_variable && next->type == Token_literal)
+		if (actual->type == Token_variable && next->type == Token_literal
+			&& !ft_in_charset(next->str[0], NOT_VALID_CHARS_IN_VAR))
 		{
 			iterator->content = merge_tokens(actual, next, actual->type);
 			ft_lstdelone(ft_lstpop_elem(tokens, iterator->next), NULL);

@@ -6,12 +6,14 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 14:41:28 by hwinston          #+#    #+#             */
-/*   Updated: 2020/08/24 18:40:55 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/11 18:16:39 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
+
+# define NOT_VALID_CHARS_IN_VAR " \\\"'$@!&|;"
 
 typedef int		(*t_builtin_ptr)(const char **args);
 
