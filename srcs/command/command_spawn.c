@@ -6,13 +6,13 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:45:43 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/09 23:23:09 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/12 22:51:29 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int				run_command(t_command *command)
+static int		run_command(t_command *command)
 {
 	t_builtin_ptr	builtin;
 
@@ -31,78 +31,63 @@ int				run_command(t_command *command)
 	return (0);
 }
 
-int				fork_command(t_command *pipeline, int *pfd, int in)
+static void		redirect_command(t_command *command, int in, int out)
 {
-	pid_t			pid;
-
-	pipe(pfd);
-	if ((pid = fork()) == -1)
-		exit(EXIT_FAILURE);
-	else if (pid == 0)
+	if (command->redirections)
+		check_redirections(command->redirections, in, out);
+	else
 	{
 		redirect_pipe_end(in, STDIN_FILENO);
-		if (pipeline->pipe)
-			redirect_pipe_end(pfd[1], STDOUT_FILENO);
-		close(pfd[0]);
-		run_command(pipeline);
+		redirect_pipe_end(out, STDOUT_FILENO);
 	}
-	close(pfd[1]);
-	return (0);
+	run_command(command);
 }
 
-static void		exec_internal_builtin(t_builtin_ptr to_exec, char **args)
+static void		exec_last_commmand(t_command *command, int in, int out)
 {
-	if (to_exec != exit_builtin)
-		redirect_parent_to_null_on();
-	if (to_exec == exit_builtin)
-		g_sh.status = (*to_exec)((const char **)args);
-	else
-		(*to_exec)((const char **)args);
-	if (to_exec != exit_builtin)
-		redirect_parent_to_null_off();
+	pid_t	pid;
+
+	if ((pid = fork()) == -1)
+		exit(EXIT_FAILURE);
+	if (pid == 0)
+		redirect_command(command, in, out);
 }
 
-static int		run_internal_builtins(t_command *pipeline)
+static void		fork_command(t_command *command, int in, int *pfd)
 {
-	t_builtin_ptr	builtin;
-	t_command		*first;
+	pid_t	pid;
 
-	first = pipeline;
-	while (pipeline)
+	if ((pid = fork()) == -1)
+		exit(EXIT_FAILURE);
+	if (pid == 0)
 	{
-		if ((builtin = get_internal_builtin_ptr(pipeline->args[0])) != NULL)
-			if (!pipeline->pipe && ((builtin == exit_builtin
-			&& first == pipeline) || builtin != exit_builtin))
-				exec_internal_builtin(builtin, pipeline->args);
-		pipeline = pipeline->pipe;
+		close(pfd[R_END]);
+		if (command->pipe)
+			redirect_command(command, in, pfd[W_END]);
+		else
+			redirect_command(command, in, STDOUT_FILENO);
 	}
-	return (0);
 }
 
 int				spawn_pipeline(t_command *pipeline)
 {
-	t_builtin_ptr		builtin;
-	int					pfd[2];
-	int					in;
 	const t_command		*first = pipeline;
+	int					pfd[2];
+	int					tmp_fd;
 
-	in = 0;
+	tmp_fd = STDIN_FILENO;
 	while (pipeline)
 	{
-		builtin = get_internal_builtin_ptr(pipeline->args[0]);
-		if (pipeline->redirections)
-		{
-			redirection_hub(pipeline, pipeline->redirections, pfd, in);
-			in = STDOUT_FILENO;
-		}
-		else if (builtin != exit_builtin)
-		{
-			fork_command(pipeline, pfd, in);
-			in = pfd[0];
-		}
+		pipe(pfd);
+		fork_command(pipeline, tmp_fd, pfd);
+		close(pfd[W_END]);
+		if (tmp_fd != 0)
+			close(tmp_fd);
+		tmp_fd = pfd[R_END];
 		pipeline = pipeline->pipe;
 	}
 	set_signal();
+	close(tmp_fd);
 	run_internal_builtins((t_command *)first);
 	return (0);
 }

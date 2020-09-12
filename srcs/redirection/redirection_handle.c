@@ -6,11 +6,20 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/01 01:38:36 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/09 23:25:47 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/12 22:53:36 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void			redirect_pipe_end(int old, int new)
+{
+	if (old != new)
+	{
+		dup2(old, new);
+		close(old);
+	}
+}
 
 static int		open_file(t_redirection *r)
 {
@@ -28,7 +37,7 @@ static int		open_file(t_redirection *r)
 	return (fd);
 }
 
-static int		get_fdin_pos(t_list *r)
+static int		get_fdin_position(t_list *r)
 {
 	t_redirection	*content;
 	int				i;
@@ -49,7 +58,7 @@ static int		get_fdin_pos(t_list *r)
 	return (i);
 }
 
-static int		get_fdout_pos(t_list *r)
+static int		get_fdout_position(t_list *r)
 {
 	t_redirection	*content;
 	int				i;
@@ -77,47 +86,28 @@ static int		get_fdout_pos(t_list *r)
 	return (i + j);
 }
 
-static int		fork_redirection(t_command *command, int *pfd)
+void			check_redirections(t_list *redirections, int in, int out)
 {
-	int pid;
-
-	if ((pid = fork()) == -1)
-		return (-1);
-	if (pid == 0)
-	{
-		redirect_pipe_end(pfd[0], STDIN_FILENO);
-		redirect_pipe_end(pfd[1], STDOUT_FILENO);
-		run_command(command);
-		exit(EXIT_FAILURE);
-	}
-	waitpid(pid, &g_sh.status, 0);
-	return (0);
-}
-
-int				redirection_hub(t_command *cmd, t_list *r, int *pfd, int in)
-{
-	int		fd[ft_lstsize(r)];
-	int		fdpos[2];
+	int		fd[ft_lstsize(redirections)];
+	int		fd_pos[2];
 	int		i;
 
-	if ((fdpos[0] = get_fdin_pos(r)) == -1)
-		pfd[0] = in;
-	if ((fdpos[1] = get_fdout_pos(r)) == -1)
-		pfd[1] = STDOUT_FILENO;
+	if ((fd_pos[W_END] = get_fdin_position(redirections)) == -1)
+		redirect_pipe_end(in, STDIN_FILENO);
+	if ((fd_pos[R_END] = get_fdout_position(redirections)) == -1)
+		redirect_pipe_end(out, STDOUT_FILENO);
 	i = 0;
-	while (r)
+	while (redirections)
 	{
-		if ((fd[i] = open_file(r->content)) == -1)
-			return (-1);
-		if (i != fdpos[0] && i != fdpos[1])
+		if ((fd[i] = open_file(redirections->content)) == -1)
+			return ;
+		if (i != fd_pos[R_END] && i != fd_pos[W_END])
 			close(fd[i]);
-		else if (i == fdpos[0])
-			pfd[0] = fd[i];
-		else if (i == fdpos[1])
-			pfd[1] = fd[i];
-		r = r->next;
+		else if (i == fd_pos[W_END])
+			redirect_pipe_end(fd[i], in);
+		else if (i == fd_pos[R_END])
+			redirect_pipe_end(fd[i], out);
+		redirections = redirections->next;
 		i++;
 	}
-	fork_redirection(cmd, pfd);
-	return (0);
 }
