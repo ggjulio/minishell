@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:45:43 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/12 22:51:29 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/12 23:13:25 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,6 @@ static void		redirect_command(t_command *command, int in, int out)
 		redirect_pipe_end(out, STDOUT_FILENO);
 	}
 	run_command(command);
-}
-
-static void		exec_last_commmand(t_command *command, int in, int out)
-{
-	pid_t	pid;
-
-	if ((pid = fork()) == -1)
-		exit(EXIT_FAILURE);
-	if (pid == 0)
-		redirect_command(command, in, out);
 }
 
 static void		fork_command(t_command *command, int in, int *pfd)

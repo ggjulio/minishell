@@ -6,13 +6,13 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 22:47:21 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/12 22:52:55 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/12 23:12:25 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		exec_internal_builtin(t_builtin_ptr to_exec, char **args)
+static void		exec_internal_builtin(t_builtin_ptr to_exec, char **args)
 {
 	if (to_exec != exit_builtin)
 		redirect_parent_to_null_on();
@@ -24,7 +24,7 @@ void		exec_internal_builtin(t_builtin_ptr to_exec, char **args)
 		redirect_parent_to_null_off();
 }
 
-int			run_internal_builtins(t_command *pipeline)
+int				run_internal_builtins(t_command *pipeline)
 {
 	t_builtin_ptr	builtin;
 	t_command		*first;

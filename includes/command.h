@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:37:23 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/12 22:54:27 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/12 23:12:48 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int				spawn_pipeline(t_command *command);
 /*
 ** command_builtins.c
 */
-void			exec_internal_builtin(t_builtin_ptr to_exec, char **args);
 int				run_internal_builtins(t_command *pipeline);
 
 #endif

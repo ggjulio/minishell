@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 14:41:28 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/11 18:16:39 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/12 23:11:06 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
+
+# include "minishell.h"
 
 # define NOT_VALID_CHARS_IN_VAR " \\\"'$@!&|;"
 
