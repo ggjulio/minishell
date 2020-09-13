@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/01 01:38:36 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/12 22:53:36 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/13 11:52:38 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static int		get_fdout_position(t_list *r)
 	return (i + j);
 }
 
-void			check_redirections(t_list *redirections, int in, int out)
+int				check_redirections(t_list *redirections, int in, int out)
 {
 	int		fd[ft_lstsize(redirections)];
 	int		fd_pos[2];
@@ -100,14 +100,15 @@ void			check_redirections(t_list *redirections, int in, int out)
 	while (redirections)
 	{
 		if ((fd[i] = open_file(redirections->content)) == -1)
-			return ;
+			return (0);
 		if (i != fd_pos[R_END] && i != fd_pos[W_END])
 			close(fd[i]);
 		else if (i == fd_pos[W_END])
-			redirect_pipe_end(fd[i], in);
+			redirect_pipe_end(fd[i], STDIN_FILENO);
 		else if (i == fd_pos[R_END])
 			redirect_pipe_end(fd[i], out);
 		redirections = redirections->next;
 		i++;
 	}
+	return (1);
 }
