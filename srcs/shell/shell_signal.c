@@ -17,17 +17,10 @@ void	sigint_handler(int sig)
 	(void)sig;
 	while (wait(&g_sh.status) > 0)
 		;
-	if (g_sh.status == 2)
-	{
-		g_sh.status = STATUS_CTRL_C;
-		ft_printf("\n");
-	}
-	else
-	{
-		g_sh.status = STATUS_FAILURE;
-		ft_printf("\n");
+	ft_printf("\n");
+	if (g_sh.status != 2)
 		prompt_name();
-	}
+	g_sh.status = STATUS_CTRL_C;
 }
 
 void	sigquit_handler(int sig)
@@ -47,8 +40,8 @@ int		set_signal(void)
 
 	while (wait(&status) > 0)
 		;
-	if (g_sh.status != STATUS_CTRL_C
-	&& g_sh.status != STATUS_CTRL_BACKSLASH)
-		g_sh.status = status % 255;
+	g_sh.status = status % 255;
+	if (g_sh.status == 145)
+		g_sh.status = 130;
 	return (0);
 }
