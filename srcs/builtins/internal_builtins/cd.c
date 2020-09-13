@@ -53,8 +53,7 @@ static int		cd_no_args(const char **args, char *var)
 	}
 	if (ft_strcmp(var, "OLDPWD") == 0)
 		ft_printf("%s\n", get_environment_variable_value(var));
-	do_cd(var);
-	return (STATUS_FAILURE);
+	return (STATUS_SUCCESS);
 }
 
 static int		too_many_arguments(const char **args)
