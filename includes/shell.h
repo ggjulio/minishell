@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 17:54:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/11 02:10:22 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/13 21:13:15 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@
 ** https://tldp.org/LDP/abs/html/exitcodes.html
 ** https://shapeshed.com/unix-exit-codes/
 */
+
+/*
+**  https://www.thegeekstuff.com/2010/10/linux-error-codes/
+*/
+
 # define STATUS_SUCCESS				0
 # define STATUS_FAILURE 			1
 # define STATUS_FAILURE_BUILTIN 	2
