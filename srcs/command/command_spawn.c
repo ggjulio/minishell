@@ -6,7 +6,7 @@
 /*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:45:43 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/12 23:13:25 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/13 08:02:45 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ static void		fork_command(t_command *command, int in, int *pfd)
 
 int				spawn_pipeline(t_command *pipeline)
 {
+	t_builtin_ptr		builtin;
 	const t_command		*first = pipeline;
 	int					pfd[2];
 	int					tmp_fd;
@@ -68,8 +69,10 @@ int				spawn_pipeline(t_command *pipeline)
 	tmp_fd = STDIN_FILENO;
 	while (pipeline)
 	{
+		builtin = get_internal_builtin_ptr(pipeline->args[0]);
 		pipe(pfd);
-		fork_command(pipeline, tmp_fd, pfd);
+		if (builtin != exit_builtin)
+			fork_command(pipeline, tmp_fd, pfd);
 		close(pfd[W_END]);
 		if (tmp_fd != 0)
 			close(tmp_fd);
