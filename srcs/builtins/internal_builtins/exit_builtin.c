@@ -3,27 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   exit_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/11 04:08:45 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/13 17:53:11 by hwinston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// static int		is_number(const char *s)
-// {
-// 	int i;
+static int		is_valid(const char *s)
+{
+	int						i;
+	int						sign;
+	unsigned long int	res;
 
-// 	if (*s != '-' && *s != '+' && !ft_isdigit(*s) && !ft_isspace(*s))
-// 		return (0);
-// 	i = 0;
-// 	while (s[++i])
-// 		if (!ft_isdigit(s[i]) && !ft_isspace(s[i]))
-// 			return (0);
-// 	return (1);
-// }
+	i = 0;
+	while (ft_isspace(s[i]))
+		i++;
+	sign = 1;
+	if (s[i] == '+' || s[i] == '-')
+		if (s[i++] == '-')
+			sign = -1;
+	while (ft_isdigit(s[i]))
+		res = res * 10 + s[i++] - '0';
+	if (sign == 1 && res > (unsigned long int)LONG_MAX)
+		return (0);
+	if (sign == -1 && res > (unsigned long int)LONG_MAX + 1)
+		return (0);
+	return (1);
+}
 
 static int		is_number(const char *s)
 {
@@ -38,17 +47,9 @@ static int		is_number(const char *s)
 		i++;
 	if (s[i] != '\0')
 		return (0);
+	if (!is_valid(s))
+		return (0);
 	return (1);
-}
-
-static int		get_status(char *str, const char **args)
-{
-	(void)args;
-	if (is_number(str))
-	{
-		return (ft_atoi(str));
-	}
-	return (STATUS_FAILURE_BUILTIN);
 }
 
 int				exit_builtin(const char **args)
@@ -68,5 +69,5 @@ int				exit_builtin(const char **args)
 		ft_dprintf(2, "%s: %s: too many arguments\n", g_sh.name, args[0]);
 		return (STATUS_FAILURE);
 	}
-	return (get_status((char *)args[1], args));
+	return (ft_atoi(args[1]));
 }
