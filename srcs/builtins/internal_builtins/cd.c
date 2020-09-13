@@ -12,34 +12,6 @@
 
 #include "minishell.h"
 
-static int		cd_no_args(const char **args, char *var)
-{
-	if (!get_environment_variable(var))
-	{
-		ft_dprintf(2, "%s: %s: %s not set\n", g_sh.name, args[0], var);
-		return (STATUS_FAILURE);
-	}
-	if (chdir(get_environment_variable_value(var)) == -1)
-	{
-		if (get_environment_variable(var)
-			&& get_environment_variable_value(var)[0] == '\0')
-			return (STATUS_SUCCESS);
-		error("cd", get_environment_variable_value(var));
-		return (STATUS_FAILURE);
-	}
-	if (ft_strcmp(var, "OLDPWD") == 0)
-		ft_printf("%s\n", get_environment_variable_value(var));
-	return (STATUS_FAILURE);
-}
-
-static int		too_many_arguments(const char **args)
-{
-	if (ft_array_len((char **)args) <= 2)
-		return (STATUS_SUCCESS);
-	ft_dprintf(STDERR_FILENO, "%s: cd: too many arguments\n", g_sh.name);
-	return (STATUS_FAILURE);
-}
-
 static int		has_only_slashes(char *str)
 {
 	int i;
@@ -62,6 +34,35 @@ static void		do_cd(char *path)
 		g_sh.cwd[0] = '/';
 	}
 	set_environment_variable_value("PWD", g_sh.cwd);
+}
+
+static int		cd_no_args(const char **args, char *var)
+{
+	if (!get_environment_variable(var))
+	{
+		ft_dprintf(2, "%s: %s: %s not set\n", g_sh.name, args[0], var);
+		return (STATUS_FAILURE);
+	}
+	if (chdir(get_environment_variable_value(var)) == -1)
+	{
+		if (get_environment_variable(var)
+			&& get_environment_variable_value(var)[0] == '\0')
+			return (STATUS_SUCCESS);
+		error("cd", get_environment_variable_value(var));
+		return (STATUS_FAILURE);
+	}
+	if (ft_strcmp(var, "OLDPWD") == 0)
+		ft_printf("%s\n", get_environment_variable_value(var));
+	do_cd(var);
+	return (STATUS_FAILURE);
+}
+
+static int		too_many_arguments(const char **args)
+{
+	if (ft_array_len((char **)args) <= 2)
+		return (STATUS_SUCCESS);
+	ft_dprintf(STDERR_FILENO, "%s: cd: too many arguments\n", g_sh.name);
+	return (STATUS_FAILURE);
 }
 
 int				cd(const char **args)
