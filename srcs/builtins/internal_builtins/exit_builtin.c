@@ -25,6 +25,7 @@ static int		is_valid(const char *s)
 	if (s[i] == '+' || s[i] == '-')
 		if (s[i++] == '-')
 			sign = -1;
+	res = 0;
 	while (ft_isdigit(s[i]))
 		res = res * 10 + s[i++] - '0';
 	if (sign == 1 && res > (unsigned long int)LONG_MAX)
