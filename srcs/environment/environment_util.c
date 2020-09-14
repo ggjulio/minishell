@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 15:10:55 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/02 02:24:37 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/14 17:06:54 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,16 @@ const char	*get_environment_variable(char *name)
 
 const char	*get_environment_variable_value(char *name)
 {
-	const char *variable;
+	const char	*variable;
+	char		*value;
 
 	variable = get_environment_variable(name);
 	if (!variable)
 		return (NULL);
-	return (ft_strchr(variable, '=') + 1);
+	value = ft_strchr(variable, '=');
+	if (*value == '=')
+		return (value + 1);
+	return (NULL);
 }
 
 void		set_environment_variable_value(char *name, char *value)

@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 17:54:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/13 21:13:15 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/14 18:08:37 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@
 # define STATUS_CTRL_BACKSLASH		131
 
 # ifdef DARWIN
-#  define STATUS_FAILURE_PARSER		258
-# else
 #  define STATUS_FAILURE_PARSER		2
+# else
+#  define STATUS_FAILURE_PARSER		1
 # endif
 
 typedef struct		s_shell
