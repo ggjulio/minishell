@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/16 16:31:28 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/16 23:43:44 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static void		do_cd(char *path)
 	set_environment_variable_value("OLDPWD", g_sh.cwd);
 	free(g_sh.cwd);
 	g_sh.cwd = getcwd(NULL, 0);
-	if ((!strncmp(path, "//", 2) && !has_only_slashes(path))
-		|| !strcmp(path, "//"))
+	if (path != NULL && ((!ft_strncmp(path, "//", 2) && !has_only_slashes(path))
+		|| !ft_strcmp(path, "//")))
 	{
 		ft_asprintf(&tmp, "/%s", g_sh.cwd);
 		free(g_sh.cwd);

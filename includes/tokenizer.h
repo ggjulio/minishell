@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:38 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/16 21:46:05 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/16 23:30:00 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 # define TOKEN_OPERATOR "<>|"
 # define TOKEN_QUOTE "'\""
-# define TOKEN_SPACE " "
+# define TOKEN_SPACE " \t"
 # define TOKEN_VARIABLE "$"
 # define TOKEN_ESCAPE "\\"
 # define TOKEN_SEPARATOR ",[]{}"
