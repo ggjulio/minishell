@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:38 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/16 17:19:11 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/16 21:46:05 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 # define TOKEN_OPERATOR "<>|"
 # define TOKEN_QUOTE "'\""
-# define TOKEN_SPACE " \f\n\r\t\v"
+# define TOKEN_SPACE " "
 # define TOKEN_VARIABLE "$"
 # define TOKEN_ESCAPE "\\"
 # define TOKEN_SEPARATOR ",[]{}"
@@ -54,6 +54,7 @@ typedef struct	s_token
 **	tokenizer.c
 */
 t_list			*tokenize(char *input);
+t_list			*assign_token_type_to_each_char(char *input);
 
 /*
 **	tokenizer_util.c
@@ -61,10 +62,14 @@ t_list			*tokenize(char *input);
 t_token_type	get_token_type(char c);
 char			**lst_string_to_string_array(t_list *lst_strings);
 char			**lst_token_to_string_array(t_list *lst_strings);
-int				in_simple_quote(t_list *begin_tokens, t_list *to_find);
-int				in_double_quote(t_list *begin_tokens, t_list *to_find);
 void			remove_tokens_type(
 					t_list **tokens, t_token_type type_to_remove);
+
+/*
+**	tokenizer_util_quote.c
+*/
+int				in_simple_quote(t_list *begin_tokens, t_list *to_find);
+int				in_double_quote(t_list *begin_tokens, t_list *to_find);
 
 /*
 **	tokenizer_variable.c
@@ -123,9 +128,5 @@ t_token			*merge_tokens(t_token *t1, t_token *t2, t_token_type type);
 void			print_lst_tokens(t_list *lst);
 void			print_token(void *token);
 int				cmp_token_type(t_token *t1, t_token *t2);
-
-t_list			*assign_token_type_to_each_char(char *input);
-void				do_escape(t_list **begin_tokens);
-void				manage_quotes(t_list **tokens);
 
 #endif

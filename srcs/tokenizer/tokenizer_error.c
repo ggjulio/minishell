@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/02 18:19:46 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/14 18:08:07 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/16 21:19:10 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 
 void	syntax_error(char *op)
 {
-	// if (op[0] == '|' || op[0] == ';')
-	// 	g_sh.status = STATUS_FAILURE;
-	// else
-		g_sh.status = STATUS_FAILURE_PARSER;
+	g_sh.status = STATUS_FAILURE_PARSER;
 	if (has_syntax_error(1))
 		return ;
 	ft_dprintf(STDERR_FILENO,
