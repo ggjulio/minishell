@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 17:52:21 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/09 02:30:53 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/16 16:19:05 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_shell	create_shell(const char *name, t_environment envp)
 	result.running = 42;
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, sigquit_handler);
-	getcwd(result.cwd, sizeof(result.cwd));
+	result.cwd = getcwd(NULL, 0);
 	return (result);
 }
 
@@ -42,6 +42,7 @@ void	destroy_shell(t_shell to_destroy)
 {
 	free_environment(to_destroy.env);
 	free(to_destroy.name);
+	free(to_destroy.cwd);
 }
 
 void	free_shell(t_shell *to_free)

@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:40:40 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/11 02:14:14 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/16 16:31:28 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,17 @@ static int		has_only_slashes(char *str)
 
 static void		do_cd(char *path)
 {
+	char	*tmp;
+
 	set_environment_variable_value("OLDPWD", g_sh.cwd);
-	getcwd(g_sh.cwd, sizeof(g_sh.cwd));
+	free(g_sh.cwd);
+	g_sh.cwd = getcwd(NULL, 0);
 	if ((!strncmp(path, "//", 2) && !has_only_slashes(path))
 		|| !strcmp(path, "//"))
 	{
-		ft_memmove(g_sh.cwd + 1, g_sh.cwd, ft_strlen(g_sh.cwd) + 1);
-		g_sh.cwd[0] = '/';
+		ft_asprintf(&tmp, "/%s", g_sh.cwd);
+		free(g_sh.cwd);
+		g_sh.cwd = tmp;
 	}
 	set_environment_variable_value("PWD", g_sh.cwd);
 }
