@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/31 15:00:10 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/13 11:50:01 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/17 02:40:31 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 
 # include "minishell.h"
 
-typedef enum	e_redirection_type
+typedef enum		e_redirection_type
 {
 	Redirection_None,
 	Redirection_great,
 	Redirection_dgreat,
 	Redirection_less,
-}				t_redirection_type;
+}					t_redirection_type;
 
-typedef struct	s_redirection
+typedef struct		s_redirection
 {
 	char				*str;
 	t_redirection_type	type;
-}				t_redirection;
+}					t_redirection;
 
 /*
 ** redirection.c

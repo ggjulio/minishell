@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 17:35:53 by juligonz          #+#    #+#             */
-/*   Updated: 2020/08/22 16:03:02 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/17 02:40:02 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef const char**	t_environment;
 t_environment			malloc_environment(t_environment envp);
 void					free_environment(t_environment to_free);
 void					add_environment_variable(char *variable);
-void			        remove_environment_variable(char *name);
+void					remove_environment_variable(char *name);
 size_t					environment_len(t_environment envp);
 
 /*
