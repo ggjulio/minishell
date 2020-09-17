@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_spawn.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:45:43 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/13 12:05:00 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/17 02:05:42 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,18 @@ static int		run_command(t_command *command)
 		exit(EXIT_SUCCESS);
 	else if (ft_strchr(command->args[0], '/') && !is_executable(command))
 		exit(g_sh.status);
-	else if (command->bin_path != NULL
-	&& !execve(command->bin_path, command->args, (char **)g_sh.env))
+	else if (command->bin_path != NULL)
+	{
+		errno = 0;
+		execve(command->bin_path, command->args, (char **)g_sh.env);
+		if (errno == EACCES || errno == ENOEXEC)
+		{
+			ft_dprintf(STDERR_FILENO, "%s: %s: ", g_sh.name, command->bin_path);
+			ft_dprintf(STDERR_FILENO, "%s\n", strerror(EACCES));
+			exit(STATUS_NOT_EXECUTABLE);
+		}
 		exit(EXIT_FAILURE);
+	}
 	exit(g_sh.status);
 	return (0);
 }

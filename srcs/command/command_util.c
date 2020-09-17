@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_util.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:45:43 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/12 22:38:06 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/17 02:28:49 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,11 @@ int				is_executable(t_command *command)
 		free(stats);
 		return (permission_error(command->args[0], 1));
 	}
-	else if ((stats->st_mode & S_IXUSR) == 0)
-	{
-		free(stats);
-		return (permission_error(command->args[0], 2));
-	}
+	// else if ((stats->st_mode & S_IRUSR) == 0)
+	// {
+	// 	free(stats);
+	// 	return (permission_error(command->args[0], 2));
+	// }
 	free(stats);
 	return (1);
 }
