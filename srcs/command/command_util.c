@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:45:43 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/17 02:28:49 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/17 18:04:40 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,26 +70,16 @@ void			print_command(t_command *to_print)
 
 int				is_executable(t_command *command)
 {
-	struct stat		*stats;
+	struct stat		stats;
 
-	if (!(stats = malloc(sizeof(struct stat))))
-		return (0);
-	if (stat(command->args[0], stats) == -1)
+	if (stat(command->args[0], &stats) == -1)
 	{
 		error(command->args[0], "");
-		free(stats);
 		return (0);
 	}
-	if (S_ISREG(stats->st_mode) == 0)
-	{
-		free(stats);
+	if (S_ISREG(stats.st_mode) == 0)
 		return (permission_error(command->args[0], 1));
-	}
-	else if ((stats->st_mode & S_IRUSR) == 0)
-	{
-		free(stats);
+	else if ((stats.st_mode & S_IXUSR) == 0)
 		return (permission_error(command->args[0], 2));
-	}
-	free(stats);
 	return (1);
 }
