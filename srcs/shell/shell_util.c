@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 13:31:31 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/11 22:19:06 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/17 16:40:00 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,16 @@ void		run_shell_commands(char **commands)
 
 void		run_shell(void)
 {
-	char		*input;
-	char		**commands;
+	char	*input;
+	char	**commands;
+	char	show_prompt;
 
 	input = NULL;
+	show_prompt = 1;
 	while (g_sh.running)
 	{
-		prompt_name();
+		if (show_prompt && !(show_prompt = 0))
+			prompt_name();
 		if (get_next_line(STDIN_FILENO, &input) != 0)
 		{
 			commands = split_input(input);
@@ -51,8 +54,9 @@ void		run_shell(void)
 				run_shell_commands(commands);
 				ft_free_array(commands);
 			}
+			show_prompt = 1;
 		}
-		else
+		else if (ft_strlen(input) < 1)
 			g_sh.running = 0;
 		free(input);
 	}
