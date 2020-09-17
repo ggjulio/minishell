@@ -57,7 +57,8 @@ OBJ_DIR = obj
 SRCS_DIR = $(shell find $(SRC_DIR) -type d)
 LIB_DIR = $(shell find ./lib -maxdepth 1 -type d)
 
-INC = minishell.h shell.h environment.h tokenizer.h builtins.h
+INC = minishell.h shell.h redirection.h environment.h tokenizer.h builtins.h
+INC+= error.h command.h 
 vpath %.h $(INC_DIR)
 
 # Minishell
@@ -97,13 +98,13 @@ else
 	CFLAGS += -D LINUX
 endif
 
-all: $(NAME)
+all: install $(NAME)
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(OBJ_DIR)
 	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
-$(NAME): $(INC) $(OBJ) 
+$(NAME): $(INC) $(OBJ)
 	@$(CC) $(CFLAGS) $(IFLAGS)  -o $@ $(OBJ) $(LFLAGS)
 	@printf "$(_GREEN)Compiled : $(_MAGENTA)$(NAME)$(_R)\n"
 	@printf "\nDo $(_CYAN)$(_BOLD)make show$(_R) to debug the Makefile\n"
