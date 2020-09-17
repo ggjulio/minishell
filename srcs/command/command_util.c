@@ -85,11 +85,11 @@ int				is_executable(t_command *command)
 		free(stats);
 		return (permission_error(command->args[0], 1));
 	}
-	// else if ((stats->st_mode & S_IRUSR) == 0)
-	// {
-	// 	free(stats);
-	// 	return (permission_error(command->args[0], 2));
-	// }
+	else if ((stats->st_mode & S_IRUSR) == 0)
+	{
+		free(stats);
+		return (permission_error(command->args[0], 2));
+	}
 	free(stats);
 	return (1);
 }

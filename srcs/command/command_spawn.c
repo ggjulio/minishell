@@ -24,18 +24,9 @@ static int		run_command(t_command *command)
 		exit(EXIT_SUCCESS);
 	else if (ft_strchr(command->args[0], '/') && !is_executable(command))
 		exit(g_sh.status);
-	else if (command->bin_path != NULL)
-	{
-		errno = 0;
-		execve(command->bin_path, command->args, (char **)g_sh.env);
-		if (errno == EACCES || errno == ENOEXEC)
-		{
-			ft_dprintf(STDERR_FILENO, "%s: %s: ", g_sh.name, command->bin_path);
-			ft_dprintf(STDERR_FILENO, "%s\n", strerror(EACCES));
-			exit(STATUS_NOT_EXECUTABLE);
-		}
+	else if (command->bin_path != NULL &&
+	execve(command->bin_path, command->args, (char **)g_sh.env))
 		exit(EXIT_FAILURE);
-	}
 	exit(g_sh.status);
 	return (0);
 }
