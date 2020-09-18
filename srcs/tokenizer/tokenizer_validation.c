@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/02 20:30:21 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/03 17:28:16 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/18 20:54:11 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,14 @@ void	validation_backslash(t_list *begin_list)
 	t_token	*actual;
 
 	iterator = begin_list;
+	actual = NULL;
 	while (iterator)
 	{
 		actual = iterator->content;
-		if (actual->type == Token_escape)
-		{
-			syntax_error("\\");
-			return ;
-		}
 		iterator = iterator->next;
 	}
+	if (actual && actual->type == Token_escape)
+		syntax_error("\\");
 }
 
 void	validation_pipes(t_list *begin_list)
