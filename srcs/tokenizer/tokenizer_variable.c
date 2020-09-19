@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 22:52:47 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/11 21:41:17 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/19 18:29:54 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,9 @@ void		expand_variables(t_list **begin_tokens)
 		{
 			if (!in_simple_quote(*begin_tokens, iterator))
 			{
-				if (!ft_strcmp(actual->str, "$"))
+				if (!ft_strcmp(actual->str, "$")
+		&& (in_quote(*begin_tokens, iterator) || (!iterator->next
+		|| ((t_token*)(iterator->next->content))->type != Token_quote)))
 					actual->type = Token_literal;
 				else if (!ft_strncmp("$?", actual->str, 2))
 					expand_variables_expand_status(actual);

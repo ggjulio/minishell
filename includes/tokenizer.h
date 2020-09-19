@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 14:06:38 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/16 23:30:00 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/19 17:56:46 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void			remove_tokens_type(
 */
 int				in_simple_quote(t_list *begin_tokens, t_list *to_find);
 int				in_double_quote(t_list *begin_tokens, t_list *to_find);
+int				in_quote(t_list *begin_tokens, t_list *to_find);
 
 /*
 **	tokenizer_variable.c
