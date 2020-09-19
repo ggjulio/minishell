@@ -106,7 +106,7 @@ int				check_redirections(t_list *redirections, int in, int out)
 		else if (i == fd_pos[W_END] && (close(in) || 1))
 			redirect_pipe_end(fd[i], STDIN_FILENO);
 		else if (i == fd_pos[R_END])
-			redirect_pipe_end(fd[i], out);
+			redirect_pipe_end(fd[i], STDOUT_FILENO);
 		redirections = redirections->next;
 		i++;
 	}
