@@ -71,7 +71,7 @@ SRC+= token.c token_util.c tokenizer_error.c tokenizer_validation.c
 SRC+= tokenizer_split_input.c tokenizer_split_input_util.c tokenizer_quote.c
 SRC+= tokenizer_util_quote.c
 
-SRC+= command.c command_util.c command_pipelines.c command_validation.c
+SRC+= command.c command_util.c command_pipelines.c
 SRC+= command_spawn.c command_builtins.c
 SRC+= redirection.c redirection_util.c redirection_handle.c redirection_to_null.c
 SRC+= error.c

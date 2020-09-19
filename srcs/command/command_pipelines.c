@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_pipelines.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hwinston <hwinston@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 23:37:33 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/07 18:11:58 by hwinston         ###   ########.fr       */
+/*   Updated: 2020/09/20 00:53:33 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,5 @@ t_command			*get_pipeline(char *input)
 		return (NULL);
 	result = convert_tokens_to_command(tokens);
 	ft_lstclear(&tokens, lst_del_token);
-	show_command_not_found(result);
 	return (result);
 }

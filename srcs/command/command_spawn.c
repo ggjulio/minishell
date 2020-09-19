@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 13:45:43 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/17 18:02:17 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/20 01:12:23 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ static int		run_command(t_command *command)
 		exit(EXIT_SUCCESS);
 	else if (ft_strchr(command->args[0], '/') && !is_executable(command))
 		exit(g_sh.status);
-	else if (command->bin_path != NULL
-	&& !execve(command->bin_path, command->args, (char **)g_sh.env))
+	else if (command->bin_path == NULL)
+		bad_command(command->args[0]);
+	else if (!execve(command->bin_path, command->args, (char **)g_sh.env))
 		exit(EXIT_FAILURE);
 	exit(g_sh.status);
 	return (0);

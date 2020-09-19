@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 13:32:17 by juligonz          #+#    #+#             */
-/*   Updated: 2020/09/11 22:20:43 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/20 00:15:57 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ static void	execute_string(char *input)
 
 int			main(int ac, const char **av, t_environment envp)
 {
-	(void)ac;
-	(void)av;
 	g_sh = create_shell(av[0], envp);
 	set_environment_variable_value("PWD", g_sh.cwd);
 	if (ac == 1)
@@ -40,7 +38,8 @@ int			main(int ac, const char **av, t_environment envp)
 	else if (ac == 3 && !ft_strcmp("-c", av[1]))
 		execute_string((char *)av[2]);
 	else
-		ft_printf("Bad args\n");
+		ft_dprintf(STDERR_FILENO,
+			"minishell: Invalid arguments.\nUsage :  ./minishell\n");
 	destroy_shell(g_sh);
 	return (g_sh.status);
 }
