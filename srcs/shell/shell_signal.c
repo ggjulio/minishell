@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/31 18:49:36 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/20 18:30:23 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/20 18:36:23 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,7 @@ int		set_signal(void)
 	status = 0;
 	while (wait(&status) > 0)
 		;
-	if (status == 13)
-		return (0);
-	if (g_sh.status != STATUS_CTRL_BACKSLASH)
+	if (g_sh.status != STATUS_CTRL_BACKSLASH && status != 13)
 		g_sh.status = status % 255;
 	if (g_sh.status == 145)
 		g_sh.status = STATUS_CTRL_C;
