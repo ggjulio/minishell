@@ -27,15 +27,9 @@ static void		exec_internal_builtin(t_builtin_ptr to_exec, char **args)
 int				run_internal_builtins(t_command *pipeline)
 {
 	t_builtin_ptr	builtin;
-	t_command		*first;
 
-	first = pipeline;
-	while (pipeline)
-	{
-		if ((builtin = get_internal_builtin_ptr(pipeline->args[0])) != NULL)
-			if (!pipeline->pipe && first == pipeline)
-				exec_internal_builtin(builtin, pipeline->args);
-		pipeline = pipeline->pipe;
-	}
+	if ((builtin = get_internal_builtin_ptr(pipeline->args[0])) != NULL)
+		if (!pipeline->pipe)
+	 		exec_internal_builtin(builtin, pipeline->args);
 	return (0);
 }
