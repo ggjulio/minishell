@@ -27,9 +27,9 @@ static int		open_file(t_redirection *r)
 
 	fd = 0;
 	if (r->type == Redirection_great)
-		fd = open(r->str, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+		fd = open(r->str, O_WRONLY | O_TRUNC | O_CREAT, 0664);
 	else if (r->type == Redirection_dgreat)
-		fd = open(r->str, O_WRONLY | O_APPEND | O_CREAT, 0644);
+		fd = open(r->str, O_WRONLY | O_APPEND | O_CREAT, 0664);
 	else if (r->type == Redirection_less)
 		fd = open(r->str, O_RDONLY);
 	if (fd == -1)

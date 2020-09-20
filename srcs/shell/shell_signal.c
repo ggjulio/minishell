@@ -35,6 +35,7 @@ int		set_signal(void)
 {
 	int status;
 
+	status = 0;
 	while (wait(&status) > 0)
 		;
 	if (g_sh.status != STATUS_CTRL_BACKSLASH)
