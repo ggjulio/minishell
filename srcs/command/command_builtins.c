@@ -30,6 +30,6 @@ int				run_internal_builtins(t_command *pipeline)
 
 	if ((builtin = get_internal_builtin_ptr(pipeline->args[0])) != NULL)
 		if (!pipeline->pipe)
-	 		exec_internal_builtin(builtin, pipeline->args);
+			exec_internal_builtin(builtin, pipeline->args);
 	return (0);
 }
