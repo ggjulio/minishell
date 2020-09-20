@@ -56,9 +56,9 @@ https://stackoverflow.com/questions/9084099/re-opening-stdout-and-stdin-file-des
   - [x] exit sans aucune option 
 - [x] ; dans la ligne de commande doit séparer les commandes
 - [x] ’ et " doivent marcher comme dans bash, à l’exception du multiligne.
-- [ ] Les redirections <, > et “>>” doivent marcher comme dans bash, à l’exception des aggrégations de fd
+- [x] Les redirections <, > et “>>” doivent marcher comme dans bash, à l’exception des aggrégations de fd
 
 - [x] Pipes | doivent marcher comme dans bash.
 - [x] Les variables d’environnement ($suivi de caractères) doivent marcher comme dans bash.
 - [x] $? doit marcher comme dans bash
-- [ ] ctrl-C, ctrl-D et ctrl-\ doivent afficher le même résultat que dans bash.
+- [x] ctrl-C, ctrl-D et ctrl-\ doivent afficher le même résultat que dans bash.
