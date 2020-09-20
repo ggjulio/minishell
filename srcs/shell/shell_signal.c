@@ -6,7 +6,7 @@
 /*   By: juligonz <juligonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/31 18:49:36 by hwinston          #+#    #+#             */
-/*   Updated: 2020/09/20 18:36:23 by juligonz         ###   ########.fr       */
+/*   Updated: 2020/09/20 19:36:15 by juligonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	sigquit_handler(int sig)
 	(void)sig;
 	wait(&g_sh.status);
 	if (g_sh.status == STATUS_CTRL_BACKSLASH)
-		ft_dprintf(2, "Quit: 3\n");
+		ft_dprintf(2, "Quit (core dumped)\n");
 }
 
 int		set_signal(void)
